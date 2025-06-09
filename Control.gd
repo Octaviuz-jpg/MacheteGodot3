@@ -1,8 +1,13 @@
 extends Node
+
+onready var altura = $"%alturaText"
+onready var profundidad = $"%profundidadText"
+onready var anchura = $"%anchuraText"
+
 func _on_Button_pressed():
-	MedidasSingleton.altura = float($altura.text.strip_edges())
-	MedidasSingleton.anchura = float($anchura.text.strip_edges())
-	MedidasSingleton.profundidad = float($profundidad.text.strip_edges())
+	MedidasSingleton.altura = float(altura.text)
+	MedidasSingleton.anchura = float(anchura.text)
+	MedidasSingleton.profundidad = float(profundidad.text)
 
 	print("Valores almacenados:")
 	print("Altura:", MedidasSingleton.altura)
