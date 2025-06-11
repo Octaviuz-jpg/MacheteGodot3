@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
+[ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CamaraOrbit" type="Spatial" parent="."]
+script = ExtResource( 1 )
+
+[node name="camara3D" type="Camera" parent="CamaraOrbit"]
+
+[node name="DynamicRoom" type="Spatial" parent="."]
+script = ExtResource( 2 )
