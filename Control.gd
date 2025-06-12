@@ -11,7 +11,7 @@ func _on_Button_pressed():
 	var profundidad_val = float(profundidad.text)
 
 	if not _validar_medidas(altura_val, anchura_val, profundidad_val):
-		error_label.text = "⚠️ Las medidas deben estar entre 1 y 50."
+		error_label.text = "⚠️ERROR: Las medidas deben estar entre 1 y 50."
 		return
 
 	MedidasSingleton.altura = altura_val
