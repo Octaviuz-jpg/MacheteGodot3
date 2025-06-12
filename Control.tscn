@@ -34,8 +34,83 @@ font_data = ExtResource( 5 )
 size = 29
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="DynamicFont" id=6]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.152941, 0.313726, 0.341176, 0.596078 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=16]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.239216, 0.239216, 0.239216, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="DynamicFont" id=7]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color( 1, 1, 1, 0.2 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.8, 0.8, 0.8, 0 )
 corner_radius_top_left = 40
 corner_radius_top_right = 40
 
@@ -53,6 +128,10 @@ corner_radius_bottom_right = 36
 bg_color = Color( 0.227451, 0.556863, 0.545098, 1 )
 corner_radius_top_right = 36
 corner_radius_bottom_right = 36
+
+[sub_resource type="DynamicFont" id=12]
+size = 25
+font_data = ExtResource( 7 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -72,8 +151,8 @@ margin_left = 360.0
 margin_top = 640.0
 margin_right = 360.0
 margin_bottom = 640.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 5
+size_flags_vertical = 5
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelPresentación"]
 margin_left = 351.0
@@ -137,66 +216,62 @@ custom_constants/separation = 100
 margin_right = 195.0
 margin_bottom = 24.0
 
-[node name="anchura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+[node name="anchura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer3"]
+margin_right = 197.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 text = "Anchura:"
 
 [node name="anchuraText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 201.0
+margin_right = 289.0
+margin_bottom = 38.0
+custom_styles/focus = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+placeholder_alpha = 0.489
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
 margin_top = 124.0
 margin_right = 195.0
 margin_bottom = 148.0
 
-[node name="profundidad" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+[node name="profundidad" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer2"]
+margin_right = 197.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 text = "Profundidad"
 
 [node name="profundidadText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 201.0
+margin_right = 289.0
+margin_bottom = 38.0
+custom_styles/focus = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
 margin_top = 248.0
 margin_right = 195.0
 margin_bottom = 272.0
 
-[node name="altura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
-margin_top = 5.0
-margin_right = 117.0
-margin_bottom = 19.0
+[node name="altura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
+margin_right = 197.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
 text = "altura: "
 valign = 1
 
 [node name="alturaText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 121.0
-margin_right = 179.0
-margin_bottom = 24.0
+margin_left = 201.0
+margin_right = 289.0
+margin_bottom = 38.0
+custom_styles/focus = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
-
-[node name="ErrorLabel" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-margin_left = 183.0
-margin_top = 5.0
-margin_right = 195.0
-margin_bottom = 19.0
-text = "\"\""
 
 [node name="Button" type="Button" parent="CenterContainer/PanelPresentación/VBoxContainer"]
 margin_top = 372.0
