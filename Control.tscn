@@ -49,6 +49,15 @@ default_font = SubResource( 9 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_color = Color( 0.176471, 0.176471, 0.176471, 0.6 )
+shadow_size = 17
+shadow_offset = Vector2( 0, 10 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -69,10 +78,10 @@ margin_bottom = 640.0
 
 [node name="Fondo_Degradado" type="TextureRect" parent="CenterContainer/Panel"]
 margin_left = 357.0
-margin_top = -637.0
-margin_right = 1636.0
-margin_bottom = 86.9999
-rect_rotation = 89.7605
+margin_top = -640.0
+margin_right = 1639.0
+margin_bottom = 87.0
+rect_rotation = 89.9443
 size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = SubResource( 2 )
@@ -115,18 +124,18 @@ custom_fonts/font = SubResource( 5 )
 text = "Presenta"
 
 [node name="LabromaquehizoOCTAVIO" type="VBoxContainer" parent="CenterContainer/Panel"]
-margin_left = -117.0
-margin_top = -38.0
-margin_right = 126.0
-margin_bottom = 272.0
-custom_constants/separation = 30
+margin_left = -140.0
+margin_top = -8.0
+margin_right = 149.0
+margin_bottom = 320.0
+custom_constants/separation = 45
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
-margin_right = 243.0
+margin_right = 289.0
 margin_bottom = 38.0
 
 [node name="anchura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer3"]
-margin_right = 132.0
+margin_right = 227.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 6 )
@@ -134,18 +143,18 @@ text = "Anchura:"
 
 [node name="anchuraText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 130.0
-margin_right = 243.0
+margin_left = 231.0
+margin_right = 289.0
 margin_bottom = 38.0
 placeholder_alpha = 0.489
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
-margin_top = 68.0
-margin_right = 243.0
-margin_bottom = 106.0
+margin_top = 83.0
+margin_right = 289.0
+margin_bottom = 121.0
 
 [node name="profundidad" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer2"]
-margin_right = 181.0
+margin_right = 227.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 7 )
@@ -153,17 +162,17 @@ text = "Profundidad:"
 
 [node name="profundidadText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 185.0
-margin_right = 243.0
+margin_left = 231.0
+margin_right = 289.0
 margin_bottom = 38.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
-margin_top = 136.0
-margin_right = 243.0
-margin_bottom = 174.0
+margin_top = 166.0
+margin_right = 289.0
+margin_bottom = 204.0
 
 [node name="altura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
-margin_right = 99.0
+margin_right = 211.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 8 )
@@ -172,8 +181,8 @@ valign = 1
 
 [node name="alturaText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 100.0
-margin_right = 227.0
+margin_left = 215.0
+margin_right = 273.0
 margin_bottom = 38.0
 __meta__ = {
 "_edit_use_anchors_": true
@@ -181,23 +190,26 @@ __meta__ = {
 
 [node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 231.0
+margin_left = 277.0
 margin_top = 12.0
-margin_right = 243.0
+margin_right = 289.0
 margin_bottom = 26.0
 text = "\"\""
 
 [node name="Button" type="Button" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
-margin_top = 204.0
-margin_right = 243.0
-margin_bottom = 247.0
+margin_top = 249.0
+margin_right = 289.0
+margin_bottom = 292.0
 theme = SubResource( 10 )
+custom_colors/font_color = Color( 0.0862745, 0.25098, 0.243137, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_styles/normal = SubResource( 11 )
 text = "Continuar"
 
 [node name="Escena1#Elementografico" type="Sprite" parent="CenterContainer/Panel"]
-position = Vector2( -119, 136 )
-scale = Vector2( 0.561343, 0.528183 )
+position = Vector2( -124.52, 125.921 )
+rotation = 0.00404244
+scale = Vector2( 0.56727, 0.538671 )
 texture = ExtResource( 4 )
 
 [connection signal="pressed" from="CenterContainer/Panel/LabromaquehizoOCTAVIO/Button" to="." method="_on_Button_pressed"]
