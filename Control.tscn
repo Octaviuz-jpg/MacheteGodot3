@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Img/uneg_white.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Img/Logo_blanco_txt.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/moon_get/moon_get-Heavy.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold Italic.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.628788, 1 )
+colors = PoolColorArray( 0.227451, 0.556863, 0.545098, 1, 0.435294, 0.741176, 0.729412, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 5 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -10,83 +28,142 @@ script = ExtResource( 1 )
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = 8.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 291.0
-margin_top = 444.0
-margin_right = 429.0
-margin_bottom = 836.0
+[node name="Panel" type="Panel" parent="CenterContainer"]
+margin_left = 360.0
+margin_top = 640.0
+margin_right = 360.0
+margin_bottom = 640.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/Panel"]
+margin_left = 389.0
+margin_top = -615.0
+margin_right = 1668.0
+margin_bottom = 109.0
+rect_rotation = 89.7605
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = SubResource( 2 )
+expand = true
+
+[node name="UnegWhite" type="Sprite" parent="CenterContainer/Panel"]
+position = Vector2( -288.446, -558.875 )
+scale = Vector2( 0.13107, 0.129175 )
+texture = ExtResource( 2 )
+
+[node name="LogoBlancoTxt" type="Sprite" parent="CenterContainer/Panel"]
+position = Vector2( 28, -279 )
+scale = Vector2( 0.6875, 0.6875 )
+texture = ExtResource( 3 )
+
+[node name="Encabezado" type="VBoxContainer" parent="CenterContainer/Panel"]
+margin_left = -198.0
+margin_top = -507.0
+margin_right = 195.0
+margin_bottom = -362.0
+
+[node name="WELCOME" type="Label" parent="CenterContainer/Panel/Encabezado"]
+margin_right = 393.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 3 )
+text = "WELCOME!"
+
+[node name="MACHETE STUDIOS" type="Label" parent="CenterContainer/Panel/Encabezado"]
+margin_top = 22.0
+margin_right = 393.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 4 )
+text = "MACHETE STUDIOS "
+
+[node name="PRESENTS" type="Label" parent="CenterContainer/Panel/Encabezado"]
+margin_top = 43.0
+margin_right = 393.0
+margin_bottom = 57.0
+text = "Presents:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
+margin_left = -63.0
+margin_top = -43.0
+margin_right = 132.0
+margin_bottom = 353.0
 custom_constants/separation = 100
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_right = 138.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+margin_right = 195.0
 margin_bottom = 24.0
 
-[node name="anchura" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+[node name="anchura" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer3"]
 margin_top = 5.0
-margin_right = 76.0
+margin_right = 133.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
-text = "anchura:"
+text = "Anchura:"
 
-[node name="anchuraText" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+[node name="anchuraText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 80.0
-margin_right = 138.0
+margin_left = 137.0
+margin_right = 195.0
 margin_bottom = 24.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
 margin_top = 124.0
-margin_right = 138.0
+margin_right = 195.0
 margin_bottom = 148.0
 
-[node name="profundidad" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="profundidad" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer2"]
 margin_top = 5.0
-margin_right = 76.0
+margin_right = 133.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
-text = "profundidad"
+text = "Profundidad"
 
-[node name="profundidadText" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="profundidadText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 80.0
-margin_right = 138.0
+margin_left = 137.0
+margin_right = 195.0
 margin_bottom = 24.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
 margin_top = 248.0
-margin_right = 138.0
+margin_right = 195.0
 margin_bottom = 272.0
 
-[node name="altura" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="altura" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
 margin_top = 5.0
-margin_right = 60.0
+margin_right = 117.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "altura: "
 valign = 1
 
-[node name="alturaText" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="alturaText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 64.0
-margin_right = 122.0
+margin_left = 121.0
+margin_right = 179.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ErrorLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 126.0
+margin_left = 183.0
 margin_top = 5.0
-margin_right = 138.0
+margin_right = 195.0
 margin_bottom = 19.0
 text = "\"\""
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
 margin_top = 372.0
-margin_right = 138.0
+margin_right = 195.0
 margin_bottom = 392.0
 text = "generar"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[node name="Escena1#Elementografico" type="Sprite" parent="."]
+position = Vector2( 280.5, 797.056 )
+scale = Vector2( 0.561343, 0.528183 )
+texture = ExtResource( 4 )
+
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
