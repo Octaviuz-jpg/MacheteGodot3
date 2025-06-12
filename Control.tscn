@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Img/uneg_white.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Fonts/moon_get/moon_get-Heavy.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold Italic.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.628788, 1 )
@@ -26,6 +27,29 @@ font_data = ExtResource( 5 )
 size = 29
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,11 +67,11 @@ margin_top = 640.0
 margin_right = 360.0
 margin_bottom = 640.0
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/Panel"]
-margin_left = 389.0
-margin_top = -615.0
-margin_right = 1668.0
-margin_bottom = 109.0
+[node name="Fondo_Degradado" type="TextureRect" parent="CenterContainer/Panel"]
+margin_left = 357.0
+margin_top = -637.0
+margin_right = 1636.0
+margin_bottom = 86.9999
 rect_rotation = 89.7605
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -60,7 +84,7 @@ scale = Vector2( 0.13107, 0.129175 )
 texture = ExtResource( 2 )
 
 [node name="LogoBlancoTxt" type="Sprite" parent="CenterContainer/Panel"]
-position = Vector2( 28, -250.5 )
+position = Vector2( 0, -244 )
 scale = Vector2( 0.6875, 0.692727 )
 texture = ExtResource( 3 )
 
@@ -90,87 +114,90 @@ margin_bottom = 119.0
 custom_fonts/font = SubResource( 5 )
 text = "Presenta"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
-margin_left = -63.0
-margin_top = -43.0
+[node name="LabromaquehizoOCTAVIO" type="VBoxContainer" parent="CenterContainer/Panel"]
+margin_left = -117.0
+margin_top = -38.0
+margin_right = 126.0
+margin_bottom = 272.0
+custom_constants/separation = 30
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
+margin_right = 243.0
+margin_bottom = 38.0
+
+[node name="anchura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer3"]
 margin_right = 132.0
-margin_bottom = 353.0
-custom_constants/separation = 100
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
-margin_right = 195.0
-margin_bottom = 24.0
-
-[node name="anchura" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer3"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 6 )
 text = "Anchura:"
 
-[node name="anchuraText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer3"]
+[node name="anchuraText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 130.0
+margin_right = 243.0
+margin_bottom = 38.0
+placeholder_alpha = 0.489
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
-margin_top = 124.0
-margin_right = 195.0
-margin_bottom = 148.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
+margin_top = 68.0
+margin_right = 243.0
+margin_bottom = 106.0
 
-[node name="profundidad" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+[node name="profundidad" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer2"]
+margin_right = 181.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
-text = "Profundidad"
+custom_fonts/font = SubResource( 7 )
+text = "Profundidad:"
 
-[node name="profundidadText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer2"]
+[node name="profundidadText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 185.0
+margin_right = 243.0
+margin_bottom = 38.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
-margin_top = 248.0
-margin_right = 195.0
-margin_bottom = 272.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
+margin_top = 136.0
+margin_right = 243.0
+margin_bottom = 174.0
 
-[node name="altura" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
-margin_top = 5.0
-margin_right = 117.0
-margin_bottom = 19.0
+[node name="altura" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
+margin_right = 99.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
-text = "altura: "
+custom_fonts/font = SubResource( 8 )
+text = "Altura: "
 valign = 1
 
-[node name="alturaText" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="alturaText" type="LineEdit" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 121.0
-margin_right = 179.0
-margin_bottom = 24.0
+margin_left = 100.0
+margin_right = 227.0
+margin_bottom = 38.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 183.0
-margin_top = 5.0
-margin_right = 195.0
-margin_bottom = 19.0
+margin_left = 231.0
+margin_top = 12.0
+margin_right = 243.0
+margin_bottom = 26.0
 text = "\"\""
 
-[node name="Button" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
-margin_top = 372.0
-margin_right = 195.0
-margin_bottom = 392.0
-text = "generar"
+[node name="Button" type="Button" parent="CenterContainer/Panel/LabromaquehizoOCTAVIO"]
+margin_top = 204.0
+margin_right = 243.0
+margin_bottom = 247.0
+theme = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+text = "Continuar"
 
 [node name="Escena1#Elementografico" type="Sprite" parent="CenterContainer/Panel"]
-position = Vector2( -87.5, 157.056 )
+position = Vector2( -119, 136 )
 scale = Vector2( 0.561343, 0.528183 )
 texture = ExtResource( 4 )
 
-[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/LabromaquehizoOCTAVIO/Button" to="." method="_on_Button_pressed"]
