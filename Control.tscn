@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Img/uneg_white.png" type="Texture" id=2]
@@ -15,10 +15,16 @@ colors = PoolColorArray( 0.227451, 0.556863, 0.545098, 1, 0.435294, 0.741176, 0.
 gradient = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 36
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 40
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 29
+font_data = ExtResource( 6 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -54,34 +60,35 @@ scale = Vector2( 0.13107, 0.129175 )
 texture = ExtResource( 2 )
 
 [node name="LogoBlancoTxt" type="Sprite" parent="CenterContainer/Panel"]
-position = Vector2( 28, -279 )
-scale = Vector2( 0.6875, 0.6875 )
+position = Vector2( 28, -250.5 )
+scale = Vector2( 0.6875, 0.692727 )
 texture = ExtResource( 3 )
 
 [node name="Encabezado" type="VBoxContainer" parent="CenterContainer/Panel"]
-margin_left = -198.0
+margin_left = -230.0
 margin_top = -507.0
-margin_right = 195.0
+margin_right = 286.0
 margin_bottom = -362.0
 
 [node name="WELCOME" type="Label" parent="CenterContainer/Panel/Encabezado"]
-margin_right = 393.0
-margin_bottom = 18.0
+margin_right = 516.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 3 )
-text = "WELCOME!"
+text = "BIENVENIDO!"
 
 [node name="MACHETE STUDIOS" type="Label" parent="CenterContainer/Panel/Encabezado"]
-margin_top = 22.0
-margin_right = 393.0
-margin_bottom = 39.0
+margin_top = 43.0
+margin_right = 516.0
+margin_bottom = 83.0
 custom_fonts/font = SubResource( 4 )
 text = "MACHETE STUDIOS "
 
 [node name="PRESENTS" type="Label" parent="CenterContainer/Panel/Encabezado"]
-margin_top = 43.0
-margin_right = 393.0
-margin_bottom = 57.0
-text = "Presents:"
+margin_top = 87.0
+margin_right = 516.0
+margin_bottom = 119.0
+custom_fonts/font = SubResource( 5 )
+text = "Presenta"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
 margin_left = -63.0
@@ -161,8 +168,8 @@ margin_right = 195.0
 margin_bottom = 392.0
 text = "generar"
 
-[node name="Escena1#Elementografico" type="Sprite" parent="."]
-position = Vector2( 280.5, 797.056 )
+[node name="Escena1#Elementografico" type="Sprite" parent="CenterContainer/Panel"]
+position = Vector2( -87.5, 157.056 )
 scale = Vector2( 0.561343, 0.528183 )
 texture = ExtResource( 4 )
 
