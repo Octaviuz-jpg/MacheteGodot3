@@ -11,12 +11,12 @@ onready var viewport_3d = $"%Viewport" # Asumiendo que has nombrado tu Viewport
 
 # Referencia al contenedor de la UI de entrada de parámetros
 # Asegúrate que el VBoxContainer que tiene tus LineEdits y Button tiene el nombre único (%)
-onready var input_ui_container = $"%VBoxContainer" 
+onready var input_ui_container = $"%CenterContainer" 
 
 # Referencia al CanvasLayer que contiene las barras de herramientas
 onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars" 
 onready var hslider_zoom = $"%CanvasLayer_UI_Bars/Zoom" # <--- RUTA CORREGIDA según tu imagen
-onready var bottom_bar = $"%CanvasLayer_UI_Bars/BottomBar" # Nueva ruta
+onready var bottom_bar = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar" # Nueva ruta
 
 # Precargar tu escena 3D (la que contiene Spatial, CamaraOrbit, DynamicRoom)
 # ¡CAMBIA ESTA RUTA SI TU ESCENA 3D TIENE OTRO NOMBRE!
