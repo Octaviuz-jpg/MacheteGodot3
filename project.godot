@@ -10,9 +10,11 @@ config_version=4
 
 [application]
 
-config/name="Machete Godot 3"
+config/name="MetricalHomeMachete"
 run/main_scene="res://Control.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://Assets/Img/Logo_turquesa_txt.png"
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
+config/icon="res://Assets/Img/Logo_turquesa_txt.png"
 
 [autoload]
 
@@ -22,6 +24,8 @@ MedidasSingleton="*res://MedidasSingleton.gd"
 
 window/size/width=720
 window/size/height=1280
+window/size/test_width=720
+window/size/test_height=1280
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
