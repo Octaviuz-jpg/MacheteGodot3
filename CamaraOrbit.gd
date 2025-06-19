@@ -77,3 +77,8 @@ func _update_camera_position():
 func _on_ZoomSlider_value_changed(value):
 	_distance = clamp(value, min_distance, max_distance)  # Aseguramos que esté dentro de los límites
 	_update_camera_position()
+	
+func _on_camita_pressed():
+	ObjectSelector.objeto_seleccionado = "res://objetos/cama/source/cama.tscn"
+	
+	
