@@ -240,42 +240,44 @@ size_flags_stretch_ratio = 0.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="ZoomIn" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
 margin_left = 89.0
 margin_right = 137.0
 margin_bottom = 67.0
 icon = ExtResource( 7 )
 flat = true
 
-[node name="Button2" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="ZoomOut" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
 margin_left = 187.0
 margin_right = 236.0
 margin_bottom = 67.0
 icon = ExtResource( 10 )
 flat = true
 
-[node name="Button3" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="Undo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 286.0
 margin_right = 335.0
 margin_bottom = 67.0
 icon = ExtResource( 9 )
 flat = true
 
-[node name="Button4" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="Redo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 385.0
 margin_right = 434.0
 margin_bottom = 67.0
 icon = ExtResource( 11 )
 flat = true
 
-[node name="Button5" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="Meassures" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 484.0
 margin_right = 533.0
 margin_bottom = 67.0
 icon = ExtResource( 8 )
 flat = true
 
-[node name="Button6" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="Save" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 583.0
 margin_right = 631.0
 margin_bottom = 67.0
@@ -307,3 +309,5 @@ flat = true
 icon_align = 1
 
 [connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_Button_ZoomIn_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_Button_ZoomOut_pressed"]

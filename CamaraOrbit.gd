@@ -3,7 +3,7 @@ extends Spatial
 export var camera_speed: float = 0.01
 export var zoom_speed: float = 0.1
 export var min_distance: float = 2.0
-export var max_distance: float = 20.0
+export var max_distance: float = 100.0
 
 var _camera: Camera
 var _distance: float = 5.0
@@ -18,7 +18,10 @@ var _ui_zoom_slider: HSlider = null # Usamos el tipo explícito para HSlider
 func _ready():
 	_camera = get_node("camara3D")
 	if not _camera:
-		push_error("No se encontró Camera3D como hijo")
+		push_error("No se encontró Camera3D como hijo");
+	if _camera:
+	 _camera.far = 500.0  # Aumenta el plano lejano de renderizado
+	_camera.keep_aspect = Camera.KEEP_WIDTH  # Mantener relación de aspecto
 	
 	# Eliminamos la conexión y configuración inicial del slider aquí,
 	# ya que Control.gd lo hará cuando instancie la escena 3D.
@@ -41,7 +44,7 @@ func _set_distance_from_slider(value: float):
 # Ajustada la lógica de init_orbit
 func init_orbit(room_size: float):
 	_distance = clamp(room_size * 2.5, min_distance, max_distance * 2) # Ajusta la distancia inicial
-	max_distance = room_size * 2.0 # Asegura que pueda alejarse más en habitaciones grandes
+	max_distance = room_size * 4.0 # Asegura que pueda alejarse más en habitaciones grandes
 	
 	if _ui_zoom_slider: # Si el slider ha sido seteado, actualiza su max_value y su valor actual
 		_ui_zoom_slider.max_value = max_distance

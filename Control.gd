@@ -17,12 +17,15 @@ onready var input_ui_container = $"%CenterContainer"
 onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars" 
 onready var hslider_zoom = $"%CanvasLayer_UI_Bars/Zoom" # <--- RUTA CORREGIDA según tu imagen
 onready var bottom_bar = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar" # Nueva ruta
+onready var button_zoom_in = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" # RUTA CORREGIDA
+onready var button_zoom_out = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" # RUTA CORREGIDA
 
 # Precargar tu escena 3D (la que contiene Spatial, CamaraOrbit, DynamicRoom)
 # ¡CAMBIA ESTA RUTA SI TU ESCENA 3D TIENE OTRO NOMBRE!
 var room_3d_scene_res = preload("res://Node3D.tscn")
 
 var _camera_orbit_instance: Spatial = null
+
 
 func _ready():
 	# Asegurarse de que el ViewportContainer esté oculto al inicio
@@ -34,7 +37,7 @@ func _on_Button_pressed():
 	var anchura_val = float(anchura.text)
 	var profundidad_val = float(profundidad.text)
 	
-
+	viewport_3d.transparent_bg = true  # Para fondo transparente
 	if not _validar_medidas(altura_val, anchura_val, profundidad_val):
 		error_label.text = "⚠️ERROR: Las medidas deben estar entre 1 y 50."
 		return
@@ -91,13 +94,23 @@ func _validar_medidas(altura_val, anchura_val, profundidad_val) -> bool:
 
 func _on_Button_ZoomIn_pressed():
 	if _camera_orbit_instance:
+		# Llama a la función de zoom del script de la cámara
+		# Factor 0.8 significa acercar (80% de la distancia actual)
 		_camera_orbit_instance._handle_zoom(0.8)
+	else:
+		print("Error: _camera_orbit_instance no está asignado. La cámara 3D no está lista.")
 
 func _on_Button_ZoomOut_pressed():
 	if _camera_orbit_instance:
+		# Llama a la función de zoom del script de la cámara
+		# Factor 1.2 significa alejar (120% de la distancia actual)
 		_camera_orbit_instance._handle_zoom(1.2)
+	else:
+		print("Error: _camera_orbit_instance no está asignado. La cámara 3D no está lista.")
 
 func _on_HSlider_Zoom_value_changed(value):
 	if _camera_orbit_instance:
 		_camera_orbit_instance._set_distance_from_slider(value)
+
+
 
