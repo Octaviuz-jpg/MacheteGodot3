@@ -102,9 +102,11 @@ func _update_camera_position():
 	_camera.look_at(target.translation, Vector3.UP)
 
 
-# Esta función era la anterior _on_zoom_changed, ahora es _set_distance_from_slider.
-# Es llamada por Control.gd cuando el slider de la UI cambia de valor.
-# Eliminar la duplicada _on_ZoomSlider_value_changed si existe.
-# func _on_ZoomSlider_value_changed(value): # Esta función ya no es necesaria aquí si usas _set_distance_from_slider
-# 	_distance = clamp(value, min_distance, max_distance)
-# 	_update_camera_position()
+func _on_ZoomSlider_value_changed(value):
+	_distance = clamp(value, min_distance, max_distance)  # Aseguramos que esté dentro de los límites
+	_update_camera_position()
+	
+func _on_camita_pressed():
+	ObjectSelector.objeto_seleccionado = "res://objetos/cama/source/cama.tscn"
+	
+	

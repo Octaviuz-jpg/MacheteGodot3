@@ -19,6 +19,7 @@ config/icon="res://Assets/Img/Logo_turquesa_txt.png"
 [autoload]
 
 MedidasSingleton="*res://MedidasSingleton.gd"
+ObjectSelector="*res://ObjectSelector.gd"
 
 [display]
 
