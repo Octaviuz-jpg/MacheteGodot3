@@ -79,6 +79,10 @@ func _on_ZoomSlider_value_changed(value):
 	_update_camera_position()
 	
 func _on_camita_pressed():
-	ObjectSelector.objeto_seleccionado = "res://objetos/cama/source/cama.tscn"
-	
-	
+	ObjectSelector.objeto_seleccionado = "res://objetos/Mesa_de_noce/mesa_de_noche.tscn"
+
+
+
+
+func _on_cocinatipo2_pressed():
+	ObjectSelector.objeto_seleccionado = "res://objetos/Cocina/cocina_moderna_tipo2.tscn"
