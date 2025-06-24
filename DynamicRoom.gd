@@ -3,6 +3,9 @@ extends Spatial
 onready var _wall_texture = preload("res://materials/pared_blanca.jpg")
 onready var _floor_texture = preload("res://materials/suelo_granito.jpg")
 
+onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
+
+
 func _ready():
 	self.translation = Vector3.ZERO
 	build_room()
@@ -77,6 +80,9 @@ func _create_wall(pos: Vector3, size: Vector3, rot_y: float, material: SpatialMa
 	wall.add_child(static_body)
 
 	add_child(wall)
+
+# En el script de tu Room/SceneRoot:
+
 
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):

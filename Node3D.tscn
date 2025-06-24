@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/IconTools/avatar.png" type="Texture" id=10]
 [ext_resource path="res://Scripts/Gridmap.gd" type="Script" id=11]
 [ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
+[ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
@@ -123,6 +124,7 @@ margin_left = -250.0
 margin_top = 3.0
 margin_right = -198.0
 margin_bottom = 49.0
+icon = ExtResource( 13 )
 flat = true
 icon_align = 1
 
