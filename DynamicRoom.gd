@@ -97,10 +97,6 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 		push_error("❌ Ruta inválida: " + ruta)
 		return
 
-	if detectar_objeto_colocado_en(punto):
-		print("⛔ Ya hay un objeto en esta posición")
-		return
-
 	var obj = load(ruta).instance()
 	$Container.add_child(obj)
 	obj.add_to_group("colocados")
@@ -114,6 +110,12 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 		var offset = aabb.position.y * obj.scale.y
 		var y_final = punto.y - offset
 		obj.translation = Vector3(punto.x, y_final, punto.z)
+
+		# 🚫 Validación volumétrica real
+		if hay_colision_volumetrica(obj):
+			print("⛔ No se puede colocar, colisión volumétrica detectada")
+			obj.queue_free()
+			return
 	else:
 		obj.translation = punto
 
@@ -206,3 +208,38 @@ func _process(delta):
 				var altura = aabb.size.y * obj.scale.y
 				var y_final = result.position.y - offset + altura / 2.0
 				obj.translation = Vector3(result.position.x, y_final, result.position.z)
+
+func hay_colision_volumetrica(objeto: Node) -> bool:
+	var space = get_world().direct_space_state
+
+	var excludes = []
+	if objeto.has_method("get_rid"):
+		excludes.append(objeto.get_rid())
+
+	for hijo in objeto.get_children():
+		if hijo.has_method("get_rid"):
+			excludes.append(hijo.get_rid())
+
+	for shape_node in objeto.get_children():
+		if shape_node is CollisionShape and shape_node.shape:
+			var shape = shape_node.shape
+			var transform = shape_node.global_transform
+
+			var params = PhysicsShapeQueryParameters.new()
+			params.set_shape(shape)
+			params.set_transform(transform)
+			params.set_collide_with_bodies(true)
+			params.set_exclude(excludes)
+
+			var result = space.intersect_shape(params, 10)
+
+			for res in result:
+				var col = res.collider
+				if col and not col.is_in_group("suelo"):
+					return true  # ❌ Colisión con algo que no es el suelo
+
+		elif shape_node.get_child_count() > 0:
+			if hay_colision_volumetrica(shape_node):
+				return true
+
+	return false  # ✅ No hay colisión relevante

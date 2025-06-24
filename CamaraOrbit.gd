@@ -10,6 +10,9 @@ var _distance: float = 5.0
 var _angle_x: float = 0.0
 var _angle_y: float = 0.5
 var _mouse_pressed: bool = false
+var modo_construccion := false
+var vista_aerea_activa := false
+var CamaraTrancada := false
 
 # ¡IMPORTANTE! Eliminar la línea onready var zoom_slider = get_parent().get_node("CanvasLayer/ZoomSlider")
 # Usaremos esta variable para que Control.gd nos pase la referencia
@@ -53,6 +56,10 @@ func init_orbit(room_size: float):
 	_update_camera_position()
 
 func _input(event):
+	
+	if modo_construccion:
+		return
+
 	# Controles para PC
 	if event is InputEventMouseButton:
 		_mouse_pressed = event.pressed
@@ -74,6 +81,8 @@ func _input(event):
 		if _ui_zoom_slider: # Sincroniza el slider con el zoom multitáctil
 			_ui_zoom_slider.value = _distance
 		_update_camera_position()
+	
+	
 
 
 func _handle_rotation(relative: Vector2):
@@ -107,10 +116,33 @@ func _on_ZoomSlider_value_changed(value):
 	_update_camera_position()
 	
 func _on_camita_pressed():
-	ObjectSelector.objeto_seleccionado = "res://objetos/Mesa_de_noce/mesa_de_noche.tscn"
+	ObjectSelector.objeto_seleccionado = "res://objetos/sofa blanco tipo1/sofa blanco.tscn"
 
 
 
 
 func _on_cocinatipo2_pressed():
 	ObjectSelector.objeto_seleccionado = "res://objetos/Cocina/cocina_moderna_tipo2.tscn"
+
+func set_modo_construccion(activo: bool):
+	modo_construccion = activo
+
+func activar_camara_construccion(activo: bool):
+	var cam_construccion = get_tree().get_root().find_node("Camera", true, false)
+	if cam_construccion and cam_construccion is Camera:
+		cam_construccion.current = activo
+		if _camera:
+			_camera.current = not activo
+	else:
+		print("⚠️ Cámara de construcción no encontrada")
+
+
+	
+
+func _on_vistaAerea_pressed():
+	vista_aerea_activa = !vista_aerea_activa
+	activar_camara_construccion(vista_aerea_activa)
+
+func _on_trancarCamara_pressed():
+	CamaraTrancada = !CamaraTrancada
+	set_modo_construccion(CamaraTrancada)

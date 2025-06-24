@@ -15,19 +15,27 @@ script = ExtResource( 2 )
 
 [node name="Container" type="Spatial" parent="DynamicRoom"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UIConstruction" type="CanvasLayer" parent="."]
 
-[node name="camita" type="Button" parent="CanvasLayer"]
+[node name="camita" type="Button" parent="UIConstruction"]
 margin_left = 38.0
 margin_top = 203.0
 margin_right = 50.0
 margin_bottom = 223.0
 
-[node name="cocinatipo2" type="Button" parent="CanvasLayer"]
+[node name="cocinatipo2" type="Button" parent="UIConstruction"]
 margin_left = 40.0
 margin_top = 243.0
 margin_right = 52.0
 margin_bottom = 263.0
 
-[connection signal="pressed" from="CanvasLayer/camita" to="CamaraOrbit" method="_on_camita_pressed"]
-[connection signal="pressed" from="CanvasLayer/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[node name="trancarCamara" type="Button" parent="UIConstruction"]
+margin_left = 52.0
+margin_top = 306.0
+margin_right = 160.0
+margin_bottom = 326.0
+text = "Trancar camara"
+
+[connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
+[connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
