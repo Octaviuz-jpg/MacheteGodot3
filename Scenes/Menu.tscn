@@ -158,4 +158,7 @@ margin_right = 722.0
 margin_bottom = 1281.0
 custom_styles/panel = SubResource( 7 )
 
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/inicio" to="CanvasLayer/TextureRect/VBoxContainer/inicio" method="_on_inicio_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/Proyectos" to="CanvasLayer/TextureRect/VBoxContainer/Proyectos" method="_on_Proyectos_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/Salir" to="CanvasLayer/TextureRect/VBoxContainer/Salir" method="_on_Salir_pressed"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]

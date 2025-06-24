@@ -1,17 +1,22 @@
 extends Button
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _on_Registrarse_pressed():
 	print("te has registrado felicidades, vuelve a la pestaña login")
-	get_tree().change_scene("res://Scenes/Login.tscn")
+	var new_scene_path = "res://Scenes/Login.tscn"
+	var new_scene_packed = load(new_scene_path)
+	var new_scene_instance = new_scene_packed.instance()
 
+	# 2. Obtener la escena actual (la que queremos liberar)
+	var current_scene_node = get_tree().current_scene
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	# 3. Eliminar la escena actual del árbol
+	# Esto activará _exit_tree() en los nodos de la escena anterior
+	current_scene_node.queue_free()
+
+	# 4. Añadir la nueva escena al nodo raíz del árbol
+	# get_tree().root es el Viewport global del juego.
+	get_tree().root.add_child(new_scene_instance)
+
+	# 5. Establecer la nueva escena como la escena principal del árbol
+	get_tree().current_scene = new_scene_instance
+	

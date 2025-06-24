@@ -233,4 +233,6 @@ margin_right = 722.0
 margin_bottom = 1281.0
 custom_styles/panel = SubResource( 7 )
 
+[connection signal="pressed" from="CanvasLayer/TextureRect/Registrarse" to="CanvasLayer/TextureRect/Registrarse" method="_on_Registrarse_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/volver" to="CanvasLayer/TextureRect/volver" method="_on_volver_pressed"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
