@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="MetricalHomeMachete"
-run/main_scene="res://Control.tscn"
+run/main_scene="res://Welcome.tscn"
 boot_splash/image="res://Assets/Img/Logo_turquesa_txt.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://Assets/Img/Logo_turquesa_txt.png"

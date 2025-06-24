@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Img/uneg_white.png" type="Texture" id=2]
@@ -12,8 +12,7 @@
 [ext_resource path="res://Assets/IconTools/zoom-out.png" type="Texture" id=10]
 [ext_resource path="res://Assets/IconTools/redo.png" type="Texture" id=11]
 [ext_resource path="res://Assets/IconTools/save.png" type="Texture" id=12]
-[ext_resource path="res://Assets/IconTools/package-plus.png" type="Texture" id=13]
-[ext_resource path="res://Assets/IconTools/layers.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=13]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.628788, 1 )
@@ -34,25 +33,22 @@ font_data = ExtResource( 5 )
 size = 29
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 30
+extra_spacing_bottom = 10
+font_data = ExtResource( 13 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.160784, 0.333333, 0.372549, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 40
 corner_radius_top_right = 40
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
-corner_radius_top_right = 36
-corner_radius_bottom_right = 36
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
-corner_radius_top_right = 36
-corner_radius_bottom_right = 36
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.227451, 0.556863, 0.545098, 1 )
-corner_radius_top_right = 36
-corner_radius_bottom_right = 36
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -129,79 +125,79 @@ unique_name_in_owner = true
 margin_left = -63.0
 margin_top = -43.0
 margin_right = 132.0
-margin_bottom = 353.0
 custom_constants/separation = 100
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
-margin_right = 195.0
-margin_bottom = 24.0
+margin_right = 211.0
+margin_bottom = 42.0
 
 [node name="anchura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+margin_right = 149.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 7 )
 text = "Anchura:"
 
 [node name="anchuraText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 153.0
+margin_right = 211.0
+margin_bottom = 42.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
-margin_top = 124.0
-margin_right = 195.0
-margin_bottom = 148.0
+margin_top = 142.0
+margin_right = 211.0
+margin_bottom = 184.0
 
 [node name="profundidad" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 19.0
+margin_right = 149.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 7 )
 text = "Profundidad"
 
 [node name="profundidadText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 137.0
-margin_right = 195.0
-margin_bottom = 24.0
+margin_left = 153.0
+margin_right = 211.0
+margin_bottom = 42.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
-margin_top = 248.0
-margin_right = 195.0
-margin_bottom = 272.0
+margin_top = 284.0
+margin_right = 211.0
+margin_bottom = 326.0
 
 [node name="altura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
-margin_top = 5.0
-margin_right = 117.0
-margin_bottom = 19.0
+margin_right = 149.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
-text = "altura: "
+custom_fonts/font = SubResource( 7 )
+text = "Altura: "
 valign = 1
 
 [node name="alturaText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 121.0
-margin_right = 179.0
-margin_bottom = 24.0
+margin_left = 153.0
+margin_right = 211.0
+margin_bottom = 42.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ErrorLabel" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-margin_left = 183.0
-margin_top = 5.0
-margin_right = 195.0
-margin_bottom = 19.0
-text = "\"\""
-
 [node name="Button" type="Button" parent="CenterContainer/PanelPresentación/VBoxContainer"]
-margin_top = 372.0
-margin_right = 195.0
-margin_bottom = 392.0
+margin_top = 426.0
+margin_right = 211.0
+margin_bottom = 468.0
+custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "generar"
+
+[node name="ErrorLabel" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 568.0
+margin_right = 211.0
+margin_bottom = 610.0
+custom_fonts/font = SubResource( 7 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
@@ -289,24 +285,6 @@ unique_name_in_owner = true
 visible = false
 margin_right = 16.0
 margin_bottom = 176.0
-
-[node name="BotonCatalogo" type="Button" parent="CanvasLayer_UI_Bars"]
-margin_right = 96.0
-margin_bottom = 97.0
-custom_styles/hover = SubResource( 9 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/normal = SubResource( 7 )
-icon = ExtResource( 13 )
-icon_align = 1
-
-[node name="BotonProyectos" type="Button" parent="CanvasLayer_UI_Bars"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -101.0
-margin_bottom = 108.0
-icon = ExtResource( 14 )
-flat = true
-icon_align = 1
 
 [connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_Button_ZoomIn_pressed"]
