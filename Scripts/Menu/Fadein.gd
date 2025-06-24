@@ -9,7 +9,7 @@ onready var fade_rect = $CanvasLayer/ColorRect
 # REFERENCIA AL TIMER (¡Asegúrate de que la ruta sea correcta a tu nodo Timer!)
 # Si tu Timer es hijo directo del nodo raíz, sería "$Timer"
 # Si es hijo del CanvasLayer, sería "$CanvasLayer/Timer"
-onready var change_scene_timer = $CanvasLayer/Timer # <-- Ajusta esta ruta si tu Timer está en otro lugar
+#onready var change_scene_timer = $CanvasLayer/Timer # <-- Ajusta esta ruta si tu Timer está en otro lugar
 
 func _ready():
 	
@@ -18,13 +18,13 @@ func _ready():
 	animation_player.play("fadein")
 
 	# Inicia el Timer para controlar el tiempo total de la splash screen.
-	change_scene_timer.start() # <-- EL TIMER SE INICIA AQUÍ, AL PRINCIPIO.
-	print("Animación 'fade_in' iniciada y Timer de cambio de escena iniciado.")
+	#change_scene_timer.start() # <-- EL TIMER SE INICIA AQUÍ, AL PRINCIPIO.
+	#print("Animación 'fade_in' iniciada y Timer de cambio de escena iniciado.")
 
 
 
-func _on_Timer_timeout():
-	print("Timer de cambio de escena terminado. Cambiando a Login.tscn...")
-	get_tree().change_scene("res://Scenes/Login.tscn") # ¡CAMBIA ESTA RUTA SI ES DIFERENTE!
+#func _on_Timer_timeout():
+	#print("Timer de cambio de escena terminado. Cambiando a Login.tscn...")
+	#get_tree().change_scene("res://Control.tscn") # ¡CAMBIA ESTA RUTA SI ES DIFERENTE!
 
 
