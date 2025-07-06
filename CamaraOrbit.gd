@@ -3,13 +3,16 @@ extends Spatial
 export var camera_speed: float = 0.01
 export var zoom_speed: float = 0.1
 export var min_distance: float = 2.0
-export var max_distance: float = 20.0
+export var max_distance: float = 100.0
 
 var _camera: Camera
 var _distance: float = 5.0
 var _angle_x: float = 0.0
 var _angle_y: float = 0.5
 var _mouse_pressed: bool = false
+var modo_construccion := false
+var vista_aerea_activa := false
+var CamaraTrancada := false
 
 # ¡IMPORTANTE! Eliminar la línea onready var zoom_slider = get_parent().get_node("CanvasLayer/ZoomSlider")
 # Usaremos esta variable para que Control.gd nos pase la referencia
@@ -18,7 +21,10 @@ var _ui_zoom_slider: HSlider = null # Usamos el tipo explícito para HSlider
 func _ready():
 	_camera = get_node("camara3D")
 	if not _camera:
-		push_error("No se encontró Camera3D como hijo")
+		push_error("No se encontró Camera3D como hijo");
+	if _camera:
+	 _camera.far = 500.0  # Aumenta el plano lejano de renderizado
+	_camera.keep_aspect = Camera.KEEP_WIDTH  # Mantener relación de aspecto
 	
 	# Eliminamos la conexión y configuración inicial del slider aquí,
 	# ya que Control.gd lo hará cuando instancie la escena 3D.
@@ -41,7 +47,7 @@ func _set_distance_from_slider(value: float):
 # Ajustada la lógica de init_orbit
 func init_orbit(room_size: float):
 	_distance = clamp(room_size * 2.5, min_distance, max_distance * 2) # Ajusta la distancia inicial
-	max_distance = room_size * 2.0 # Asegura que pueda alejarse más en habitaciones grandes
+	max_distance = room_size * 4.0 # Asegura que pueda alejarse más en habitaciones grandes
 	
 	if _ui_zoom_slider: # Si el slider ha sido seteado, actualiza su max_value y su valor actual
 		_ui_zoom_slider.max_value = max_distance
@@ -50,6 +56,10 @@ func init_orbit(room_size: float):
 	_update_camera_position()
 
 func _input(event):
+	
+	if modo_construccion:
+		return
+
 	# Controles para PC
 	if event is InputEventMouseButton:
 		_mouse_pressed = event.pressed
@@ -71,6 +81,8 @@ func _input(event):
 		if _ui_zoom_slider: # Sincroniza el slider con el zoom multitáctil
 			_ui_zoom_slider.value = _distance
 		_update_camera_position()
+	
+	
 
 
 func _handle_rotation(relative: Vector2):
@@ -99,9 +111,38 @@ func _update_camera_position():
 	_camera.look_at(target.translation, Vector3.UP)
 
 
-# Esta función era la anterior _on_zoom_changed, ahora es _set_distance_from_slider.
-# Es llamada por Control.gd cuando el slider de la UI cambia de valor.
-# Eliminar la duplicada _on_ZoomSlider_value_changed si existe.
-# func _on_ZoomSlider_value_changed(value): # Esta función ya no es necesaria aquí si usas _set_distance_from_slider
-# 	_distance = clamp(value, min_distance, max_distance)
-# 	_update_camera_position()
+func _on_ZoomSlider_value_changed(value):
+	_distance = clamp(value, min_distance, max_distance)  # Aseguramos que esté dentro de los límites
+	_update_camera_position()
+	
+func _on_camita_pressed():
+	ObjectSelector.objeto_seleccionado = "res://objetos/sofa blanco tipo1/sofa blanco.tscn"
+
+
+
+
+func _on_cocinatipo2_pressed():
+	ObjectSelector.objeto_seleccionado = "res://objetos/Cocina/cocina_moderna_tipo2.tscn"
+
+func set_modo_construccion(activo: bool):
+	modo_construccion = activo
+
+func activar_camara_construccion(activo: bool):
+	var cam_construccion = get_tree().get_root().find_node("Camera", true, false)
+	if cam_construccion and cam_construccion is Camera:
+		cam_construccion.current = activo
+		if _camera:
+			_camera.current = not activo
+	else:
+		print("⚠️ Cámara de construcción no encontrada")
+
+
+	
+
+func _on_vistaAerea_pressed():
+	vista_aerea_activa = !vista_aerea_activa
+	activar_camara_construccion(vista_aerea_activa)
+
+func _on_trancarCamara_pressed():
+	CamaraTrancada = !CamaraTrancada
+	set_modo_construccion(CamaraTrancada)
