@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
+[ext_resource path="res://CameraConstruction.gd" type="Script" id=3]
+[ext_resource path="res://Node3D.gd" type="Script" id=4]
 
 [node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
 
 [node name="CamaraOrbit" type="Spatial" parent="."]
 script = ExtResource( 1 )
@@ -46,6 +49,43 @@ margin_top = 71.0
 margin_right = -11.0
 margin_bottom = 91.0
 
+[node name="ButtonModoConstruction" type="Button" parent="CanvasLayer"]
+margin_left = 35.0
+margin_top = 301.0
+margin_right = 47.0
+margin_bottom = 321.0
+text = "Modo Construccion"
+
+[node name="CamaraConstruction" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CamaraConstruction"]
+script = ExtResource( 3 )
+
+[node name="UIConstruction" type="CanvasLayer" parent="."]
+
+[node name="trancarCamara" type="Button" parent="UIConstruction"]
+margin_left = 52.0
+margin_top = 78.0
+margin_right = 64.0
+margin_bottom = 98.0
+text = "bloquear camara"
+
+[node name="MenuButton" type="MenuButton" parent="UIConstruction"]
+margin_left = 148.0
+margin_top = 16.0
+margin_right = 279.0
+margin_bottom = 63.0
+
+[node name="vistaAerea" type="Button" parent="UIConstruction"]
+margin_left = 71.0
+margin_top = 115.0
+margin_right = 152.0
+margin_bottom = 135.0
+text = "vista aerea"
+
 [connection signal="value_changed" from="CanvasLayer/ZoomSlider" to="CamaraOrbit" method="_on_ZoomSlider_value_changed"]
 [connection signal="pressed" from="CanvasLayer/VScrollBar/camita" to="CamaraOrbit" method="_on_camita_pressed"]
 [connection signal="pressed" from="CanvasLayer/VScrollBar/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonModoConstruction" to="." method="_on_ButtonModoConstruction_pressed"]
+[connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
