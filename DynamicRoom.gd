@@ -132,7 +132,7 @@ func crear_vista_previa(ruta: String) -> Node:
 	var mesh_node = encontrar_nodo_con_malla(obj)
 	if mesh_node:
 		var escala = calcular_escala_normalizada(mesh_node, 0.2)
-		obj.scale = Vector3.ONE * escala
+		obj.scale = Vector3.ONE 
 		aplicar_transparencia(obj)
 
 	desactivar_colisiones(obj)
@@ -193,32 +193,55 @@ func _process(delta):
 		ObjectSelector.vista_previa = crear_vista_previa(ObjectSelector.objeto_seleccionado)
 
 	if ObjectSelector.vista_previa:
+		var obj = ObjectSelector.vista_previa
 		var mouse_pos = get_viewport().get_mouse_position()
 		var camera = get_viewport().get_camera()
 		var desde = camera.project_ray_origin(mouse_pos)
 		var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
 
-		var result = get_world().direct_space_state.intersect_ray(desde, hacia, [], 1)
+		# 🔍 Excluir objetos colocados del raycast
+		var excluidos = []
+		for nodo in get_tree().get_nodes_in_group("colocados"):
+			if nodo.has_method("get_rid"):
+				excluidos.append(nodo.get_rid())
 
-		if result and result.collider.is_in_group("suelo"):
-			var obj = ObjectSelector.vista_previa
-			var mesh = encontrar_nodo_con_malla(obj)
-			if mesh:
-				var aabb = mesh.get_aabb()
-				var offset = aabb.position.y * obj.scale.y
-				var altura = aabb.size.y * obj.scale.y
-				var y_final = result.position.y - offset + altura / 2.0
-				obj.translation = Vector3(result.position.x, y_final, result.position.z)
+		var result = get_world().direct_space_state.intersect_ray(desde, hacia, excluidos, 1)
+		var destino : Vector3
 
+		if result and result.collider and result.collider.is_in_group("suelo"):
+			destino = result.position
+		else:
+			# 🆘 Fallback: proyectar hacia el plano del suelo en Y = 0
+			var altura_suelo := 0.0
+			var t : float  = (altura_suelo - desde.y) / (hacia.y - desde.y)
+			destino = desde.linear_interpolate(hacia, t)
+		
+		var mesh = encontrar_nodo_con_malla(obj)
+		if mesh:
+			var aabb = mesh.get_aabb()
+			var offset = aabb.position.y * obj.scale.y
+			var altura = aabb.size.y * obj.scale.y
+			var y_final = destino.y - offset + altura / 2.0
+
+			# 🛞 Movimiento suave con interpolación
+			var objetivo = Vector3(destino.x, y_final, destino.z)
+			obj.translation = obj.translation.linear_interpolate(objetivo, 0.25)
+
+# 🔍 Recolectar todos los RIDs del objeto y sus hijos
+func recolectar_rids(nodo: Node) -> Array:
+		var rids = []
+		if nodo.has_method("get_rid"):
+			rids.append(nodo.get_rid())
+		for hijo in nodo.get_children():
+			rids += recolectar_rids(hijo)
+		return rids
+		
 func hay_colision_volumetrica(objeto: Node) -> bool:
 	var space = get_world().direct_space_state
 
-	var excludes = []
-	if objeto.has_method("get_rid"):
-		excludes.append(objeto.get_rid())
-	for hijo in objeto.get_children():
-		if hijo.has_method("get_rid"):
-			excludes.append(hijo.get_rid())
+	
+
+	var excludes = recolectar_rids(objeto)
 
 	for shape_node in objeto.get_children():
 		if shape_node is CollisionShape and shape_node.shape:
@@ -227,21 +250,20 @@ func hay_colision_volumetrica(objeto: Node) -> bool:
 
 			var params = PhysicsShapeQueryParameters.new()
 
-			# 🔄 Si la forma es cóncava, generamos un BoxShape basado en el mesh
 			if shape is ConcavePolygonShape:
 				var mesh = encontrar_nodo_con_malla(objeto)
 				if mesh:
 					var aabb = mesh.get_aabb()
 					var box_shape = BoxShape.new()
 					box_shape.set_extents(aabb.size * 0.5 * objeto.scale)
-					
+
 					var offset = aabb.position * objeto.scale
 					var box_transform = Transform(transform.basis, transform.origin + offset)
 
 					params.set_shape(box_shape)
 					params.set_transform(box_transform)
 				else:
-					continue  # No se pudo generar un volumen estimado
+					continue
 			else:
 				params.set_shape(shape)
 				params.set_transform(transform)
