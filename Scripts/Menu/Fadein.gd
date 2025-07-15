@@ -3,8 +3,6 @@ extends Control # O Node2D, dependiendo de tu nodo raíz
 # Referencia al AnimationPlayer. (Sigue siendo necesario para reproducir el fade visual)
 onready var animation_player = $CanvasLayer/AnimationPlayer
 
-# Referencia al ColorRect.
-onready var fade_rect = $CanvasLayer/TextureRect
 
 # REFERENCIA AL TIMER (¡Asegúrate de que la ruta sea correcta a tu nodo Timer!)
 # Si tu Timer es hijo directo del nodo raíz, sería "$Timer"
@@ -22,9 +20,5 @@ func _ready():
 	#print("Animación 'fade_in' iniciada y Timer de cambio de escena iniciado.")
 
 
-
-func _on_Timer_timeout():
-	print("Timer de cambio de escena terminado. Cambiando a Login.tscn...")
-	#get_tree().change_scene("res://Control.tscn") # ¡CAMBIA ESTA RUTA SI ES DIFERENTE!
-
+ 
 

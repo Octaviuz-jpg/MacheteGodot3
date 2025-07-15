@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Img/Logovr2_white.png" type="Texture" id=2]
@@ -29,12 +29,12 @@ tracks/0/keys = {
 bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=17]
-size = 39
+size = 41
 extra_spacing_bottom = 5
 extra_spacing_char = 6
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=20]
 content_margin_left = 20.0
 content_margin_right = 20.0
 content_margin_top = 20.0
@@ -49,6 +49,137 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=21]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.584314 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=22]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.584314 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=23]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.584314 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=18]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=24]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=25]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+
+[sub_resource type="StyleBoxFlat" id=26]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=27]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 1 )
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1000
+
+[sub_resource type="DynamicFont" id=28]
+size = 27
+extra_spacing_bottom = 5
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=29]
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -94,42 +225,97 @@ margin_right = 615.0
 margin_bottom = 850.0
 custom_constants/separation = 60
 
-[node name="inicio" type="Button" parent="Panel/TextureRect/VBoxContainer"]
+[node name="MenuButton" type="MenuButton" parent="Panel/TextureRect/VBoxContainer"]
 margin_right = 503.0
-margin_bottom = 87.0
+margin_bottom = 89.0
 custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
 custom_styles/normal = SubResource( 18 )
-text = "Diseñar habitacion"
+text = "Diseñar habitación"
+flat = false
+script = ExtResource( 3 )
+
+[node name="PopupMenu2" type="PopupMenu" parent="Panel/TextureRect/VBoxContainer/MenuButton"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.494
+anchor_right = 0.5
+anchor_bottom = 0.494
+margin_left = 14.5
+margin_top = -208.966
+margin_right = 302.5
+margin_bottom = 0.0339966
+custom_styles/labeled_separator_left = SubResource( 18 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/labeled_separator_right = SubResource( 18 )
+custom_styles/panel_disabled = SubResource( 24 )
+custom_styles/panel = SubResource( 25 )
+custom_styles/separator = SubResource( 26 )
+
+[node name="Panel" type="Panel" parent="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2"]
+margin_top = 194.0
+margin_right = 53.0
+margin_bottom = 229.0
+custom_styles/panel = SubResource( 27 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2"]
+margin_left = 13.0
+margin_top = 27.0
+margin_right = 278.0
+margin_bottom = 151.0
+custom_constants/separation = 8
+
+[node name="inicio" type="Button" parent="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer"]
+margin_right = 265.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 28 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 18 )
+custom_styles/normal = SubResource( 18 )
+text = "modo experto"
+script = ExtResource( 8 )
+
+[node name="inicio2" type="Button" parent="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer"]
+margin_top = 83.0
+margin_right = 265.0
+margin_bottom = 158.0
+custom_fonts/font = SubResource( 28 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 18 )
+custom_styles/normal = SubResource( 18 )
+text = "modo base"
 script = ExtResource( 8 )
 
 [node name="Proyectos" type="Button" parent="Panel/TextureRect/VBoxContainer"]
-margin_top = 147.0
+margin_top = 149.0
 margin_right = 503.0
-margin_bottom = 234.0
+margin_bottom = 238.0
 custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 29 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 18 )
 custom_styles/normal = SubResource( 18 )
 text = "Proyectos"
 script = ExtResource( 9 )
 
 [node name="Salir" type="Button" parent="Panel/TextureRect/VBoxContainer"]
-margin_top = 294.0
+margin_top = 298.0
 margin_right = 503.0
-margin_bottom = 381.0
+margin_bottom = 387.0
 custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 18 )
 custom_styles/normal = SubResource( 18 )
 text = "Salir"
 script = ExtResource( 4 )
-
-[node name="MenuButton" type="MenuButton" parent="Panel/TextureRect/VBoxContainer"]
-margin_top = 441.0
-margin_right = 503.0
-margin_bottom = 461.0
-flat = false
-script = ExtResource( 3 )
-
-[node name="PopupMenu2" type="PopupMenu" parent="Panel/TextureRect/VBoxContainer/MenuButton"]
-margin_right = 44.0
-margin_bottom = 20.0
 
 [node name="usuario" type="Button" parent="Panel/TextureRect"]
 margin_left = 606.0
@@ -138,6 +324,10 @@ margin_right = 1134.0
 margin_bottom = 569.0
 rect_scale = Vector2( 0.2, 0.2 )
 custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 19 )
 custom_styles/normal = SubResource( 19 )
 icon = ExtResource( 7 )
 
@@ -146,7 +336,8 @@ position = Vector2( 370, 180 )
 texture = ExtResource( 2 )
 
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="pressed" from="Panel/TextureRect/VBoxContainer/inicio" to="Panel/TextureRect/VBoxContainer/inicio" method="_on_inicio_pressed"]
+[connection signal="pressed" from="Panel/TextureRect/VBoxContainer/MenuButton" to="Panel/TextureRect/VBoxContainer/MenuButton" method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer/inicio" to="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer/inicio" method="_on_inicio_pressed"]
+[connection signal="pressed" from="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer/inicio2" to="Panel/TextureRect/VBoxContainer/MenuButton/PopupMenu2/VBoxContainer/inicio2" method="_on_inicio_pressed"]
 [connection signal="pressed" from="Panel/TextureRect/VBoxContainer/Proyectos" to="Panel/TextureRect/VBoxContainer/Proyectos" method="_on_Proyectos_pressed"]
 [connection signal="pressed" from="Panel/TextureRect/VBoxContainer/Salir" to="Panel/TextureRect/VBoxContainer/Salir" method="_on_Salir_pressed"]
-[connection signal="pressed" from="Panel/TextureRect/VBoxContainer/MenuButton" to="Panel/TextureRect/VBoxContainer/MenuButton" method="_on_MenuButton_pressed"]
