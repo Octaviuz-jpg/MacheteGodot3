@@ -134,12 +134,10 @@ anchor_bottom = 1.0
 custom_styles/panel = SubResource( 7 )
 
 [node name="Label" type="Label" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 100.0
 margin_top = 300.0
-margin_right = -164.0
-margin_bottom = -780.0
+margin_right = 556.0
+margin_bottom = 500.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 8 )
@@ -232,12 +230,10 @@ text = "Registrarse"
 script = ExtResource( 6 )
 
 [node name="inicio" type="Button" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 119.0
 margin_top = 844.0
-margin_right = -111.0
-margin_bottom = -336.0
+margin_right = 609.0
+margin_bottom = 944.0
 custom_fonts/font = SubResource( 17 )
 custom_styles/hover = SubResource( 18 )
 custom_styles/pressed = SubResource( 19 )

@@ -10,10 +10,11 @@ config_version=4
 
 [application]
 
-config/name="Machete Godot 3"
-run/main_scene="res://Welcome.tscn"
+config/name="MakeTalo"
+run/main_scene="res://Scenes/Login.tscn"
 boot_splash/image="res://Assets/Img/Logo (2).png"
-config/icon="res://icon.png"
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
+config/icon="res://Assets/Img/Logo (2).png"
 
 [autoload]
 
