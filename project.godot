@@ -11,7 +11,8 @@ config_version=4
 [application]
 
 config/name="Machete Godot 3"
-run/main_scene="res://Control.tscn"
+run/main_scene="res://Welcome.tscn"
+boot_splash/image="res://Assets/Img/Logo (2).png"
 config/icon="res://icon.png"
 
 [autoload]
@@ -24,6 +25,8 @@ ObjectSelector="*res://ObjectSelector.gd"
 window/size/width=720
 window/size/height=1280
 window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [gui]
 
