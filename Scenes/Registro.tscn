@@ -229,12 +229,10 @@ text = "Registrarse"
 script = ExtResource( 7 )
 
 [node name="Label2" type="Label" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 100.0
 margin_top = 300.0
-margin_right = -164.0
-margin_bottom = -828.0
+margin_right = 556.0
+margin_bottom = 452.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 27 )
