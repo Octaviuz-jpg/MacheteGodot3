@@ -1,11 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Img/uneg_white.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Img/Logo_blanco_txt.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Img/volver.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/sub-menu/volver_a_menu.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Fonts/moon_get/moon_get-Heavy.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold Italic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Assets/IconTools/zoom-in.png" type="Texture" id=7]
 [ext_resource path="res://Assets/IconTools/ruler.png" type="Texture" id=8]
 [ext_resource path="res://Assets/IconTools/undo.png" type="Texture" id=9]
@@ -13,25 +11,10 @@
 [ext_resource path="res://Assets/IconTools/redo.png" type="Texture" id=11]
 [ext_resource path="res://Assets/IconTools/save.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Assets/Img/baseOctavio.png" type="Texture" id=14]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.628788, 1 )
-colors = PoolColorArray( 0.227451, 0.556863, 0.545098, 1, 0.435294, 0.741176, 0.729412, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 36
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 40
-font_data = ExtResource( 5 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 29
-font_data = ExtResource( 6 )
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 30
@@ -45,6 +28,9 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 40
@@ -55,149 +41,117 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-unique_name_in_owner = true
+[node name="PanelPresentación" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = 8.0
-
-[node name="PanelPresentación" type="Panel" parent="CenterContainer"]
-margin_left = 360.0
-margin_top = 640.0
-margin_right = 360.0
-margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/panel = SubResource( 9 )
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelPresentación"]
-margin_left = 351.0
-margin_top = -639.0
-margin_right = 1630.0
-margin_bottom = 85.0001
-rect_rotation = 89.7605
-texture = SubResource( 2 )
-expand = true
-
-[node name="UnegWhite" type="Sprite" parent="CenterContainer/PanelPresentación"]
-position = Vector2( -288.446, -558.875 )
-scale = Vector2( 0.13107, 0.129175 )
-texture = ExtResource( 2 )
-
-[node name="LogoBlancoTxt" type="Sprite" parent="CenterContainer/PanelPresentación"]
-position = Vector2( 28, -250.5 )
-scale = Vector2( 0.6875, 0.692727 )
-texture = ExtResource( 3 )
-
-[node name="Encabezado" type="VBoxContainer" parent="CenterContainer/PanelPresentación"]
-margin_left = -230.0
-margin_top = -507.0
-margin_right = 286.0
-margin_bottom = -362.0
-
-[node name="WELCOME" type="Label" parent="CenterContainer/PanelPresentación/Encabezado"]
-margin_right = 516.0
-margin_bottom = 39.0
-custom_fonts/font = SubResource( 3 )
-text = "BIENVENIDO!"
-
-[node name="MACHETE STUDIOS" type="Label" parent="CenterContainer/PanelPresentación/Encabezado"]
-margin_top = 43.0
-margin_right = 516.0
-margin_bottom = 83.0
-custom_fonts/font = SubResource( 4 )
-text = "MACHETE STUDIOS "
-
-[node name="PRESENTS" type="Label" parent="CenterContainer/PanelPresentación/Encabezado"]
-margin_top = 87.0
-margin_right = 516.0
-margin_bottom = 119.0
-custom_fonts/font = SubResource( 5 )
-text = "Presenta"
-
-[node name="Escena1#Elementografico" type="Sprite" parent="CenterContainer/PanelPresentación"]
-position = Vector2( -123.75, 135 )
-scale = Vector2( 0.564236, 0.528183 )
+[node name="Escena1#Elementografico" type="Sprite" parent="PanelPresentación"]
+position = Vector2( 277, 748 )
+scale = Vector2( 0.62934, 0.551591 )
 texture = ExtResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelPresentación"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelPresentación"]
 unique_name_in_owner = true
-margin_left = -63.0
-margin_top = -43.0
-margin_right = 132.0
+margin_left = 251.0
+margin_top = 443.0
+margin_right = 640.0
+margin_bottom = 1053.0
 custom_constants/separation = 100
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
-margin_right = 211.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelPresentación/VBoxContainer"]
+margin_right = 389.0
 margin_bottom = 42.0
 
-[node name="anchura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
-margin_right = 149.0
+[node name="anchura" type="Label" parent="PanelPresentación/VBoxContainer/HBoxContainer3"]
+margin_right = 327.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "Anchura:"
 
-[node name="anchuraText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
+[node name="anchuraText" type="LineEdit" parent="PanelPresentación/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 153.0
-margin_right = 211.0
+margin_left = 331.0
+margin_right = 389.0
 margin_bottom = 42.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelPresentación/VBoxContainer"]
 margin_top = 142.0
-margin_right = 211.0
+margin_right = 389.0
 margin_bottom = 184.0
 
-[node name="profundidad" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
-margin_right = 149.0
+[node name="profundidad" type="Label" parent="PanelPresentación/VBoxContainer/HBoxContainer2"]
+margin_right = 327.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "Profundidad"
 
-[node name="profundidadText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
+[node name="profundidadText" type="LineEdit" parent="PanelPresentación/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 153.0
-margin_right = 211.0
+margin_left = 331.0
+margin_right = 389.0
 margin_bottom = 42.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelPresentación/VBoxContainer"]
 margin_top = 284.0
-margin_right = 211.0
+margin_right = 389.0
 margin_bottom = 326.0
 
-[node name="altura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
-margin_right = 149.0
+[node name="altura" type="Label" parent="PanelPresentación/VBoxContainer/HBoxContainer"]
+margin_right = 327.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "Altura: "
 valign = 1
 
-[node name="alturaText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
+[node name="alturaText" type="LineEdit" parent="PanelPresentación/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 153.0
-margin_right = 211.0
+margin_left = 331.0
+margin_right = 389.0
 margin_bottom = 42.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button" type="Button" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+[node name="Button" type="Button" parent="PanelPresentación/VBoxContainer"]
 margin_top = 426.0
-margin_right = 211.0
+margin_right = 389.0
 margin_bottom = 468.0
 custom_fonts/font = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "generar"
 
-[node name="ErrorLabel" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="PanelPresentación/VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 568.0
-margin_right = 211.0
+margin_right = 389.0
 margin_bottom = 610.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 7 )
+
+[node name="volver" type="Button" parent="PanelPresentación"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 20.0
+margin_right = -178.0
+margin_bottom = -748.0
+rect_scale = Vector2( 0.12, 0.12 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 10 )
+icon = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
@@ -286,6 +240,12 @@ visible = false
 margin_right = 16.0
 margin_bottom = 176.0
 
-[connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[node name="BaseOctavio" type="Sprite" parent="."]
+position = Vector2( 256, 227 )
+scale = Vector2( 0.767578, 0.773438 )
+texture = ExtResource( 14 )
+
+[connection signal="pressed" from="PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="PanelPresentación/volver" to="PanelPresentación/volver" method="_on_volver_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_Button_ZoomIn_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_Button_ZoomOut_pressed"]
