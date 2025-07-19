@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
+[ext_resource path="res://CameraConstruction.gd" type="Script" id=3]
 
 [node name="Spatial" type="Spatial"]
 
@@ -12,3 +13,53 @@ script = ExtResource( 1 )
 
 [node name="DynamicRoom" type="Spatial" parent="."]
 script = ExtResource( 2 )
+
+[node name="Container" type="Spatial" parent="DynamicRoom"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ZoomSlider" type="VSlider" parent="CanvasLayer"]
+anchor_top = 0.018
+anchor_right = 0.046
+anchor_bottom = 0.123
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 20, 30 )
+min_value = 1.0
+step = 0.1
+value = 5.0
+
+[node name="VScrollBar" type="VScrollBar" parent="CanvasLayer"]
+margin_left = 63.0
+margin_top = 172.0
+margin_right = 161.0
+margin_bottom = 265.0
+
+[node name="camita" type="Button" parent="CanvasLayer/VScrollBar"]
+margin_left = -25.0
+margin_top = 31.0
+margin_right = -13.0
+margin_bottom = 51.0
+
+[node name="cocinatipo2" type="Button" parent="CanvasLayer/VScrollBar"]
+margin_left = -23.0
+margin_top = 71.0
+margin_right = -11.0
+margin_bottom = 91.0
+
+[node name="Construccion modo" type="Button" parent="CanvasLayer"]
+margin_left = 59.0
+margin_top = 135.0
+margin_right = 153.0
+margin_bottom = 155.0
+text = "construccion"
+
+[node name="CamaraConstruction" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CamaraConstruction"]
+script = ExtResource( 3 )
+
+[connection signal="value_changed" from="CanvasLayer/ZoomSlider" to="CamaraOrbit" method="_on_ZoomSlider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/VScrollBar/camita" to="CamaraOrbit" method="_on_camita_pressed"]
+[connection signal="pressed" from="CanvasLayer/VScrollBar/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Construccion modo" to="CamaraOrbit" method="_on_Construccion_modo_pressed"]

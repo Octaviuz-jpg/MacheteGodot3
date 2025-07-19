@@ -2,7 +2,7 @@ extends Button
 
 func _on_inicio_pressed():
 	print("ok, vamos a control.tscn")
-	var new_scene_path = "res://Control.tscn"
+	var new_scene_path = "res://Control2.tscn"
 	var new_scene_packed = load(new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
 

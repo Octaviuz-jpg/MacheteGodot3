@@ -2,6 +2,8 @@
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
+[ext_resource path="res://CameraConstruction.gd" type="Script" id=3]
+[ext_resource path="res://Node3D.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Fonts/moon_get/moon_get-Heavy.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://Assets/IconTools/layers.png" type="Texture" id=4]
 [ext_resource path="res://Assets/IconTools/package-plus.png" type="Texture" id=5]
