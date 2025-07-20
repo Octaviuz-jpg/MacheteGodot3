@@ -50,3 +50,4 @@ func _on_Button_pressed():
 		print("Error: El Panel no está asignado en el Inspector del botón.")
 
 
+

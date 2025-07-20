@@ -256,13 +256,27 @@ icon = ExtResource( 8 )
 flat = true
 
 [node name="Save" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
 margin_left = 583.0
 margin_right = 631.0
 margin_bottom = 67.0
 icon = ExtResource( 12 )
 flat = true
 
+[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer_UI_Bars"]
+unique_name_in_owner = true
+margin_right = 83.0
+margin_bottom = 58.0
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer_UI_Bars/AcceptDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 75.0
+margin_bottom = 32.0
+
 [connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelPresentación/volver" to="CenterContainer/PanelPresentación/volver" method="_on_volver_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_ZoomIn_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_ZoomOut_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/Save" to="." method="_on_Save_pressed"]
+[connection signal="confirmed" from="CanvasLayer_UI_Bars/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]

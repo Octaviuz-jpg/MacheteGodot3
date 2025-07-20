@@ -10,6 +10,11 @@ func _ready():
 	self.translation = Vector3.ZERO
 	build_room()
 	_setup_camera()
+	
+	# Cargar proyecto si hay uno seleccionado
+	if MedidasSingleton.proyecto_actual != "":
+		SistemaGuardado.cargar_proyecto(MedidasSingleton.proyecto_actual, self)
+		MedidasSingleton.proyecto_actual = ""  # Resetear después de cargar
 
 func _setup_camera():
 	if camera_orbit:
@@ -77,6 +82,8 @@ func _create_wall(pos: Vector3, size: Vector3, rot_y: float, material: SpatialMa
 	collision.shape.extents = size * 0.5
 	static_body.add_child(collision)
 	wall.add_child(static_body)
+	wall.add_to_group("paredes")
+	static_body.add_to_group("paredes")
 
 	add_child(wall)
 
@@ -103,6 +110,7 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 		return
 
 	var obj = load(ruta).instance()
+	obj.set_meta("ruta_original", ruta)
 	$Container.add_child(obj)
 	obj.add_to_group("colocados")
 

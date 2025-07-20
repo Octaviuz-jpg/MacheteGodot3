@@ -8,6 +8,8 @@ onready var viewport_container = $"%ViewportContainer"
 onready var viewport_3d = $"%Viewport"
 onready var input_ui_container = $"%CenterContainer"
 onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars"
+onready var Accept = $"%CanvasLayer_UI_Bars/AcceptDialog"
+onready var nombre_input = $"CanvasLayer_UI_Bars/AcceptDialog/LineEdit"
 
 var room_3d_scene_res = preload("res://Node3D.tscn")
 var _camera_orbit_instance: Spatial = null
@@ -97,3 +99,19 @@ func _on_ZoomIn_pressed():
 	else:
 		print("Error: _camera_orbit_instance no está asignado. La cámara 3D no está lista.")
 
+
+
+func _on_Save_pressed():
+	nombre_input.text = ""  # Limpiar texto anterior
+	Accept.popup_centered()
+	
+
+func _on_AcceptDialog_confirmed():
+	var nombre = nombre_input.text.strip_edges()
+	if nombre.empty():
+		nombre_input.placeholder_text = "¡Nombre requerido!"
+		Accept.popup_centered()  # Mostrar nuevamente
+		return
+	
+	if SistemaGuardado.guardar_proyecto(nombre, viewport_3d.get_child(0)):
+		print("Proyecto guardado: ", nombre)
