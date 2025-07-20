@@ -1,0 +1,253 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Img/volver.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Img/Logovr2.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Registro/volver.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Registro/Registrarse.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 40
+outline_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 40
+outline_color = Color( 0.141176, 0.227451, 0.247059, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 39
+extra_spacing_char = 6
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.0890465, 0.287867, 0.363281, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color( 0.0890465, 0.287867, 0.363281, 1 )
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="DynamicFont" id=27]
+size = 56
+outline_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+extra_spacing_char = 3
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "fadein"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="volver" type="Button" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 20.0
+margin_right = -178.0
+margin_bottom = -748.0
+rect_scale = Vector2( 0.12, 0.12 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 19 )
+icon = ExtResource( 3 )
+script = ExtResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+margin_left = 110.0
+margin_top = 434.0
+margin_right = 622.0
+margin_bottom = 1544.0
+custom_constants/separation = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 96.0
+
+[node name="username2" type="Label" parent="Panel/VBoxContainer/VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 43.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 20 )
+text = "Username"
+
+[node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer"]
+margin_top = 47.0
+margin_right = 512.0
+margin_bottom = 96.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 21 )
+custom_styles/normal = SubResource( 22 )
+placeholder_alpha = 0.44
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 156.0
+margin_right = 512.0
+margin_bottom = 252.0
+
+[node name="username2" type="Label" parent="Panel/VBoxContainer/VBoxContainer2"]
+margin_right = 512.0
+margin_bottom = 43.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 20 )
+text = "Correo"
+
+[node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer2"]
+margin_top = 47.0
+margin_right = 512.0
+margin_bottom = 96.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 21 )
+custom_styles/normal = SubResource( 22 )
+placeholder_alpha = 0.44
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 312.0
+margin_right = 512.0
+margin_bottom = 408.0
+
+[node name="username2" type="Label" parent="Panel/VBoxContainer/VBoxContainer3"]
+margin_right = 512.0
+margin_bottom = 43.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 20 )
+text = "Password"
+
+[node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer3"]
+margin_top = 47.0
+margin_right = 512.0
+margin_bottom = 96.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 21 )
+custom_styles/normal = SubResource( 22 )
+placeholder_alpha = 0.44
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 468.0
+margin_right = 512.0
+margin_bottom = 564.0
+
+[node name="username2" type="Label" parent="Panel/VBoxContainer/VBoxContainer4"]
+margin_right = 512.0
+margin_bottom = 43.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 20 )
+text = "Confirm"
+
+[node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer4"]
+margin_top = 47.0
+margin_right = 512.0
+margin_bottom = 96.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 21 )
+custom_styles/normal = SubResource( 22 )
+placeholder_alpha = 0.44
+
+[node name="Logovr2" type="Sprite" parent="Panel"]
+position = Vector2( 365, 211 )
+texture = ExtResource( 4 )
+
+[node name="Registrarse" type="Button" parent="Panel"]
+margin_left = 106.0
+margin_top = 1062.0
+margin_right = 618.0
+margin_bottom = 1148.0
+custom_fonts/font = SubResource( 17 )
+custom_styles/hover = SubResource( 23 )
+custom_styles/pressed = SubResource( 24 )
+custom_styles/focus = SubResource( 25 )
+custom_styles/normal = SubResource( 26 )
+text = "Registrarse"
+script = ExtResource( 7 )
+
+[node name="Label2" type="Label" parent="Panel"]
+margin_left = 100.0
+margin_top = 300.0
+margin_right = 556.0
+margin_bottom = 452.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 27 )
+text = "¡WELCOME!"
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+anims/fadein = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.8
+one_shot = true
+autostart = true
+
+[connection signal="pressed" from="Panel/volver" to="Panel/volver" method="_on_volver_pressed"]
+[connection signal="pressed" from="Panel/Registrarse" to="Panel/Registrarse" method="_on_Registrarse_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

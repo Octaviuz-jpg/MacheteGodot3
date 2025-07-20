@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Login/Fadein.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Img/Logovr2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Img/iconuser.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Menu/IrOPCdiseño_habitacion.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Menu/Salir.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Menu/IraProyectos.gd" type="Script" id=9]
+
+[sub_resource type="Animation" id=6]
+resource_name = "fadein"
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 41
+extra_spacing_bottom = 5
+extra_spacing_char = 6
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 40
+outline_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 41
+extra_spacing_bottom = 5
+extra_spacing_char = 6
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+anims/fadein = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="CanvasLayer"]
+wait_time = 2.8
+one_shot = true
+autostart = true
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="Label2" type="RichTextLabel" parent="Panel"]
+margin_left = 47.0
+margin_top = 371.0
+margin_right = 704.0
+margin_bottom = 583.0
+custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/normal_font = SubResource( 12 )
+text = "Menu de opciones base, quí podrás hacer tu diseño de habitación soñado y tus proyectos arquitectonicos"
+
+[node name="Menu_opciones" type="VBoxContainer" parent="Panel"]
+margin_left = 112.0
+margin_top = 597.0
+margin_right = 615.0
+margin_bottom = 967.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 60
+
+[node name="Diseño_habitacion" type="Button" parent="Panel/Menu_opciones"]
+margin_right = 503.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 11 )
+text = "Diseñar habitación"
+script = ExtResource( 5 )
+
+[node name="Proyectos" type="Button" parent="Panel/Menu_opciones"]
+margin_top = 109.0
+margin_right = 503.0
+margin_bottom = 158.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 11 )
+text = "Proyectos"
+script = ExtResource( 9 )
+
+[node name="Salir" type="Button" parent="Panel/Menu_opciones"]
+margin_top = 218.0
+margin_right = 503.0
+margin_bottom = 267.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 11 )
+text = "Salir"
+script = ExtResource( 6 )
+
+[node name="Logovr2" type="Sprite" parent="Panel"]
+position = Vector2( 365, 250 )
+texture = ExtResource( 3 )
+
+[node name="usuario" type="Button" parent="Panel"]
+margin_left = 606.0
+margin_top = 18.0
+margin_right = 1134.0
+margin_bottom = 569.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = SubResource( 14 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 15 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 15 )
+icon = ExtResource( 4 )
+
+[connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="Panel/Menu_opciones/Diseño_habitacion" to="Panel/Menu_opciones/Diseño_habitacion" method="_on_Diseo_habitacion_pressed"]
+[connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
+[connection signal="pressed" from="Panel/Menu_opciones/Salir" to="Panel/Menu_opciones/Salir" method="_on_Salir_pressed"]

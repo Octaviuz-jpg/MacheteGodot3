@@ -1,9 +1,68 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/moon_get/moon_get-Heavy.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/IconTools/layers.png" type="Texture" id=4]
+[ext_resource path="res://Assets/IconTools/package-plus.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/BotonCatalogo.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/CargarCatalogo2.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/BotonProyectos.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/CargarProyectos2.gd" type="Script" id=9]
+[ext_resource path="res://Assets/IconTools/avatar.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/Gridmap.gd" type="Script" id=11]
+[ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
+[ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
+[ext_resource path="res://CameraConstruction.gd" type="Script" id=14]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.227451, 0.556863, 0.545098, 1 )
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.196078, 0.439216, 0.447059, 1 )
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0.164706, 0.396078, 0.4, 1 )
+corner_radius_top_right = 10
+corner_radius_bottom_right = 100
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = 5
+extra_spacing_bottom = 5
+extra_spacing_char = 2
+extra_spacing_space = 3
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.196078, 0.439216, 0.447059, 1 )
+border_width_left = 10
+border_width_top = 10
+border_color = Color( 0.164706, 0.396078, 0.4, 1 )
+corner_radius_top_left = 10
+corner_radius_bottom_left = 100
 
 [node name="Spatial" type="Spatial"]
+script = ExtResource( 11 )
+
+[node name="CameraConstruccion" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CameraConstruccion"]
+script = ExtResource( 14 )
 
 [node name="CamaraOrbit" type="Spatial" parent="."]
 script = ExtResource( 1 )
@@ -13,4 +72,175 @@ script = ExtResource( 1 )
 [node name="DynamicRoom" type="Spatial" parent="."]
 script = ExtResource( 2 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Container" type="Spatial" parent="DynamicRoom"]
+
+[node name="UIConstruction" type="CanvasLayer" parent="."]
+
+[node name="camita" type="Button" parent="UIConstruction"]
+margin_left = 120.0
+margin_top = 35.0
+margin_right = 132.0
+margin_bottom = 55.0
+
+[node name="cocinatipo2" type="Button" parent="UIConstruction"]
+margin_left = 140.0
+margin_top = 35.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="trancarCamara" type="Button" parent="UIConstruction"]
+margin_left = 180.0
+margin_top = 35.0
+margin_right = 288.0
+margin_bottom = 55.0
+text = "Trancar camara"
+
+[node name="BotonCatalogo" type="Button" parent="UIConstruction"]
+margin_right = 96.0
+margin_bottom = 97.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 5 )
+icon_align = 1
+script = ExtResource( 6 )
+panel_path = NodePath("../Catalogo")
+
+[node name="user" type="Button" parent="UIConstruction"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -101.0
+margin_bottom = 108.0
+icon = ExtResource( 10 )
+flat = true
+icon_align = 1
+script = ExtResource( 8 )
+panel_path = NodePath("../Proyectos")
+
+[node name="Catalogo" type="Panel" parent="UIConstruction"]
+margin_top = 120.0
+margin_right = 250.0
+margin_bottom = 1120.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="BotonProyectos" type="Button" parent="UIConstruction/Catalogo"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -250.0
+margin_top = 3.0
+margin_right = -198.0
+margin_bottom = 49.0
+icon = ExtResource( 13 )
+flat = true
+icon_align = 1
+
+[node name="Label" type="Label" parent="UIConstruction/Catalogo"]
+margin_left = 59.0
+margin_top = 14.0
+margin_right = 219.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 5 )
+text = "CATALOGO"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Catalogo"]
+visible = false
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 249.0
+margin_bottom = 80.0
+
+[node name="cocinatipo2" type="Button" parent="UIConstruction/Catalogo/VBoxContainer"]
+margin_right = 170.0
+margin_bottom = 20.0
+text = "Cocina Tipo 2 de Octavio"
+
+[node name="camita" type="Button" parent="UIConstruction/Catalogo/VBoxContainer"]
+margin_top = 24.0
+margin_right = 170.0
+margin_bottom = 44.0
+text = "Camita de Octavio"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIConstruction/Catalogo"]
+margin_left = 35.0
+margin_top = 62.0
+margin_right = 240.0
+margin_bottom = 613.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Catalogo/ScrollContainer"]
+
+[node name="GridContainer" type="GridContainer" parent="UIConstruction/Catalogo/ScrollContainer/VBoxContainer"]
+script = ExtResource( 7 )
+
+[node name="Proyectos" type="Panel" parent="UIConstruction"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -500.0
+margin_bottom = 500.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Label" type="Label" parent="UIConstruction/Proyectos"]
+margin_left = 48.0
+margin_top = 17.0
+margin_right = 219.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 5 )
+text = "PROYECTOS"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIConstruction/Proyectos"]
+margin_left = 35.0
+margin_top = 62.0
+margin_right = 240.0
+margin_bottom = 613.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Proyectos/ScrollContainer"]
+
+[node name="GridContainer" type="GridContainer" parent="UIConstruction/Proyectos/ScrollContainer/VBoxContainer"]
+script = ExtResource( 9 )
+
+[node name="BotonProyectos2" type="Button" parent="UIConstruction"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -155.0
+margin_top = 23.0
+margin_right = -86.0
+margin_bottom = 86.0
+icon = ExtResource( 4 )
+flat = true
+icon_align = 1
+script = ExtResource( 8 )
+panel_path = NodePath("../Proyectos")
+
+[node name="ButtonModoCons" type="Button" parent="UIConstruction"]
+margin_left = 185.0
+margin_top = 96.0
+margin_right = 197.0
+margin_bottom = 116.0
+text = "modo construccion"
+
+[node name="vistaAerea" type="Button" parent="UIConstruction"]
+margin_left = 184.0
+margin_top = 67.0
+margin_right = 266.0
+margin_bottom = 87.0
+text = "Vista aerea"
+
+[node name="GridMap" type="GridMap" parent="."]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
+visible = false
+mesh_library = ExtResource( 12 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
+[connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="UIConstruction/ButtonModoCons" to="CamaraOrbit" method="_on_ButtonModoCons_pressed"]
+[connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]

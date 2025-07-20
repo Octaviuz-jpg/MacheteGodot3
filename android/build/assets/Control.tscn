@@ -60,7 +60,7 @@ margin_bottom = 272.0
 
 [node name="altura" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 margin_top = 5.0
-margin_right = 76.0
+margin_right = 60.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "altura: "
@@ -68,12 +68,20 @@ valign = 1
 
 [node name="alturaText" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 80.0
-margin_right = 138.0
+margin_left = 64.0
+margin_right = 122.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="ErrorLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 126.0
+margin_top = 5.0
+margin_right = 138.0
+margin_bottom = 19.0
+text = "\"\""
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 372.0
