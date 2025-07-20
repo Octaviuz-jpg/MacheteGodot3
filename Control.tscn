@@ -272,6 +272,7 @@ icon = ExtResource( 8 )
 flat = true
 
 [node name="Save" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
 margin_left = 583.0
 margin_right = 631.0
 margin_bottom = 67.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
 [ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
 [ext_resource path="res://CameraConstruction.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Login/iraMenu.gd" type="Script" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
@@ -114,8 +115,7 @@ margin_bottom = 108.0
 icon = ExtResource( 10 )
 flat = true
 icon_align = 1
-script = ExtResource( 8 )
-panel_path = NodePath("../Proyectos")
+script = ExtResource( 15 )
 
 [node name="Catalogo" type="Panel" parent="UIConstruction"]
 margin_top = 120.0
@@ -242,5 +242,6 @@ __meta__ = {
 [connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
 [connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
 [connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
 [connection signal="pressed" from="UIConstruction/ButtonModoCons" to="CamaraOrbit" method="_on_ButtonModoCons_pressed"]
 [connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
