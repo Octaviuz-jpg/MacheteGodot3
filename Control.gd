@@ -3,114 +3,97 @@ extends Node
 onready var altura = $"%alturaText"
 onready var profundidad = $"%profundidadText"
 onready var anchura = $"%anchuraText"
-onready var error_label = $"%ErrorLabel"  # Asegúrate de tener un Label para mostrar el error
+onready var error_label = $"%ErrorLabel"
+onready var viewport_container = $"%ViewportContainer"
+onready var viewport_3d = $"%Viewport"
+onready var input_ui_container = $"%CenterContainer"
+onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars"
 
-# Referencias a los nodos del Viewport
-onready var viewport_container = $"%ViewportContainer" # Asumiendo que has nombrado tu ViewportContainer
-onready var viewport_3d = $"%Viewport" # Asumiendo que has nombrado tu Viewport
-
-# Referencia al contenedor de la UI de entrada de parámetros
-# Asegúrate que el VBoxContainer que tiene tus LineEdits y Button tiene el nombre único (%)
-onready var input_ui_container = $"%CenterContainer" 
-
-# Referencia al CanvasLayer que contiene las barras de herramientas
-onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars" 
-onready var hslider_zoom = $"%CanvasLayer_UI_Bars/Zoom" # <--- RUTA CORREGIDA según tu imagen
-onready var bottom_bar = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar" # Nueva ruta
-onready var button_zoom_in = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" # RUTA CORREGIDA
-onready var button_zoom_out = $"%CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" # RUTA CORREGIDA
-
-# Precargar tu escena 3D (la que contiene Spatial, CamaraOrbit, DynamicRoom)
-# ¡CAMBIA ESTA RUTA SI TU ESCENA 3D TIENE OTRO NOMBRE!
 var room_3d_scene_res = preload("res://Node3D.tscn")
-
 var _camera_orbit_instance: Spatial = null
 
-
 func _ready():
-	# Asegurarse de que el ViewportContainer esté oculto al inicio
 	viewport_container.visible = false
-	error_label.text = "" # Limpiar el error label al inicio
+	ui_bars_canvas_layer.visible = false  # Ocultar al inicio
+	error_label.text = ""
+	viewport_3d.render_target_update_mode = Viewport.UPDATE_ALWAYS
 
 func _on_Button_pressed():
-	var altura_val = float(altura.text)
-	var anchura_val = float(anchura.text)
-	var profundidad_val = float(profundidad.text)
+	# Validación de campos vacíos
+	if altura.text.empty() or profundidad.text.empty() or anchura.text.empty():
+		error_label.text = "⚠️ ERROR: Todos los campos son obligatorios"
+		return
 	
-	viewport_3d.transparent_bg = true  # Para fondo transparente
+	# Conversión a números
+	var altura_val = float(altura.text) if altura.text.is_valid_float() else 0.0
+	var anchura_val = float(anchura.text) if anchura.text.is_valid_float() else 0.0
+	var profundidad_val = float(profundidad.text) if profundidad.text.is_valid_float() else 0.0
+
 	if not _validar_medidas(altura_val, anchura_val, profundidad_val):
-		error_label.text = "⚠️ERROR: Las medidas deben estar entre 1 y 50."
+		error_label.text = "⚠️ ERROR: Las medidas deben estar entre 1 y 50"
 		return
 
+	# Almacenar medidas
 	MedidasSingleton.altura = altura_val
 	MedidasSingleton.anchura = anchura_val
 	MedidasSingleton.profundidad = profundidad_val
 
-	print("Valores almacenados:")
-	print("Altura:", MedidasSingleton.altura)
-	print("Anchura:", MedidasSingleton.anchura)
-	print("Profundidad:", MedidasSingleton.profundidad)
-	error_label.text = ""  # Oculta el mensaje de error al corregir los valores
-	#get_tree().change_scene("res://Node3D.tscn")
-		# --- LÓGICA PARA CARGAR EL MUNDO 3D Y OCULTAR LA UI DE ENTRADA ---
-	
-	# 1. Limpiar cualquier instancia 3D previa en el Viewport
-	# Esto evita que se acumulen múltiples habitaciones si el usuario presiona "generar" varias veces
+	# Limpiar instancia previa
 	for child in viewport_3d.get_children():
-		child.queue_free() # Libera el nodo anterior de la escena 3D
+		child.queue_free()
 
-	# 2. Instanciar la escena 3D y añadirla al Viewport
+	# Forzar fondo blanco
+	viewport_3d.set_clear_mode(Viewport.CLEAR_MODE_ALWAYS)
+	viewport_3d.set_transparent_background(false)
+
+	# Instanciar nueva habitación
 	var room_instance = room_3d_scene_res.instance()
 	viewport_3d.add_child(room_instance)
 	
-		# 3. Almacenar la referencia a CamaraOrbit desde la instancia de la escena 3D
+	# Configurar cámara orbital
 	_camera_orbit_instance = room_instance.get_node("CamaraOrbit")
 	if _camera_orbit_instance:
-		print("CamaraOrbit obtenida exitosamente.")
-		# PASAR LA REFERENCIA DEL SLIDER A CAMARAORBIT
-		if hslider_zoom:
-			_camera_orbit_instance.set_zoom_slider_properties(hslider_zoom)
-		# Llamar a init_orbit para posicionar la cámara inicialmente
-		_camera_orbit_instance.init_orbit(max(MedidasSingleton.anchura, MedidasSingleton.anchura)) # Usé anchura dos veces, ¿quizás querías profundidad aquí?
+		print("Cámara orbital configurada")
+		_camera_orbit_instance.init_orbit(max(MedidasSingleton.anchura, MedidasSingleton.profundidad))
+		
+		# Asegurar que la cámara está activa
+		var cam = _camera_orbit_instance.get_node("camara3D")
+		if cam:
+			cam.current = true
+			print("Cámara activada")
 	else:
-		push_error("No se encontró CamaraOrbit en la escena 3D instanciada.")
+		push_error("No se encontró CamaraOrbit en la escena 3D")
+		return
 	
-	# 3. Ocultar la UI de entrada de parámetros
-	# Asumo que tu VBoxContainer es el padre directo de tus campos de entrada y botón.
-	input_ui_container.visible = false 
-
-	# 4. Mostrar el ViewportContainer con la vista 3D
+	# Cambiar visibilidad de elementos UI
+	input_ui_container.visible = false
 	viewport_container.visible = true
+	ui_bars_canvas_layer.visible = true  # Mostrar barras de herramientas
 	
-	  # 6. Mostrar las barras de herramientas y el slider (todo el CanvasLayer)
-	ui_bars_canvas_layer.visible = true
-
+	# Debug importante
+	print("Elementos visibles:")
+	print("ViewportContainer visible:", viewport_container.visible)
+	print("UI Bars visible:", ui_bars_canvas_layer.visible)
+	print("Número de hijos en viewport_3d:", viewport_3d.get_child_count())
 
 func _validar_medidas(altura_val, anchura_val, profundidad_val) -> bool:
 	return altura_val > 0 and altura_val <= 50 and anchura_val > 0 and anchura_val <= 50 and profundidad_val > 0 and profundidad_val <= 50
-	
-	
-# --- FUNCIONES PARA LOS BOTONES DE LA BARRA DE HERRAMIENTAS Y EL SLIDER ---
 
-func _on_Button_ZoomIn_pressed():
+
+func _on_ZoomOut_pressed():
+	if _camera_orbit_instance:
+		# Llama a la función de zoom del script de la cámara
+		# Factor 1.2 significa alejar (120% de la distancia actual)
+		_camera_orbit_instance._handle_zoom(1.2)
+	else:
+		print("Error: _camera_orbit_instance no está asignado. La cámmara 3D no está lista.")
+
+
+func _on_ZoomIn_pressed():
 	if _camera_orbit_instance:
 		# Llama a la función de zoom del script de la cámara
 		# Factor 0.8 significa acercar (80% de la distancia actual)
 		_camera_orbit_instance._handle_zoom(0.8)
 	else:
 		print("Error: _camera_orbit_instance no está asignado. La cámara 3D no está lista.")
-
-func _on_Button_ZoomOut_pressed():
-	if _camera_orbit_instance:
-		# Llama a la función de zoom del script de la cámara
-		# Factor 1.2 significa alejar (120% de la distancia actual)
-		_camera_orbit_instance._handle_zoom(1.2)
-	else:
-		print("Error: _camera_orbit_instance no está asignado. La cámara 3D no está lista.")
-
-func _on_HSlider_Zoom_value_changed(value):
-	if _camera_orbit_instance:
-		_camera_orbit_instance._set_distance_from_slider(value)
-
-
 

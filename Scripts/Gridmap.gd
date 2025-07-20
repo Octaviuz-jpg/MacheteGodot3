@@ -60,3 +60,7 @@ func generar_grid_map_centrado(total_width: int, total_height: int, total_depth:
 	
 	print("GridMap generado exitosamente y centrado en el origen.")
 
+
+
+func _on_vistaAerea_pressed():
+	pass # Replace with function body.

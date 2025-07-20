@@ -7,13 +7,11 @@ onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta
 
 
 func _ready():
-	
 	self.translation = Vector3.ZERO
 	build_room()
 	_setup_camera()
 
 func _setup_camera():
-	var camera_orbit = get_parent().get_node("CamaraOrbit")
 	if camera_orbit:
 		var room_size = max(MedidasSingleton.anchura, MedidasSingleton.profundidad)
 		camera_orbit.init_orbit(room_size)
@@ -137,8 +135,7 @@ func crear_vista_previa(ruta: String) -> Node:
 
 	var mesh_node = encontrar_nodo_con_malla(obj)
 	if mesh_node:
-		var escala = calcular_escala_normalizada(mesh_node, 0.2)
-		obj.scale = Vector3.ONE 
+		obj.scale = Vector3.ONE
 		aplicar_transparencia(obj)
 
 	desactivar_colisiones(obj)
@@ -225,15 +222,24 @@ func _process(delta):
 		var mesh = encontrar_nodo_con_malla(obj)
 		if mesh:
 			var aabb = mesh.get_aabb()
-			var offset = aabb.position.y * obj.scale.y
-			var altura = aabb.size.y * obj.scale.y
-			var y_final = destino.y - offset + altura / 2.0
+			# 1. Calcular el centro real del objeto considerando su escala
+			var centro_objeto = aabb.position + (aabb.size * 0.5)
+			centro_objeto *= obj.scale
+			
+			# 2. Ajustar la posición para que el centro del objeto coincida con el punto de impacto
+			var offset = Vector3(centro_objeto.x, aabb.position.y, centro_objeto.z) * obj.scale
+			var y_final = destino.y - offset.y
+			
+			# 3. Posicionar el objeto exactamente en el punto del mouse
+			obj.translation = Vector3(
+				destino.x - offset.x, 
+				y_final, 
+				destino.z - offset.z
+			)
 
 			# 🛞 Movimiento suave con interpolación
-			var objetivo = Vector3(destino.x, y_final, destino.z)
-			obj.translation = obj.translation.linear_interpolate(objetivo, 0.25)
+			obj.translation = Vector3(destino.x, y_final, destino.z)
 
-# 🔍 Recolectar todos los RIDs del objeto y sus hijos
 func recolectar_rids(nodo: Node) -> Array:
 		var rids = []
 		if nodo.has_method("get_rid"):
@@ -241,7 +247,7 @@ func recolectar_rids(nodo: Node) -> Array:
 		for hijo in nodo.get_children():
 			rids += recolectar_rids(hijo)
 		return rids
-		
+
 func hay_colision_volumetrica(objeto: Node) -> bool:
 	var space = get_world().direct_space_state
 
@@ -288,3 +294,4 @@ func hay_colision_volumetrica(objeto: Node) -> bool:
 				return true
 
 	return false
+

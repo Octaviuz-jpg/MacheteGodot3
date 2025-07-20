@@ -4,7 +4,7 @@ extends Control # O Node2D, dependiendo de tu nodo raíz
 onready var animation_player = $CanvasLayer/AnimationPlayer
 
 # Referencia al ColorRect.
-onready var fade_rect = $CanvasLayer/TextureRect
+#onready var fade_rect = $CanvasLayer/TextureRect
 
 # REFERENCIA AL TIMER (¡Asegúrate de que la ruta sea correcta a tu nodo Timer!)
 # Si tu Timer es hijo directo del nodo raíz, sería "$Timer"
