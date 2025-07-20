@@ -45,6 +45,10 @@ func _input(event):
 	if event is InputEventMouseMotion and _mouse_pressed:
 		_handle_rotation(event.relative)
 		_update_camera_position()
+	# Control de Zoom (Pinch-to-Zoom para Android)
+	if event is InputEventMagnifyGesture:
+		_distance = clamp(_distance / event.factor, min_distance, max_distance)
+		_update_camera_position()
 
 func _handle_rotation(relative: Vector2):
 	_angle_x -= relative.x * camera_speed
