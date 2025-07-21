@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Login/Fadein.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/Img/iconuser.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Menu/IrOPCdiseño_habitacion.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Menu/Salir.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Registro/volver.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Img/volver.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/Menu/IraProyectos.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=6]
@@ -65,6 +67,9 @@ extra_spacing_char = 6
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="Control" type="Control"]
@@ -165,7 +170,24 @@ custom_styles/disabled = SubResource( 15 )
 custom_styles/normal = SubResource( 15 )
 icon = ExtResource( 4 )
 
+[node name="volver" type="Button" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 20.0
+margin_right = -178.0
+margin_bottom = -748.0
+rect_scale = Vector2( 0.12, 0.12 )
+custom_styles/hover = SubResource( 16 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/disabled = SubResource( 16 )
+custom_styles/normal = SubResource( 16 )
+icon = ExtResource( 8 )
+script = ExtResource( 7 )
+
 [connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="Panel/Menu_opciones/Diseño_habitacion" to="Panel/Menu_opciones/Diseño_habitacion" method="_on_Diseo_habitacion_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Salir" to="Panel/Menu_opciones/Salir" method="_on_Salir_pressed"]
+[connection signal="pressed" from="Panel/volver" to="Panel/volver" method="_on_volver_pressed"]

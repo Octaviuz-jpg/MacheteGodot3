@@ -1,6 +1,7 @@
 extends Button
 
-func _on_inicio_pressed():
+
+func _on_volver_pressed():
 	print("ok, vamos a control.tscn")
 	var new_scene_path = "res://Control2.tscn"
 	var new_scene_packed = load(new_scene_path)
@@ -19,4 +20,3 @@ func _on_inicio_pressed():
 
 	# 5. Establecer la nueva escena como la escena principal del árbol
 	get_tree().current_scene = new_scene_instance
-

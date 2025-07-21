@@ -114,7 +114,7 @@ config/name="MakeTalo"
 run/main_scene="res://Scenes/Login.tscn"
 boot_splash/image="res://Assets/Img/Logo (2).png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
-config/icon="res://Assets/Img/Logo (2).png"
+config/icon="res://Assets/Img/icono.png"
 
 [autoload]
 
@@ -126,7 +126,8 @@ ObjectSelector="*res://ObjectSelector.gd"
 window/size/width=720
 window/size/height=1280
 window/handheld/orientation="portrait"
-window/stretch/mode="2d"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [gui]
 

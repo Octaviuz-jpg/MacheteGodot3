@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Proyectos/Proyectos.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Img/volver.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="Proyectos" type="Control"]
 anchor_right = 1.0
@@ -38,11 +42,17 @@ margin_bottom = 149.0
 text = "Eliminar"
 
 [node name="Volver" type="Button" parent="CanvasLayer"]
-margin_left = 73.0
-margin_top = 103.0
-margin_right = 169.0
-margin_bottom = 144.0
-text = "Volver"
+margin_left = 30.0
+margin_top = 27.0
+margin_right = 542.0
+margin_bottom = 539.0
+rect_scale = Vector2( 0.15, 0.15 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+icon = ExtResource( 2 )
 
 [connection signal="pressed" from="CanvasLayer/Cargar" to="." method="_on_Cargar_pressed"]
 [connection signal="pressed" from="CanvasLayer/Eliminar" to="." method="_on_Eliminar_pressed"]
