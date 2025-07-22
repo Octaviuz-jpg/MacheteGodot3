@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/Validaciones/ok.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Validaciones/VolverLogin.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0117647, 0.384314, 0.423529, 1 )
@@ -20,7 +20,7 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
-outline_color = Color( 0.0588235, 0.352941, 0.454902, 1 )
+outline_color = Color( 0.0117647, 0.384314, 0.423529, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -30,49 +30,50 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[node name="ErrorCampoTexto" type="MarginContainer"]
-margin_top = 502.0
-margin_right = 720.0
-margin_bottom = 881.0
-custom_constants/margin_right = 0
+[node name="UsuarioRegExitoso" type="MarginContainer"]
+margin_left = 11.0
+margin_top = 569.0
+margin_right = 728.0
+margin_bottom = 907.0
+custom_constants/margin_right = 20
 custom_constants/margin_top = 20
-custom_constants/margin_left = 0
+custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 20.0
 margin_top = 20.0
-margin_right = 720.0
-margin_bottom = 359.0
+margin_right = 697.0
+margin_bottom = 318.0
 
 [node name="Panel" type="Panel" parent="TextureRect"]
-anchor_top = -1.51
-anchor_bottom = -1.51
-margin_left = 14.0
-margin_top = 516.89
-margin_right = 714.0
-margin_bottom = 855.89
+anchor_top = -1.699
+anchor_bottom = -1.699
+margin_top = 506.302
+margin_right = 677.0
+margin_bottom = 804.302
 custom_styles/panel = SubResource( 1 )
 
-[node name="Label" type="Label" parent="TextureRect/Panel"]
-anchor_top = -1.541
-anchor_bottom = -1.541
-margin_left = 130.0
-margin_top = 572.399
-margin_right = 592.0
-margin_bottom = 732.399
+[node name="UsuarioReg" type="Label" parent="TextureRect/Panel"]
+anchor_top = -1.68
+anchor_bottom = -1.68
+margin_left = 119.0
+margin_top = 542.64
+margin_right = 591.0
+margin_bottom = 687.64
 custom_fonts/font = SubResource( 2 )
-text = "Caracter invalido
-       solo texto "
+text = "Usuario registrado 
+       con exito"
 
-[node name="ok" type="Button" parent="TextureRect/Panel"]
-margin_left = 214.0
-margin_top = 209.0
-margin_right = 502.0
-margin_bottom = 281.0
-custom_colors/font_color = Color( 0.0196078, 0.360784, 0.45098, 1 )
+[node name="VolverLogin" type="Button" parent="TextureRect/Panel"]
+margin_left = 226.0
+margin_top = 192.0
+margin_right = 456.0
+margin_bottom = 280.0
+custom_colors/font_color = Color( 0.0117647, 0.384314, 0.423529, 1 )
 custom_fonts/font = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 text = "ok"
 script = ExtResource( 2 )
 
-[connection signal="pressed" from="TextureRect/Panel/ok" to="TextureRect/Panel/ok" method="_on_ok_pressed"]
+[connection signal="pressed" from="TextureRect/Panel/VolverLogin" to="TextureRect/Panel/VolverLogin" method="_on_VolverLogin_pressed"]

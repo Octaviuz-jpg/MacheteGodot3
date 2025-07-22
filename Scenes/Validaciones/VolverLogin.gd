@@ -1,7 +1,7 @@
 extends Button
 
 
-func _on_ok_pressed():
+func _on_VolverLogin_pressed():
 	var new_scene_path = "res://Scenes/Login.tscn"
 	var new_scene_packed = load (new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
