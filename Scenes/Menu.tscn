@@ -173,10 +173,10 @@ icon = ExtResource( 4 )
 [node name="volver" type="Button" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = 20.0
-margin_right = -178.0
-margin_bottom = -748.0
+margin_left = 27.0
+margin_top = 23.0
+margin_right = -181.0
+margin_bottom = -745.0
 rect_scale = Vector2( 0.12, 0.12 )
 custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 16 )

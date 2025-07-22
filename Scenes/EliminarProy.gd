@@ -1,8 +1,8 @@
 extends Button
 
-func _on_Proyectos_pressed():
-	var new_scene_path = "res://Scenes/MenuProyecto.tscn"
-	var new_scene_packed = load(new_scene_path)
+func _on_EliminarProy_pressed():
+	var new_scene_path = "res://Scenes/Validaciones/EliminarProyecto.tscn"
+	var new_scene_packed = load (new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
 
 	# 2. Obtener la escena actual (la que queremos liberar)
@@ -18,3 +18,5 @@ func _on_Proyectos_pressed():
 
 	# 5. Establecer la nueva escena como la escena principal del árbol
 	get_tree().current_scene = new_scene_instance
+
+
