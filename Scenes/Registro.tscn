@@ -146,7 +146,7 @@ margin_right = 512.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 20 )
-text = "Username"
+text = "Nombre de Usuario"
 
 [node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer"]
 margin_top = 47.0
@@ -210,7 +210,7 @@ margin_right = 512.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 20 )
-text = "Password"
+text = "Contraseña"
 
 [node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer3"]
 margin_top = 47.0
@@ -242,7 +242,7 @@ margin_right = 512.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 20 )
-text = "Confirm"
+text = "Confirmar Contraseña"
 
 [node name="Linename" type="LineEdit" parent="Panel/VBoxContainer/VBoxContainer4"]
 margin_top = 47.0
@@ -289,7 +289,8 @@ margin_bottom = 456.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/font = SubResource( 27 )
-text = "¡WELCOME!"
+text = "¡BIENVENIDO!"
+align = 1
 valign = 1
 
 [node name="UsuarioRegExitoso" parent="Panel" instance=ExtResource( 2 )]
