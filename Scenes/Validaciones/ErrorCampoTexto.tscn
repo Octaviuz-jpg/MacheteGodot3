@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/ok.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Validaciones/ok.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0117647, 0.384314, 0.423529, 1 )
