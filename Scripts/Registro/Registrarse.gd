@@ -4,7 +4,7 @@ onready var email: LineEdit= $"../VBoxContainer/VBoxContainer2/Linename"
 onready var password: LineEdit= $"../VBoxContainer/VBoxContainer3/Linename"
 onready var confirm_password: LineEdit= $"../VBoxContainer/VBoxContainer4/Linename"
 onready var req=$"../../HTTPRequestRegister"
-onready var req2=$"../../HTTPRequestRegister"
+onready var req2=$"../../HTTPRequestDB"
 
 var env=parse("res://.env")
 var key= get("SUPABASE_KEY")
@@ -13,16 +13,20 @@ func _ready():
 	if req:
 		req.connect("request_completed", self, "on_completed_request")
 
+	if req2:
+		req2.connect("request_completed", self, "on_save_request_completed")
+
 func _on_Registrarse_pressed():
 	print(get_tree().current_scene.filename)
 	print(email.text,password.text)
+	var payload={"username":username.text,"account_id":"f1c4736a-1f04-4a4b-89a0-771821f40be0"}
+
+	# save_user(payload)
 	send_signup_request(email.text,password.text)
 	print("te has registrado felicidades, vuelve a la pestaña login")
 	
 func on_email_sent(_email:String):
 	print("Account confirmation email sent to ",_email)
-	Supabase.auth.disconnect("signed_up", self, "_on_auth_register_success")
-	Supabase.auth.disconnect("error", self, "_on_auth_register_failed")
 
 	var new_scene_path = "res://Scenes/Login.tscn"
 	var new_scene_packed = load(new_scene_path)
@@ -43,7 +47,7 @@ func on_email_sent(_email:String):
 	get_tree().current_scene = new_scene_instance
 
 
-func send_signup_request(email, passw):
+func send_signup_request(_email, passw):
 	var url="https://yvimqxwsndyiyeshjyiv.supabase.co/auth/v1/signup"
 	print("Attempting to send signup request...")
 
@@ -57,7 +61,7 @@ func send_signup_request(email, passw):
 	]
 
 	var request_body_data = {
-		"email": email,
+		"email": _email,
 		"password":passw 
 	}
 
@@ -76,7 +80,7 @@ func on_completed_request(result, response_code, headers, body):
 	if response_code== 200 or response_code==201:
 		print("user signed up!")
 		var response_body_string = body.get_string_from_utf8()
-		print(response_body_string)
+		# print(response_body_string)
 		var json_parse_result = JSON.parse(response_body_string)
 
 		if json_parse_result.error == OK:
@@ -84,7 +88,6 @@ func on_completed_request(result, response_code, headers, body):
 			var user= json_parse_result.result
 			var payload={"username":username.text,"account_id":user.id}
 			save_user(payload)
-			get_tree().change_scene("res://Scenes/Login.tscn")
 			
 			
 	else:
@@ -104,6 +107,12 @@ func save_user(data_payload):
 
 	var request_body_json = JSON.print(data_payload)
 	var error = req2.request(url, headers, true, HTTPClient.METHOD_POST, request_body_json)
+
+func on_save_request_completed(result, response_code, headers, body):
+	print("save server response: ",response_code)
+	if response_code==201:
+		get_tree().change_scene("res://Scenes/Login.tscn")
+
 
 func get(name):
 	# prioritized os environment variable

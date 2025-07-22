@@ -1,5 +1,5 @@
 # Project specific files
-.env
+.env*
 export/
 scn/
 project.godot
@@ -18,4 +18,4 @@ default_env.tres
 # Mono-specific ignores
 .mono/
 data_*/
-.apk
+*.apk*
