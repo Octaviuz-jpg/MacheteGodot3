@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Login/Fadein.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Img/Logovr2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Img/iconuser.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Menu/IraUsuario.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Menu/IrOPCdiseño_habitacion.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Menu/Salir.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Registro/volver.gd" type="Script" id=7]
@@ -66,8 +66,30 @@ extra_spacing_bottom = 5
 extra_spacing_char = 6
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+shadow_color = Color( 0.0156863, 0.658824, 0.72549, 0.219608 )
+shadow_size = 22
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 1, 1, 1, 0 )
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+shadow_color = Color( 0.0156863, 0.658824, 0.72549, 0.219608 )
+shadow_size = 22
+
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StreamTexture" id=17]
+flags = 4
+load_path = "res://.import/usuario.png-e8d9816d38168c8ab2c7b4d8622821ee.stex"
 
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -159,16 +181,17 @@ texture = ExtResource( 3 )
 [node name="usuario" type="Button" parent="Panel"]
 margin_left = 606.0
 margin_top = 18.0
-margin_right = 1134.0
-margin_bottom = 569.0
+margin_right = 1094.0
+margin_bottom = 529.0
 rect_scale = Vector2( 0.2, 0.2 )
 custom_fonts/font = SubResource( 14 )
-custom_styles/hover = SubResource( 15 )
-custom_styles/pressed = SubResource( 15 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 19 )
 custom_styles/focus = SubResource( 15 )
 custom_styles/disabled = SubResource( 15 )
 custom_styles/normal = SubResource( 15 )
-icon = ExtResource( 4 )
+icon = SubResource( 17 )
+script = ExtResource( 4 )
 
 [node name="volver" type="Button" parent="Panel"]
 anchor_right = 1.0
@@ -190,4 +213,5 @@ script = ExtResource( 7 )
 [connection signal="pressed" from="Panel/Menu_opciones/Diseño_habitacion" to="Panel/Menu_opciones/Diseño_habitacion" method="_on_Diseo_habitacion_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Salir" to="Panel/Menu_opciones/Salir" method="_on_Salir_pressed"]
+[connection signal="pressed" from="Panel/usuario" to="Panel/usuario" method="_on_usuario_pressed"]
 [connection signal="pressed" from="Panel/volver" to="Panel/volver" method="_on_volver_pressed"]
