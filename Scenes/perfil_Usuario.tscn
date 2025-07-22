@@ -1,17 +1,23 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/perfil_Usuario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/Img/usuario.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Img/iconuser.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Img/volver.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Img/banner.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/perfil_usuario/agregar_banner.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/perfil_usuario/proyectos.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/perfil_usuario/salir.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/perfil_usuario/agregar_icon.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/perfil_usuario/cambiarcontraseña.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 41
+size = 32
 extra_spacing_bottom = 5
-extra_spacing_char = 6
+extra_spacing_char = 1
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -52,18 +58,41 @@ expand_margin_top = 5.0
 expand_margin_bottom = 5.0
 shadow_offset = Vector2( 0, 5 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 24
 extra_spacing_char = 2
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=12]
-size = 36
+[sub_resource type="DynamicFont" id=14]
+size = 24
+extra_spacing_char = 2
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=13]
-size = 36
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.396078, 0.729412, 0.690196, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0.184314, 0.384314, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=12]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.14902, 0.294118, 0.384314, 1 )
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+shadow_color = Color( 0.482353, 0.647059, 0.67451, 0.529412 )
+shadow_size = 13
+shadow_offset = Vector2( 3, 10 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 1, 1, 1 )
@@ -88,24 +117,23 @@ script = ExtResource( 1 )
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 430, 610 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="Label2" type="RichTextLabel" parent="Panel"]
-margin_left = 100.0
-margin_top = 397.0
-margin_right = 632.0
-margin_bottom = 458.0
+margin_left = 91.0
+margin_top = 259.0
+margin_right = 461.0
+margin_bottom = 320.0
 custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/normal_font = SubResource( 2 )
-text = "Informacion de Usuario"
+text = "Información de la Cuenta"
 
 [node name="Menu_opciones" type="VBoxContainer" parent="Panel"]
 margin_left = 108.0
-margin_top = 842.0
+margin_top = 721.0
 margin_right = 611.0
-margin_bottom = 1027.0
+margin_bottom = 879.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 60
@@ -121,6 +149,7 @@ custom_styles/focus = SubResource( 4 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Cambiar Contraseña"
+script = ExtResource( 10 )
 
 [node name="Proyectos" type="Button" parent="Panel/Menu_opciones"]
 margin_top = 109.0
@@ -134,65 +163,91 @@ custom_styles/focus = SubResource( 4 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Proyectos"
+script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="Panel"]
-position = Vector2( 353, 218 )
-scale = Vector2( 0.624023, 0.586914 )
-texture = ExtResource( 3 )
-
-[node name="correo_usuario" type="RichTextLabel" parent="Panel"]
-margin_left = 159.0
-margin_top = 629.0
-margin_right = 633.0
-margin_bottom = 669.0
+[node name="Label3" type="RichTextLabel" parent="Panel"]
+margin_left = 98.0
+margin_top = 404.0
+margin_right = 272.0
+margin_bottom = 465.0
 custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
-custom_fonts/normal_font = SubResource( 11 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "Correo:"
 
 [node name="nombre_usuario" type="RichTextLabel" parent="Panel"]
-margin_left = 174.0
-margin_top = 537.0
-margin_right = 648.0
-margin_bottom = 577.0
-custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
-custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
-custom_fonts/normal_font = SubResource( 11 )
-
-[node name="Label" type="RichTextLabel" parent="Panel"]
-margin_left = 42.0
-margin_top = 525.0
-margin_right = 190.0
-margin_bottom = 577.0
-custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
-custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
-custom_fonts/normal_font = SubResource( 12 )
-text = "Nombre:"
-
-[node name="Label1" type="RichTextLabel" parent="Panel"]
-margin_left = 40.0
-margin_top = 619.0
-margin_right = 176.0
-margin_bottom = 674.0
+margin_left = 220.0
+margin_top = 348.0
+margin_right = 633.0
+margin_bottom = 388.0
 custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
 custom_fonts/normal_font = SubResource( 13 )
-text = "Correo:"
 
-[node name="salir" type="Button" parent="."]
+[node name="correo_usuario" type="RichTextLabel" parent="Panel"]
+margin_left = 211.0
+margin_top = 406.0
+margin_right = 639.0
+margin_bottom = 452.0
+custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/normal_font = SubResource( 14 )
+
+[node name="Label4" type="RichTextLabel" parent="Panel"]
+margin_left = 90.0
+margin_top = 348.0
+margin_right = 425.0
+margin_bottom = 395.0
+custom_colors/default_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "Nombre:"
+
+[node name="Banner" type="Button" parent="Panel"]
+margin_left = 77.0
+margin_top = 31.0
+margin_right = 663.0
+margin_bottom = 239.0
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+icon = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Icon" type="Button" parent="Panel"]
+margin_left = 450.0
+margin_top = 113.0
+margin_right = 942.0
+margin_bottom = 628.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 12 )
+icon = ExtResource( 3 )
+script = ExtResource( 9 )
+
+[node name="salir" type="Button" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 30.0
+margin_left = 19.0
 margin_top = 20.0
-margin_right = -178.0
+margin_right = -189.0
 margin_bottom = -748.0
-rect_scale = Vector2( 0.12, 0.12 )
+rect_scale = Vector2( 0.09, 0.09 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
 custom_styles/normal = SubResource( 6 )
 icon = ExtResource( 4 )
+script = ExtResource( 8 )
 
-[connection signal="pressed" from="Panel/Menu_opciones/Cambiar_contraseña" to="." method="_on_Cambiar_contrasea_pressed"]
-[connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="." method="_on_Proyectos_pressed"]
-[connection signal="pressed" from="salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Panel/Menu_opciones/Cambiar_contraseña" to="Panel/Menu_opciones/Cambiar_contraseña" method="_on_Cambiar_contrasea_pressed"]
+[connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
+[connection signal="pressed" from="Panel/Banner" to="Panel/Banner" method="_on_Banner_pressed"]
+[connection signal="pressed" from="Panel/Icon" to="Panel/Icon" method="_on_Icon_pressed"]
+[connection signal="pressed" from="Panel/salir" to="Panel/salir" method="_on_salir_pressed"]

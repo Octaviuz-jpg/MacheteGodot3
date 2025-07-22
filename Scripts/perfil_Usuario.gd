@@ -22,22 +22,3 @@ func _load_user_data_example(name: String, email: String):
 		nombre_usuario.text = name
 	if correo_usuario: 
 		correo_usuario.text = email
-
-
-
-# Funciones conectadas a los botones
-
-func _on_salir_pressed():
-	print("Botón 'Salir' presionado. Volviendo al menú principal.")
-
-	get_tree().change_scene("res://Scenes/Menu.tscn")
-
-
-func _on_Cambiar_contrasea_pressed():
-	print("Botón 'Cambiar Contraseña' presionado.")
-	pass 
-
-
-func _on_Proyectos_pressed():
-	print("Botón 'Proyectos' presionado. Mostrando lista de proyectos guardados.")
-	pass
