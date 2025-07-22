@@ -190,4 +190,5 @@ script = ExtResource( 7 )
 [connection signal="pressed" from="Panel/Menu_opciones/Diseño_habitacion" to="Panel/Menu_opciones/Diseño_habitacion" method="_on_Diseo_habitacion_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Salir" to="Panel/Menu_opciones/Salir" method="_on_Salir_pressed"]
+[connection signal="pressed" from="Panel/usuario" to="." method="_on_usuario_pressed"]
 [connection signal="pressed" from="Panel/volver" to="Panel/volver" method="_on_volver_pressed"]

@@ -28,3 +28,8 @@ func _on_Timer_timeout():
 	#get_tree().change_scene("res://Control.tscn") # ¡CAMBIA ESTA RUTA SI ES DIFERENTE!
 
 
+
+
+func _on_usuario_pressed():
+	get_tree().change_scene("res://Scenes/perfil_Usuario.tscn")
+	pass # Replace with function body.
