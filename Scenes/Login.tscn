@@ -1,7 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scripts/Login/Fadein.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Img/Logovr2.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Login/iraMenu.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Login/iraRegistro.gd" type="Script" id=6]
@@ -116,7 +115,6 @@ shadow_size = 2
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/ok.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0117647, 0.384314, 0.423529, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+outline_color = Color( 0.0588235, 0.352941, 0.454902, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="ErrorCampoTexto" type="MarginContainer"]
+margin_top = 502.0
+margin_right = 720.0
+margin_bottom = 881.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 20.0
+margin_right = 720.0
+margin_bottom = 359.0
+
+[node name="Panel" type="Panel" parent="TextureRect"]
+anchor_top = -1.51
+anchor_bottom = -1.51
+margin_left = 14.0
+margin_top = 516.89
+margin_right = 714.0
+margin_bottom = 855.89
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="TextureRect/Panel"]
+anchor_top = -1.541
+anchor_bottom = -1.541
+margin_left = 130.0
+margin_top = 572.399
+margin_right = 592.0
+margin_bottom = 732.399
+custom_fonts/font = SubResource( 2 )
+text = "Caracter invalido
+       solo texto "
+
+[node name="ok" type="Button" parent="TextureRect/Panel"]
+margin_left = 214.0
+margin_top = 209.0
+margin_right = 502.0
+margin_bottom = 281.0
+custom_colors/font_color = Color( 0.0196078, 0.360784, 0.45098, 1 )
+custom_fonts/font = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "ok"
+script = ExtResource( 2 )
+
+[connection signal="pressed" from="TextureRect/Panel/ok" to="TextureRect/Panel/ok" method="_on_ok_pressed"]
