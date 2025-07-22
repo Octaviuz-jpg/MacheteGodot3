@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objetos/Mesa_de_noce/mesa_de_noche.glb" type="PackedScene" id=1]
+
+[node name="mesa_de_noche" instance=ExtResource( 1 )]
