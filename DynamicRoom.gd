@@ -234,7 +234,6 @@ func _process(delta):
 		var desde = camera.project_ray_origin(mouse_pos)
 		var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
 
-		# 🛑 Excluir objetos ya colocados
 		var excluidos = []
 		for nodo in get_tree().get_nodes_in_group("colocados"):
 			if nodo.has_method("get_rid"):
@@ -243,37 +242,29 @@ func _process(delta):
 		var result = get_world().direct_space_state.intersect_ray(desde, hacia, excluidos, 1)
 		var destino : Vector3
 
-		if result and result.collider and result.collider.is_in_group("suelo"):
-			destino = result.position
+		if result and result.collider and result.collider.is_in_group("suelo") and tap_libre_para_preview():
+		 destino = result.position
+
 		else:
 			var altura_suelo := 0.0
 			var t : float = (altura_suelo - desde.y) / (hacia.y - desde.y)
 			destino = desde.linear_interpolate(hacia, t)
 
-		# 🎯 Alinear preview al punto de impacto
 		var mesh = encontrar_nodo_con_malla(obj)
 		if mesh:
 			var aabb = mesh.get_aabb()
 			var altura = aabb.size.y * obj.scale.y
 			var y_final = destino.y + altura / 2.0
 
-			# 📦 Restringir preview dentro de la habitación
 			var ancho := float(MedidasSingleton.anchura) * 0.5
 			var largo := float(MedidasSingleton.profundidad) * 0.5
-			var margen := 0.5  # margen visual de seguridad
+			var margen := 0.15
 
 			var limite_x := clamp(destino.x, -ancho + margen, ancho - margen)
 			var limite_z := clamp(destino.z, -largo + margen, largo - margen)
 
 			var objetivo = Vector3(limite_x, y_final, limite_z)
-			obj.translation = obj.translation.linear_interpolate(objetivo, 0.25)
-
-			# Debug opcional
-			# print("🖱️ Cursor destino:", destino)
-			# print("📦 AABB Size:", aabb.size)
-			# print("📍 Altura final:", y_final)
-			# print("🧱 Paredes límite XZ:", limite_x, limite_z)
-
+			obj.translation = obj.translation.linear_interpolate(objetivo, 0.10)
 
 # 🔍 Recolectar todos los RIDs del objeto y sus hijos
 func recolectar_rids(nodo: Node) -> Array:
@@ -331,4 +322,24 @@ func hay_colision_volumetrica(objeto: Node) -> bool:
 
 	return false
 	
+func tap_libre_para_preview() -> bool:
+	var mouse_pos = get_viewport().get_mouse_position()
+
+	var controles := [
+	get_node_or_null("UIConstruction/BotoneraRotacion"),
+	get_node_or_null("UIConstruction/trancarCamara"),
+	get_node_or_null("UIConstruction/BotonCatalogo"),
+	get_node_or_null("UIConstruction/vistaAerea"),
+	# Puedes añadir más nodos si los tienes
+	]
+
+	for control in controles:
+		if control and control.get_global_rect().has_point(mouse_pos):
+			return false
+
+	return true
+
+	
+
+
 
