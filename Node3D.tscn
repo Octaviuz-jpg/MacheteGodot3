@@ -76,6 +76,25 @@ script = ExtResource( 2 )
 [node name="Container" type="Spatial" parent="DynamicRoom"]
 
 [node name="UIConstruction" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="BotoneraRotacion" type="HBoxContainer" parent="UIConstruction"]
+unique_name_in_owner = true
+margin_left = 263.0
+margin_top = 137.0
+margin_right = 405.0
+margin_bottom = 207.0
+
+[node name="RotarIzquierda" type="Button" parent="UIConstruction/BotoneraRotacion"]
+margin_right = 71.0
+margin_bottom = 70.0
+text = "izquierda"
+
+[node name="RotarDerecha" type="Button" parent="UIConstruction/BotoneraRotacion"]
+margin_left = 75.0
+margin_right = 142.0
+margin_bottom = 70.0
+text = "derecha "
 
 [node name="camita" type="Button" parent="UIConstruction"]
 margin_left = 120.0
@@ -162,9 +181,9 @@ margin_bottom = 44.0
 text = "Camita de Octavio"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UIConstruction/Catalogo"]
-margin_left = 35.0
-margin_top = 62.0
-margin_right = 240.0
+margin_left = 13.0
+margin_top = 66.0
+margin_right = 238.0
 margin_bottom = 613.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Catalogo/ScrollContainer"]
@@ -239,9 +258,10 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
+[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarIzquierda" to="CamaraOrbit" method="_on_RotarIzquierda_pressed"]
+[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarDerecha" to="CamaraOrbit" method="_on_RotarDerecha_pressed"]
 [connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
 [connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
 [connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
 [connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
-[connection signal="pressed" from="UIConstruction/ButtonModoCons" to="CamaraOrbit" method="_on_ButtonModoCons_pressed"]
 [connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
