@@ -215,6 +215,7 @@ func _process(delta):
 	else:
 		print("⚠️ BotoneraRotacion no encontrada bajo UIConstruction")
 
+	# 🧪 Generar vista previa si hay objeto seleccionado
 	if ObjectSelector.objeto_seleccionado != "" and not ObjectSelector.vista_previa:
 		ObjectSelector.vista_previa = crear_vista_previa(ObjectSelector.objeto_seleccionado)
 
@@ -233,6 +234,7 @@ func _process(delta):
 		var desde = camera.project_ray_origin(mouse_pos)
 		var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
 
+		# 🛑 Excluir objetos ya colocados
 		var excluidos = []
 		for nodo in get_tree().get_nodes_in_group("colocados"):
 			if nodo.has_method("get_rid"):
@@ -248,15 +250,30 @@ func _process(delta):
 			var t : float = (altura_suelo - desde.y) / (hacia.y - desde.y)
 			destino = desde.linear_interpolate(hacia, t)
 
+		# 🎯 Alinear preview al punto de impacto
 		var mesh = encontrar_nodo_con_malla(obj)
 		if mesh:
 			var aabb = mesh.get_aabb()
-			var offset = aabb.position.y * obj.scale.y
 			var altura = aabb.size.y * obj.scale.y
-			var y_final = destino.y - offset + altura / 2.0
+			var y_final = destino.y + altura / 2.0
 
-			var objetivo = Vector3(destino.x, y_final, destino.z)
+			# 📦 Restringir preview dentro de la habitación
+			var ancho := float(MedidasSingleton.anchura) * 0.5
+			var largo := float(MedidasSingleton.profundidad) * 0.5
+			var margen := 0.5  # margen visual de seguridad
+
+			var limite_x := clamp(destino.x, -ancho + margen, ancho - margen)
+			var limite_z := clamp(destino.z, -largo + margen, largo - margen)
+
+			var objetivo = Vector3(limite_x, y_final, limite_z)
 			obj.translation = obj.translation.linear_interpolate(objetivo, 0.25)
+
+			# Debug opcional
+			# print("🖱️ Cursor destino:", destino)
+			# print("📦 AABB Size:", aabb.size)
+			# print("📍 Altura final:", y_final)
+			# print("🧱 Paredes límite XZ:", limite_x, limite_z)
+
 
 # 🔍 Recolectar todos los RIDs del objeto y sus hijos
 func recolectar_rids(nodo: Node) -> Array:
