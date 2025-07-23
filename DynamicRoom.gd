@@ -3,16 +3,20 @@ extends Spatial
 onready var _wall_texture = preload("res://materials/pared_blanca.jpg")
 onready var _floor_texture = preload("res://materials/suelo_granito.jpg")
 
-func _ready():
-	for child in get_children():
-		print("👀 Hijo:", child.name)
+onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
 
+
+func _ready():
 	self.translation = Vector3.ZERO
 	build_room()
 	_setup_camera()
+	
+	# Cargar proyecto si hay uno seleccionado
+	if MedidasSingleton.proyecto_actual != "":
+		SistemaGuardado.cargar_proyecto(MedidasSingleton.proyecto_actual, self)
+		MedidasSingleton.proyecto_actual = ""  # Resetear después de cargar
 
 func _setup_camera():
-	var camera_orbit = get_parent().get_node("CamaraOrbit")
 	if camera_orbit:
 		var room_size = max(MedidasSingleton.anchura, MedidasSingleton.profundidad)
 		camera_orbit.init_orbit(room_size)
@@ -78,8 +82,13 @@ func _create_wall(pos: Vector3, size: Vector3, rot_y: float, material: SpatialMa
 	collision.shape.extents = size * 0.5
 	static_body.add_child(collision)
 	wall.add_child(static_body)
+	wall.add_to_group("paredes")
+	static_body.add_to_group("paredes")
 
 	add_child(wall)
+
+# En el script de tu Room/SceneRoot:
+
 
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
@@ -101,6 +110,7 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 		return
 
 	var obj = load(ruta).instance()
+	obj.set_meta("ruta_original", ruta)
 	$Container.add_child(obj)
 	obj.add_to_group("colocados")
 

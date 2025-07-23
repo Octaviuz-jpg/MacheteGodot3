@@ -267,12 +267,11 @@ flat = true
 unique_name_in_owner = true
 margin_right = 83.0
 margin_bottom = 58.0
-window_title = "¡Alerta!"
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer_UI_Bars/AcceptDialog"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 86.0
+margin_right = 75.0
 margin_bottom = 32.0
 
 [connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]

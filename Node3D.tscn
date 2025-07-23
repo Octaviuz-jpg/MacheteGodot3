@@ -263,5 +263,4 @@ __meta__ = {
 [connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
 [connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
 [connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
-[connection signal="pressed" from="UIConstruction/ButtonModoCons" to="CamaraOrbit" method="_on_ButtonModoCons_pressed"]
 [connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]

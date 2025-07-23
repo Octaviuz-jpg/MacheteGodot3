@@ -121,6 +121,7 @@ config/icon="res://Assets/Img/icono.png"
 MedidasSingleton="*res://MedidasSingleton.gd"
 Utilidad="*res://utilidad.gd"
 ObjectSelector="*res://ObjectSelector.gd"
+Supabase="*res://addons/supabase/Supabase/supabase.gd"
 
 [display]
 
@@ -129,6 +130,10 @@ window/size/height=1280
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/supabase/plugin.cfg" )
 
 [gui]
 

@@ -2,8 +2,9 @@ extends Button
 
 func _on_volver_pressed():
 	print("Boton volver presionado con exito, se te enviara a la pestaña login")
+	Supabase.auth.sign_out()
 	var new_scene_path = "res://Scenes/Login.tscn"
-	var new_scene_packed = load(new_scene_path)
+	var new_scene_packed = load (new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
 
 	# 2. Obtener la escena actual (la que queremos liberar)
@@ -19,7 +20,6 @@ func _on_volver_pressed():
 
 	# 5. Establecer la nueva escena como la escena principal del árbol
 	get_tree().current_scene = new_scene_instance
-
 
 
 

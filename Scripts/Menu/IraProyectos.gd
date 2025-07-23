@@ -1,7 +1,7 @@
 extends Button
 
 func _on_Proyectos_pressed():
-	var new_scene_path = "res://Scenes/Proyectos.tscn"
+	var new_scene_path = "res://Scenes/MenuProyecto.tscn"
 	var new_scene_packed = load(new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
 
