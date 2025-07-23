@@ -5,7 +5,7 @@ onready var password: LineEdit= $"../VBoxContainer/VBoxContainer3/Linename"
 onready var confirm_password: LineEdit= $"../VBoxContainer/VBoxContainer4/Linename"
 onready var req=$"../../HTTPRequestRegister"
 onready var req2=$"../../HTTPRequestDB"
-
+onready var errorTexto: Label= $"../VBoxContainer/VBoxContainer/ErrorTexto"
 var env=parse("res://.env")
 var key= get("SUPABASE_KEY")
 
@@ -20,7 +20,9 @@ func _on_Registrarse_pressed():
 	print(get_tree().current_scene.filename)
 	print(email.text,password.text)
 	var payload={"username":username.text,"account_id":"f1c4736a-1f04-4a4b-89a0-771821f40be0"}
-
+	if username.text.length() <=3 :
+		errorTexto.text = "Debe tener al menos 5 caracteres"
+		errorTexto.visible = true
 	# save_user(payload)
 	send_signup_request(email.text,password.text)
 	print("te has registrado felicidades, vuelve a la pestaña login")
