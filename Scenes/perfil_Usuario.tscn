@@ -151,6 +151,8 @@ custom_styles/normal = SubResource( 5 )
 text = "Cambiar Contraseña"
 script = ExtResource( 10 )
 
+[node name="HTTPRequestUpdate" type="HTTPRequest" parent="Panel/Menu_opciones/Cambiar_contraseña"]
+
 [node name="Proyectos" type="Button" parent="Panel/Menu_opciones"]
 margin_top = 109.0
 margin_right = 503.0
@@ -247,6 +249,7 @@ icon = ExtResource( 4 )
 script = ExtResource( 8 )
 
 [connection signal="pressed" from="Panel/Menu_opciones/Cambiar_contraseña" to="Panel/Menu_opciones/Cambiar_contraseña" method="_on_Cambiar_contrasea_pressed"]
+[connection signal="request_completed" from="Panel/Menu_opciones/Cambiar_contraseña/HTTPRequestUpdate" to="Panel/Menu_opciones/Cambiar_contraseña" method="_on_HTTPRequestUpdate_request_completed"]
 [connection signal="pressed" from="Panel/Menu_opciones/Proyectos" to="Panel/Menu_opciones/Proyectos" method="_on_Proyectos_pressed"]
 [connection signal="pressed" from="Panel/Banner" to="Panel/Banner" method="_on_Banner_pressed"]
 [connection signal="pressed" from="Panel/Icon" to="Panel/Icon" method="_on_Icon_pressed"]
