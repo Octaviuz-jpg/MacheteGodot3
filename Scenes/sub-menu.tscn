@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/sub-menu/ir_habitacion_Tairon.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Img/Logovr2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Img/iconuser.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Menu/IraUsuario.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/sub-menu/ir_habitacion_Octavio.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/sub-menu/volver_a_menu.gd" type="Script" id=6]
