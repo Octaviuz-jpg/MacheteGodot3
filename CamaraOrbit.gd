@@ -92,7 +92,16 @@ func _on_trancarCamara_pressed():
 	set_modo_construccion(CamaraTrancada)
 
 func _on_camita_pressed():
-	ObjectSelector.objeto_seleccionado = "res://objetos/sofa blanco tipo1/sofa blanco.tscn"
-
+	ObjectSelector.objeto_seleccionado = "res://Objeto2/nevera_ejecutiva.tscn"
 func _on_ButtonModoCons_pressed():
 	pass # Replace with function body.
+
+
+func _on_RotarIzquierda_pressed():
+	if ObjectSelector.vista_previa:
+		ObjectSelector.vista_previa.rotate_y(deg2rad(-15))
+
+
+func _on_RotarDerecha_pressed():
+	if ObjectSelector.vista_previa:
+		ObjectSelector.vista_previa.rotate_y(deg2rad(15))
