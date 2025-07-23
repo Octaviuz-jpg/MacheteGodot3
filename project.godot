@@ -121,6 +121,8 @@ config/icon="res://Assets/Img/icono.png"
 MedidasSingleton="*res://MedidasSingleton.gd"
 ObjectSelector="*res://ObjectSelector.gd"
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
+SupabaseManager="*res://Scripts/SupabaseManager.gd"
+AuthManager="*res://Scripts/AuthManager.gd"
 
 [display]
 
