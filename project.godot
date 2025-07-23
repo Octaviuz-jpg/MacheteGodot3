@@ -111,7 +111,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MakeTalo"
-run/main_scene="res://Scenes/Login.tscn"
+run/main_scene="res://Node3D.tscn"
 boot_splash/image="res://Assets/Img/Logo (2).png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://Assets/Img/icono.png"
