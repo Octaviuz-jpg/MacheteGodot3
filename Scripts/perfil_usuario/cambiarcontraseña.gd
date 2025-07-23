@@ -6,48 +6,22 @@ var estado_peticion = ""
 
 
 func _on_Cambiar_contrasea_pressed():
+
 	print("🔘 Botón presionado. Nodo HTTPRequestUpdate existe: ", has_node("HTTPRequestUpdate"))
-	var nueva_contrasena := "123456"  # Cambia por la contraseña que desees
-	cambiar_contrasena(nueva_contrasena)
+	solicitar_reestablecer_contrasena("juliorbk.dev@gmail.com")
 
-func cambiar_contrasena(nueva_contrasena: String) -> void:
-	var url := "https://yvimqxwsndyiyeshjyiv.supabase.co/auth/v1/user"
-	var token := obtener_token_guardado()
 
-	if token == "":
-		print("❌ No se encontró token JWT, no se puede autenticar la petición")
-		return
-
-	var headers := [
+func solicitar_reestablecer_contrasena(email: String) -> void:
+	var url = "https://yvimqxwsndyiyeshjyiv.supabase.co/auth/v1/recover"
+	var headers = [
 		"Content-Type: application/json",
-		"Authorization: Bearer " + token,
 		"apikey: " + key
 	]
-
-	var body := { "password": nueva_contrasena }
-	var json_body := JSON.print(body)
-
-	print("🔄 Enviando solicitud para cambiar contraseña...")
-
-	var err: int = $HTTPRequestUpdate.request(url, headers, true, HTTPClient.METHOD_PUT, json_body)
+	var body = {"email": email}
+	var json_body = JSON.print(body)
+	
+	var err = $HTTPRequestUpdate.request(url, headers, true, HTTPClient.METHOD_POST, json_body)
 	if err != OK:
-		print("❌ Error al enviar la solicitud de actualización: ", err)
-
-func _on_HTTPRequestUpdate_request_completed(result, response_code, headers, body):
-	print("📥 Respuesta del cambio de contraseña recibida")
-	print("Código HTTP:", response_code)
-	print("Cuerpo:", body.get_string_from_utf8())
-
-	if response_code == 200:
-		print("✅ Contraseña actualizada correctamente")
+		print("❌ Error al enviar solicitud de recuperación: ", err)
 	else:
-		print("❌ Error al actualizar contraseña")
-
-func obtener_token_guardado() -> String:
-	var file := File.new()
-	if file.file_exists("user://token.jwt"):
-		file.open("user://token.jwt", File.READ)
-		var token := file.get_line()
-		file.close()
-		return token.strip_edges()
-	return ""
+		print("🔄 Solicitud de recuperación enviada")
