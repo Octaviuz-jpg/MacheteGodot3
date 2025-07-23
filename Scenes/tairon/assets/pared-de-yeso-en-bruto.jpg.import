@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.s3tc.stex"
 path.etc2="res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.etc2.stex"
+path.etc="res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Scenes/tairon/assets/pared-de-yeso-en-bruto.jpg"
-dest_files=[ "res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.s3tc.stex", "res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.etc2.stex" ]
+dest_files=[ "res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.s3tc.stex", "res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.etc2.stex", "res://.import/pared-de-yeso-en-bruto.jpg-4d1b46dfaabd081d85a3bc577b0ea86c.etc.stex" ]
 
 [params]
 
