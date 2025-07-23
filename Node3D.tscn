@@ -79,6 +79,7 @@ script = ExtResource( 2 )
 unique_name_in_owner = true
 
 [node name="BotoneraRotacion" type="HBoxContainer" parent="UIConstruction"]
+unique_name_in_owner = true
 margin_left = 263.0
 margin_top = 137.0
 margin_right = 405.0

@@ -2,6 +2,7 @@ extends Spatial
 
 onready var _wall_texture = preload("res://materials/pared_blanca.jpg")
 onready var _floor_texture = preload("res://materials/suelo_granito.jpg")
+onready var botonera = $"UIConstruction/BotoneraRotacion"
 
 onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
 
@@ -209,11 +210,9 @@ func detectar_objeto_colocado_en(punto: Vector3) -> bool:
 
 func _process(delta):
 	# 🧩 Mostrar u ocultar botones táctiles de rotación
-	var botonera := get_node_or_null("UIConstruction/BotoneraRotacion")
+
 	if botonera:
 		botonera.visible = ObjectSelector.vista_previa != null
-	else:
-		print("⚠️ BotoneraRotacion no encontrada bajo UIConstruction")
 
 	# 🧪 Generar vista previa si hay objeto seleccionado
 	if ObjectSelector.objeto_seleccionado != "" and not ObjectSelector.vista_previa:
@@ -223,9 +222,9 @@ func _process(delta):
 		var obj = ObjectSelector.vista_previa
 
 		# 🎮 Rotación por teclado
-		if Input.is_action_just_pressed("rotar_izquierda"):
+		if Input.is_action_just_pressed("rotar izquierda"):
 			obj.rotate_y(deg2rad(-15))
-		elif Input.is_action_just_pressed("rotar_derecha"):
+		elif Input.is_action_just_pressed("rotar derecha"):
 			obj.rotate_y(deg2rad(15))
 
 		# 🖱️ Movimiento con el mouse

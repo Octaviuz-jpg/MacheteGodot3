@@ -119,9 +119,9 @@ config/icon="res://Assets/Img/icono.png"
 [autoload]
 
 MedidasSingleton="*res://MedidasSingleton.gd"
-Utilidad="*res://utilidad.gd"
 ObjectSelector="*res://ObjectSelector.gd"
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
+Utilidad="*res://utilidad.gd"
 
 [display]
 
