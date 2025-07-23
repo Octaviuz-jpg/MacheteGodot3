@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/Crosshair.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/modo_tairon/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/modo_tairon/Main.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/modo_tairon/Crosshair.gd" type="Script" id=3]
 [ext_resource path="res://assets/basura.png" type="Texture" id=4]
 [ext_resource path="res://Materials/Button.tres" type="Theme" id=5]
 [ext_resource path="res://assets/piso fino.jpg" type="Texture" id=6]
