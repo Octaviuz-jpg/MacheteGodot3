@@ -4,7 +4,8 @@ extends GridContainer
 # Ruta a la carpeta que contiene tus escenas o PackedScenes (pueden ser .tscn o .res)
 export var scenes_folder_path: String = "res://Assets/assets3D/" # ¡Ajusta esta ruta!
 # Tamaño mínimo deseado para los botones
-export var button_min_size: Vector2 = Vector2(128, 64) # Ancho, Alto
+export var button_min_size: Vector2 = Vector2(200, 64) # Ancho, Alto - Se mantuvo el valor de HEAD (200) por ser más grande
+
 onready var root_spatial_node: Spatial = $"../../../../.." # ¡Asegúrate de que esta ruta sea correcta para tu jerarquía!
 
 func _ready():
@@ -17,7 +18,6 @@ func _ready():
 		child.queue_free()
 
 	load_scene_buttons()
-
 
 func load_scene_buttons():
 	var dir = Directory.new()
@@ -50,28 +50,44 @@ func _create_scene_button(scene_path: String):
 	scene_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scene_button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
+#--------------ICONO DEL BOTON----------------------
+	# Define la ruta a tu archivo de icono (reemplaza "res://ruta/a/tu/icono.png")
+	var icon_path = "res://icon.png" # Ruta de ejemplo - ¡REEMPLAZA ESTO!
+	# Carga la textura del icono
+	var button_icon: Texture = load(icon_path)
+	# Si el icono se cargó correctamente, asígnalo al botón
+	if button_icon:
+		scene_button.icon = button_icon
+		# Opcional: Ajustar la escala del icono si es necesario
+		# scene_button.icon_scale = Vector2(0.5, 0.5) # Ejemplo: reducir a la mitad
+		scene_button.align = Button.ALIGN_LEFT # Alinear texto a la derecha del icono (opcional)
+		scene_button.clip_text = true # Recortar texto que se desborda (opcional)
+	else:
+		print("Advertencia: No se pudo cargar el icono para el botón:", icon_path)
 #--------------ESTILOS DEL BOTON----------------------
 	# Estilo Normal
 	var style_normal = StyleBoxFlat.new()
-	style_normal.bg_color = Color(0.8, 0.8, 0.8, 0.7) # Un gris claro semi-transparente
 	style_normal.set_border_width_all(1)
-	style_normal.set_border_color(Color(0.6, 0.6, 0.6, 0.8))
-	style_normal.set_corner_radius_all(int(button_min_size.y / 2)) # Redondea las esquinas a la mitad de la altura
+	style_normal.set_border_color(Color(1, 1, 1, 1))
+	style_normal.bg_color = Color(50, 112, 114) # Color de fondo más claro (se mantuvo el de HEAD)
+	# style_normal.set_corner_radius_all(int(button_min_size.y / 2)) # Esta línea estaba comentada en HEAD y presente en el otro branch
+
 	style_normal.set_shadow_color(Color(0, 0, 0, 0.3)) # Sombra oscura
 	style_normal.set_shadow_offset(Vector2(2, 2)) # Desplazamiento de la sombra
 	style_normal.set_shadow_size(4) # Suavidad de la sombra
-	
+
 
 	# Estilo Hover (cuando el mouse está encima)
 	var style_hover = StyleBoxFlat.new()
 	style_hover.bg_color = Color(0.9, 0.9, 0.9, 0.8) # Un poco más claro
 	style_hover.set_border_width_all(1)
 	style_hover.set_border_color(Color(0.7, 0.7, 0.7, 0.9))
-	style_hover.set_corner_radius_all(int(button_min_size.y / 2))
+	# style_hover.set_corner_radius_all(int(button_min_size.y / 2)) # Esta línea estaba comentada en HEAD y presente en el otro branch
+
 	style_hover.set_shadow_color(Color(0, 0, 0, 0.4))
 	style_hover.set_shadow_offset(Vector2(3, 3)) # Sombra más pronunciada al pasar el mouse
 	style_hover.set_shadow_size(6)
-	
+
 	# Estilo Pressed (cuando se hace clic)
 	var style_pressed = StyleBoxFlat.new()
 	style_pressed.bg_color = Color(0.6, 0.6, 0.6, 0.7) # Más oscuro
@@ -88,7 +104,7 @@ func _create_scene_button(scene_path: String):
 	scene_button.add_stylebox_override("pressed", style_pressed)
 
 	# Opcional: Ajustar el color del texto para que contraste
-	scene_button.add_color_override("font_color", Color(255, 255, 255)) # Gris muy oscuro
+	scene_button.add_color_override("font_color", Color(0, 0, 0)) # Se mantuvo el color de HEAD (negro)
 	scene_button.add_color_override("font_color_hover", Color(0, 0, 0)) # Negro al pasar el mouse
 	scene_button.add_color_override("font_color_pressed", Color(0.2, 0.2, 0.2)) # Gris un poco más claro al presionar
 
@@ -102,15 +118,20 @@ func _create_scene_button(scene_path: String):
 #--------------FUNCION BOTON A ASIGNAR------------
 
 func _on_scene_button_clicked(scene_path: String):
-	ObjectSelector.objeto_seleccionado = ""
-	ObjectSelector.vista_previa= null
+	# Se combinaron ambas lógicas, priorizando la verificación del singleton de HEAD
+	if Engine.has_singleton("ObjectSelector"):
+		ObjectSelector.objeto_seleccionado = scene_path
+		# Si ObjectSelector.vista_previa es algo que debe limpiarse o actualizarse, hazlo aquí.
+		ObjectSelector.vista_previa = null
+	else:
+		print("Advertencia: Singleton 'ObjectSelector' no encontrado. No se pudo asignar objeto.")
+
 	var scene_name = scene_path.get_file().get_basename()
 	print("El botón para la escena/recurso '", scene_name, "' ha sido clickeado.")
 	# Aquí podrías añadir la lógica para instanciar la escena 3D, por ejemplo:
 	#_instance_scene_in_world(scene_path)
-	ObjectSelector.objeto_seleccionado = scene_path
-	
-	
+
+
 # Función para cargar e instanciar la escena 3D en el nodo raíz
 func _instance_scene_in_world(path: String):
 	# Primero, verifica que la referencia al nodo raíz sea válida
@@ -132,7 +153,7 @@ func _instance_scene_in_world(path: String):
 		scene_instance = scene_resource.instance() as Spatial # 'instance()' para Godot 3
 	else:
 		print("El recurso cargado (", path, ") no es una PackedScene. No se puede instanciar.")
-		return
+		return # <-- Añadido para evitar errores si no es PackedScene
 
 	if scene_instance:
 		# Añade la instancia de la escena como hijo del nodo raíz Spatial
@@ -145,6 +166,3 @@ func _instance_scene_in_world(path: String):
 		print("Escena 3D '", scene_instance.name if scene_instance.name else path.get_file().get_basename(), "' instanciada en el nodo raíz.")
 	else:
 		print("La instancia de la escena es nula después de instanciar: ", path)
-
-
-
