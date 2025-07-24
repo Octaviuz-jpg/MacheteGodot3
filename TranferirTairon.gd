@@ -72,6 +72,10 @@ func _on_add_object_button_pressed():
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		if ObjectSelector.vista_previa:
+			if hay_colision_con_pared(ObjectSelector.vista_previa):
+				print("Colisión con pared, no se puede colocar.")
+				return
+
 			var mouse_pos = get_viewport().get_mouse_position()
 			var desde = camera.project_ray_origin(mouse_pos)
 			var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
@@ -123,6 +127,11 @@ func _process(delta):
 				ObjectSelector.vista_previa.translation = Vector3(target_position.x, target_position.y + offset_y, target_position.z)
 			else:
 				ObjectSelector.vista_previa.translation = target_position
+		
+		if hay_colision_con_pared(ObjectSelector.vista_previa):
+			set_vista_previa_color(Color(1,0,0,0.5)) # Rojo si hay colisión
+		else:
+			set_vista_previa_color(Color(1,1,1,0.5)) # Blanco si no hay colisión
 
 
 func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
@@ -160,6 +169,40 @@ func crear_vista_previa(ruta: String) -> Node:
 	return obj
 
 # --- FUNCIONES AUXILIARES ---
+
+func hay_colision_con_pared(objeto: Node) -> bool:
+	var space_state = get_world().direct_space_state
+	var mesh_instance = _encontrar_nodo_con_malla(objeto)
+	if not mesh_instance:
+		return false
+
+	var shape = BoxShape.new()
+	shape.extents = mesh_instance.get_aabb().size / 2
+	
+	var params = PhysicsShapeQueryParameters.new()
+	params.set_shape(shape)
+	params.transform = mesh_instance.global_transform
+	params.collide_with_bodies = true
+	params.collide_with_areas = false
+	
+	var result = space_state.intersect_shape(params)
+	for res in result:
+		if res.collider.is_in_group("blocks"):
+			return true
+			
+	return false
+
+func set_vista_previa_color(color: Color):
+	if ObjectSelector.vista_previa:
+		var mesh_instance = _encontrar_nodo_con_malla(ObjectSelector.vista_previa)
+		if mesh_instance:
+			for i in range(mesh_instance.get_surface_material_count()):
+				var mat = mesh_instance.get_surface_material(i)
+				if mat and mat is SpatialMaterial:
+					var new_mat = mat.duplicate()
+					new_mat.flags_transparent = true
+					new_mat.albedo_color = color
+					mesh_instance.set_surface_material(i, new_mat)
 
 func _encontrar_nodo_con_malla(nodo: Node):
 	if nodo is MeshInstance:
