@@ -15,11 +15,15 @@ var objeto_anterior_seleccionado: Node = null
 
 
 
+
 func _ready():
 	self.translation = Vector3.ZERO
 	registrar_ui()
 	build_room()
 	_setup_camera()
+#	var gestor_seleccion :Node = GestorSeleccion.new()
+#	add_child(gestor_seleccion)
+
 	
 	# Cargar proyecto si hay uno seleccionado
 	if MedidasSingleton.proyecto_actual != "":
@@ -106,7 +110,6 @@ func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
 		var pos: Vector2 = event.position
 
-		# 🔎 Verificar si el tap fue sobre la interfaz (grupo "ui")
 		if detectar_tap_en_ui(pos):
 			bloquear_preview_por_ui = true
 			print("🛑 Tap sobre UI — se bloquea preview")
@@ -115,35 +118,41 @@ func _input(event):
 			bloquear_preview_por_ui = false
 			print("✅ Tap libre — se permite preview")
 
-		# 🧱 Colocación de objeto solo si vista previa está activa y no se bloqueó por GUI
-#		if ObjectSelector.vista_previa and not bloquear_preview_por_ui:
-#			var camera := get_viewport().get_camera()
-#			var desde := camera.project_ray_origin(pos)
-#			var hacia := desde + camera.project_ray_normal(pos) * 1000
-#			var result := get_world().direct_space_state.intersect_ray(desde, hacia, [], 1)
-#
-#			if result and result.collider.is_in_group("suelo"):
-#				colocar_objeto_en_suelo(ObjectSelector.objeto_seleccionado, result.position)
-#				ObjectSelector.vista_previa.queue_free()
-#				ObjectSelector.vista_previa = null
-	if (event is InputEventScreenTouch and event.pressed):
-		var pos: Vector2 = event.position
 		var camera := get_viewport().get_camera()
 		var desde := camera.project_ray_origin(pos)
 		var hacia := desde + camera.project_ray_normal(pos) * 1000
 
 		var result := get_world().direct_space_state.intersect_ray(desde, hacia, [], 1)
 
-		if result and result.collider and result.collider.is_in_group("colocados"):
-			# 🔄 Restaurar apariencia del anterior
-			if objeto_anterior_seleccionado and objeto_anterior_seleccionado.is_inside_tree():
-			  objeto_anterior_seleccionado.modulate = Color(1, 1, 1)  # color original
+		if result and result.collider:
+			var nodo_raiz = result.collider.get_parent()
 
-			# 🔍 Marcar el nuevo seleccionado
-			objeto_seleccionado_para_eliminar = result.collider
-			objeto_anterior_seleccionado = objeto_seleccionado_para_eliminar
-			objeto_seleccionado_para_eliminar.modulate = Color(1, 0.6, 0.6)  # rojo claro
-			print("🔎 Objeto seleccionado para eliminar:", objeto_seleccionado_para_eliminar.name)
+			print("🧩 Nodo golpeado:", result.collider.name)
+			print("🔗 Nodo padre:", nodo_raiz.name)
+			print("👥 Grupos del collider:", result.collider.get_groups())
+			print("📦 ¿Padre está en 'colocados'?", nodo_raiz.is_in_group("colocados"))
+
+			if nodo_raiz.is_in_group("colocados"):
+				if nodo_raiz == objeto_seleccionado_para_eliminar:
+					quitar_marcador_seleccion(nodo_raiz)
+					objeto_seleccionado_para_eliminar = null
+					objeto_anterior_seleccionado = null
+					print("🔄 Deseleccionado: mismo objeto tocado dos veces")
+					return
+
+				if objeto_anterior_seleccionado and objeto_anterior_seleccionado.is_inside_tree():
+					quitar_marcador_seleccion(objeto_anterior_seleccionado)
+
+				objeto_seleccionado_para_eliminar = nodo_raiz
+				objeto_anterior_seleccionado = nodo_raiz
+				agregar_marcador_seleccion(nodo_raiz)
+
+				print("🔎 Nuevo objeto seleccionado:", nodo_raiz.name)
+			else:
+				print("⚠️ Nodo padre no está en grupo 'colocados' — no se selecciona nada")
+		else:
+			print("❌ Raycast no tocó ningún collider")
+
 
 func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 	if ruta == "" or not ResourceLoader.exists(ruta):
@@ -191,6 +200,9 @@ func crear_vista_previa(ruta: String) -> Node:
 
 	var mesh_node = encontrar_nodo_con_malla(obj)
 	if mesh_node:
+# warning-ignore:unused_variable
+# warning-ignore:unused_variable
+# warning-ignore:unused_variable
 		var escala = calcular_escala_normalizada(mesh_node, 0.2)
 		obj.scale = Vector3.ONE 
 		aplicar_transparencia(obj)
@@ -248,6 +260,12 @@ func detectar_objeto_colocado_en(punto: Vector3) -> bool:
 			nodo = nodo.get_parent()
 	return false
 
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _process(delta):
 	# 🧩 Mostrar u ocultar botones táctiles de rotación
 	if botonera:
@@ -398,11 +416,60 @@ func _on_Colocar_pressed():
 		
 
 
-func _on_Button_pressed():
-	if objeto_seleccionado_para_eliminar and objeto_seleccionado_para_eliminar.is_inside_tree():
-		print("🗑️ Eliminando:", objeto_seleccionado_para_eliminar.name)
+func eliminar_objeto_seleccionado():
+	if objeto_seleccionado_para_eliminar:
+		print("💣 Eliminando objeto:", objeto_seleccionado_para_eliminar.name)
 		objeto_seleccionado_para_eliminar.queue_free()
 		objeto_seleccionado_para_eliminar = null
 		objeto_anterior_seleccionado = null
 	else:
-		print("⚠️ No hay objeto seleccionado para eliminar")
+		print("⚠️ No hay objeto seleccionado")
+
+	
+
+func marcar_objeto_con_transparencia(nodo, nivel_transparencia := 0.6):
+	for child in nodo.get_children():
+		if child is MeshInstance:
+			var mod :Color= child.modulate
+			mod.a = nivel_transparencia
+			child.modulate = mod
+		if child.get_child_count() > 0:
+			marcar_objeto_con_transparencia(child, nivel_transparencia)
+			
+
+func restaurar_opacidad_original(nodo):
+	for child in nodo.get_children():
+		if child is MeshInstance:
+			var mod :Color= child.modulate
+			mod.a = 1.0
+			child.modulate = mod
+		if child.get_child_count() > 0:
+			restaurar_opacidad_original(child)
+
+
+func agregar_marcador_seleccion(nodo):
+	var marcador := Sprite3D.new()
+	marcador.name = "MarcadorSeleccion"
+	marcador.texture = preload("res://Assets/Img/Basic_red_dot.png")
+	marcador.billboard = true
+	marcador.scale = Vector3(0.05, 0.05, 0.05)
+
+	# Estimación de altura desde primer MeshInstance
+	var altura := 03.0
+	for child in nodo.get_children():
+		if child is MeshInstance and child.mesh:
+			altura = child.mesh.get_aabb().size.y
+			break
+
+	marcador.translation = Vector3(0, altura + 0.2, 0)
+	nodo.add_child(marcador)
+
+func quitar_marcador_seleccion(nodo):
+	var marcador :Sprite3D = nodo.get_node_or_null("MarcadorSeleccion")
+	if marcador:
+		marcador.queue_free()
+
+
+
+func _on_Button_pressed():
+	eliminar_objeto_seleccionado()

@@ -124,6 +124,7 @@ ObjectSelector="*res://ObjectSelector.gd"
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
 <<<<<<<HEADUtilidad="*res://utilidad.gd"
 AuthManager="*res://Scripts/AuthManager.gd"
+GestorSeleccion="*res://GestorSeleccion.gd"
 SupabaseManager="*res://Scripts/SupabaseManager.gd"
 
 [display]
