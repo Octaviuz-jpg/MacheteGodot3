@@ -105,3 +105,6 @@ func _on_RotarIzquierda_pressed():
 func _on_RotarDerecha_pressed():
 	if ObjectSelector.vista_previa:
 		ObjectSelector.vista_previa.rotate_y(deg2rad(15))
+
+
+

@@ -5,12 +5,25 @@ onready var _floor_texture = preload("res://materials/suelo_granito.jpg")
 onready var botonera = $"UIConstruction/BotoneraRotacion"
 
 onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
+var tocar_gui := false  # variable global auxiliar
+var bloquear_preview_por_ui := false
+var ultima_posicion_valida := Vector3()
+var objeto_seleccionado_para_eliminar: Node = null
+var objeto_anterior_seleccionado: Node = null
+
+
+
+
 
 
 func _ready():
 	self.translation = Vector3.ZERO
+	registrar_ui()
 	build_room()
 	_setup_camera()
+#	var gestor_seleccion :Node = GestorSeleccion.new()
+#	add_child(gestor_seleccion)
+
 	
 	# Cargar proyecto si hay uno seleccionado
 	if MedidasSingleton.proyecto_actual != "":
@@ -91,19 +104,55 @@ func _create_wall(pos: Vector3, size: Vector3, rot_y: float, material: SpatialMa
 # En el script de tu Room/SceneRoot:
 
 
+
+
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
-		if ObjectSelector.vista_previa:
-			var mouse_pos = get_viewport().get_mouse_position()
-			var camera = get_viewport().get_camera()
-			var desde = camera.project_ray_origin(mouse_pos)
-			var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
-			var result = get_world().direct_space_state.intersect_ray(desde, hacia, [], 1)
+		var pos: Vector2 = event.position
 
-			if result and result.collider.is_in_group("suelo"):
-				colocar_objeto_en_suelo(ObjectSelector.objeto_seleccionado, result.position)
-				ObjectSelector.vista_previa.queue_free()
-				ObjectSelector.vista_previa = null
+		if detectar_tap_en_ui(pos):
+			bloquear_preview_por_ui = true
+			print("🛑 Tap sobre UI — se bloquea preview")
+			return
+		else:
+			bloquear_preview_por_ui = false
+			print("✅ Tap libre — se permite preview")
+
+		var camera := get_viewport().get_camera()
+		var desde := camera.project_ray_origin(pos)
+		var hacia := desde + camera.project_ray_normal(pos) * 1000
+
+		var result := get_world().direct_space_state.intersect_ray(desde, hacia, [], 1)
+
+		if result and result.collider:
+			var nodo_raiz = result.collider.get_parent()
+
+			print("🧩 Nodo golpeado:", result.collider.name)
+			print("🔗 Nodo padre:", nodo_raiz.name)
+			print("👥 Grupos del collider:", result.collider.get_groups())
+			print("📦 ¿Padre está en 'colocados'?", nodo_raiz.is_in_group("colocados"))
+
+			if nodo_raiz.is_in_group("colocados"):
+				if nodo_raiz == objeto_seleccionado_para_eliminar:
+					quitar_marcador_seleccion(nodo_raiz)
+					objeto_seleccionado_para_eliminar = null
+					objeto_anterior_seleccionado = null
+					print("🔄 Deseleccionado: mismo objeto tocado dos veces")
+					return
+
+				if objeto_anterior_seleccionado and objeto_anterior_seleccionado.is_inside_tree():
+					quitar_marcador_seleccion(objeto_anterior_seleccionado)
+
+				objeto_seleccionado_para_eliminar = nodo_raiz
+				objeto_anterior_seleccionado = nodo_raiz
+				agregar_marcador_seleccion(nodo_raiz)
+
+				print("🔎 Nuevo objeto seleccionado:", nodo_raiz.name)
+			else:
+				print("⚠️ Nodo padre no está en grupo 'colocados' — no se selecciona nada")
+		else:
+			print("❌ Raycast no tocó ningún collider")
+
 
 func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 	if ruta == "" or not ResourceLoader.exists(ruta):
@@ -151,6 +200,9 @@ func crear_vista_previa(ruta: String) -> Node:
 
 	var mesh_node = encontrar_nodo_con_malla(obj)
 	if mesh_node:
+# warning-ignore:unused_variable
+# warning-ignore:unused_variable
+# warning-ignore:unused_variable
 		var escala = calcular_escala_normalizada(mesh_node, 0.2)
 		obj.scale = Vector3.ONE 
 		aplicar_transparencia(obj)
@@ -208,9 +260,14 @@ func detectar_objeto_colocado_en(punto: Vector3) -> bool:
 			nodo = nodo.get_parent()
 	return false
 
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _process(delta):
 	# 🧩 Mostrar u ocultar botones táctiles de rotación
-
 	if botonera:
 		botonera.visible = ObjectSelector.vista_previa != null
 
@@ -218,7 +275,8 @@ func _process(delta):
 	if ObjectSelector.objeto_seleccionado != "" and not ObjectSelector.vista_previa:
 		ObjectSelector.vista_previa = crear_vista_previa(ObjectSelector.objeto_seleccionado)
 
-	if ObjectSelector.vista_previa:
+	# 🧠 Controlar movimiento solo si no fue tap en la GUI
+	if ObjectSelector.vista_previa and not bloquear_preview_por_ui:
 		var obj = ObjectSelector.vista_previa
 
 		# 🎮 Rotación por teclado
@@ -227,33 +285,37 @@ func _process(delta):
 		elif Input.is_action_just_pressed("rotar derecha"):
 			obj.rotate_y(deg2rad(15))
 
-		# 🖱️ Movimiento con el mouse
+		# 🖱️ Movimiento con el mouse/táctil
 		var mouse_pos = get_viewport().get_mouse_position()
 		var camera = get_viewport().get_camera()
 		var desde = camera.project_ray_origin(mouse_pos)
 		var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
 
-		var excluidos = []
+		var excluidos := []
 		for nodo in get_tree().get_nodes_in_group("colocados"):
 			if nodo.has_method("get_rid"):
 				excluidos.append(nodo.get_rid())
 
 		var result = get_world().direct_space_state.intersect_ray(desde, hacia, excluidos, 1)
-		var destino : Vector3
+		var destino: Vector3  # ⬅ Declaración única y segura
 
-		if result and result.collider and result.collider.is_in_group("suelo") and tap_libre_para_preview():
-		 destino = result.position
-
+		if result and result.collider and result.collider.is_in_group("suelo"):
+			destino = result.position
+			ultima_posicion_valida = destino
 		else:
 			var altura_suelo := 0.0
-			var t : float = (altura_suelo - desde.y) / (hacia.y - desde.y)
+			var t := float((altura_suelo - desde.y) / (hacia.y - desde.y))
 			destino = desde.linear_interpolate(hacia, t)
 
+		# 🧪 Mensaje debug para confirmar tap libre
+		print("🔄 Preview actualizada. GUI bloqueando:", bloquear_preview_por_ui)
+
+		# 📦 Ajustes de colocación y altura
 		var mesh = encontrar_nodo_con_malla(obj)
 		if mesh:
 			var aabb = mesh.get_aabb()
-			var altura = aabb.size.y * obj.scale.y
-			var y_final = destino.y + altura / 2.0
+			var altura := float(aabb.size.y * obj.scale.y)
+			var y_final := destino.y + altura / 2.0
 
 			var ancho := float(MedidasSingleton.anchura) * 0.5
 			var largo := float(MedidasSingleton.profundidad) * 0.5
@@ -262,7 +324,7 @@ func _process(delta):
 			var limite_x := clamp(destino.x, -ancho + margen, ancho - margen)
 			var limite_z := clamp(destino.z, -largo + margen, largo - margen)
 
-			var objetivo = Vector3(limite_x, y_final, limite_z)
+			var objetivo := Vector3(limite_x, y_final, limite_z)
 			obj.translation = obj.translation.linear_interpolate(objetivo, 0.10)
 
 # 🔍 Recolectar todos los RIDs del objeto y sus hijos
@@ -321,24 +383,93 @@ func hay_colision_volumetrica(objeto: Node) -> bool:
 
 	return false
 	
-func tap_libre_para_preview() -> bool:
-	var mouse_pos = get_viewport().get_mouse_position()
 
-	var controles := [
-	get_node_or_null("UIConstruction/BotoneraRotacion"),
-	get_node_or_null("UIConstruction/trancarCamara"),
-	get_node_or_null("UIConstruction/BotonCatalogo"),
-	get_node_or_null("UIConstruction/vistaAerea"),
-	# Puedes añadir más nodos si los tienes
-	]
 
-	for control in controles:
-		if control and control.get_global_rect().has_point(mouse_pos):
-			return false
 
-	return true
+func detectar_tap_en_ui(pos: Vector2) -> bool:
+	for nodo in get_tree().get_nodes_in_group("ui"):
+		if nodo is Control and nodo.visible and nodo.mouse_filter != Control.MOUSE_FILTER_IGNORE:
+			var rect := Rect2(nodo.get_global_transform().origin, nodo.rect_size)
+			if rect.has_point(pos):
+				print("🛑 Tap sobre:", nodo.name)
+				return true
+	return false
+
+	
+func registrar_ui():
+	var ui_root := get_parent().get_node("Control")
+	for child in ui_root.get_children():
+		if child is Control:
+			child.add_to_group("ui")
+
+
+
+func _on_Colocar_pressed():
+	if ObjectSelector.vista_previa and ultima_posicion_valida != Vector3():
+		colocar_objeto_en_suelo(ObjectSelector.objeto_seleccionado, ultima_posicion_valida)
+		ObjectSelector.vista_previa.queue_free()
+		ObjectSelector.vista_previa = null
+		ObjectSelector.objeto_seleccionado = ""
+		print("✅ Nevera colocada desde botón en", ultima_posicion_valida)
+	else:
+		print("⚠️ No hay preview o posición válida")
+		
+
+
+func eliminar_objeto_seleccionado():
+	if objeto_seleccionado_para_eliminar:
+		print("💣 Eliminando objeto:", objeto_seleccionado_para_eliminar.name)
+		objeto_seleccionado_para_eliminar.queue_free()
+		objeto_seleccionado_para_eliminar = null
+		objeto_anterior_seleccionado = null
+	else:
+		print("⚠️ No hay objeto seleccionado")
 
 	
 
+func marcar_objeto_con_transparencia(nodo, nivel_transparencia := 0.6):
+	for child in nodo.get_children():
+		if child is MeshInstance:
+			var mod :Color= child.modulate
+			mod.a = nivel_transparencia
+			child.modulate = mod
+		if child.get_child_count() > 0:
+			marcar_objeto_con_transparencia(child, nivel_transparencia)
+			
+
+func restaurar_opacidad_original(nodo):
+	for child in nodo.get_children():
+		if child is MeshInstance:
+			var mod :Color= child.modulate
+			mod.a = 1.0
+			child.modulate = mod
+		if child.get_child_count() > 0:
+			restaurar_opacidad_original(child)
 
 
+func agregar_marcador_seleccion(nodo):
+	var marcador := Sprite3D.new()
+	marcador.name = "MarcadorSeleccion"
+	marcador.texture = preload("res://Assets/Img/Basic_red_dot.png")
+	marcador.billboard = true
+	marcador.scale = Vector3(0.05, 0.05, 0.05)
+
+	# Estimación de altura desde primer MeshInstance
+	var altura := 03.0
+	for child in nodo.get_children():
+		if child is MeshInstance and child.mesh:
+			altura = child.mesh.get_aabb().size.y
+			break
+
+	marcador.translation = Vector3(0, altura + 0.2, 0)
+	nodo.add_child(marcador)
+
+func quitar_marcador_seleccion(nodo):
+	var marcador :Sprite3D = nodo.get_node_or_null("MarcadorSeleccion")
+	if marcador:
+		marcador.queue_free()
+
+
+
+func _on_Button_pressed():
+	eliminar_objeto_seleccionado()

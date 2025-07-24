@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Guardado/GuardarDialog.gd" type="Script" id=1]
+
+[node name="GuardarDialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="GuardarDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+margin_left = 253.0
+margin_top = 485.0
+margin_right = 503.0
+margin_bottom = 595.0
+
+[node name="NombreLineEdit" type="LineEdit" parent="GuardarDialog"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 242.0
+margin_bottom = 71.0
+placeholder_text = "Nombre del proyecto"
+
+[connection signal="confirmed" from="GuardarDialog" to="." method="_on_GuardarDialog_confirmed"]
