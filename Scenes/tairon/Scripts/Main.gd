@@ -148,7 +148,10 @@ func select_block(block):
 	scale_slider.visible = true      
 	scale_slider.value = selected_block.scale.x  # Sincronizar con escala actual    
 	rotate_button.visible = true  # Mostrar botón de rotación  
-		
+	$CanvasLayer/MenuAmvorguesa.visible = true #Muestra el menu de texturas
+	
+	$CanvasLayer.set_bloque(block) # Esto actualiza crosshair.gd
+	
 func deselect_block():        
 	if selected_block != null:        
 		var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")          
@@ -158,7 +161,8 @@ func deselect_block():
 		# Ocultar controles de UI    
 		delete_button.visible = false    
 		scale_slider.visible = false    
-		rotate_button.visible = false  # Ocultar botón de rotación  
+		rotate_button.visible = false  # Ocultar botón de rotación
+		$CanvasLayer/MenuAmvorguesa.visible = false #Oculta el menu de texturas 
 	
 func _on_scale_slider_changed(value):      
 	if selected_block != null:      
@@ -238,6 +242,46 @@ func delete_block(block):
 	# Resetear variables de clic      
 	click_count = 0      
 	last_clicked_block = null    
+	
+	
+func cambiar_color_bloque_seleccionado(color: Color):
+	if selected_block == null:
+		return
+
+	var nuevo_material = SpatialMaterial.new()
+	nuevo_material.albedo_color = color
+	nuevo_material.emission_enabled = true
+	nuevo_material.emission = color * 0.5
+
+	# Evita mostrar cualquier textura previa
+	nuevo_material.albedo_texture = null
+	nuevo_material.uv1_triplanar = false
+
+	var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")
+	mesh_instance.material_override = nuevo_material
+
+	
+func cambiar_textura_bloque_seleccionado(textura: Texture):
+	if selected_block == null:
+		return
+
+	var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")
+
+	var nuevo_material = SpatialMaterial.new()
+	nuevo_material.albedo_texture = textura
+	nuevo_material.uv1_triplanar = true
+	nuevo_material.uv1_scale = Vector3(5, 5, 0.25)
+	nuevo_material.flags_unshaded = false
+	nuevo_material.emission_enabled = false
+
+	mesh_instance.material_override = nuevo_material
+
+
+func actualizar_material_bloque(block, new_material):
+	if selected_block == block:
+		# Actualizar materiales de selección (sin afectar otros bloques)
+		var mesh_instance = block.get_node("StaticBody/MeshInstance")
+		mesh_instance.set_surface_material(0, new_material)
 	
 # FUNCIONES DE ARRASTRE    
 func start_drag(collision_point):        

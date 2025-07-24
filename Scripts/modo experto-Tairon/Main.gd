@@ -1,6 +1,6 @@
 extends Spatial    
 	
-var block_scene = preload("res://Scenes/Block.tscn")    
+var block_scene = preload("res://Scenes/tairon/Scenes/Block.tscn")    
 	
 onready var raycast = $Camera/RayCast    
 onready var blocks_container = $BlocksContainer    
@@ -34,7 +34,7 @@ func _ready():
 		print("✅ RayCast listo.")    
 			
 	# Cargar el material original    
-	var original_material = preload("res://Materials/Block.tres")    
+	var original_material = preload("res://Scenes/tairon/Materials/Block.tres")    
 	# Crear una copia para selección con brillo    
 	selected_material = original_material.duplicate()    
 	selected_material.emission_enabled = true    
