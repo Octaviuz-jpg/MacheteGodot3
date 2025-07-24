@@ -1,5 +1,6 @@
 extends Control
 
+#añadir comentarios
 # Señales para notificar el resultado de la autenticación
 signal login_successful
 signal registration_successful
