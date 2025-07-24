@@ -34,7 +34,7 @@ func _ready():
 		print("✅ RayCast listo.")    
 			
 	# Cargar el material original    
-	var original_material = preload("res://Scenes/tairon/Materials/selectedBlock.tres")    
+	var original_material = preload("res://Materials/selectedBlock.tres")    
 	selected_material = original_material.duplicate()    
 	selected_material.emission_enabled = true    
 	selected_material.emission = Color(0.1, 0.1, 0.1)     

@@ -182,7 +182,7 @@ func select_block(block):
 	scale_slider.value = selected_block.scale.x # Sincronizar con escala actual
 	rotate_button.visible = true # Mostrar botón de rotación
 	
-	
+	$CanvasLayer.set_bloque(block) # Esto actualiza crosshair.gd
 
 
 func deselect_block():
