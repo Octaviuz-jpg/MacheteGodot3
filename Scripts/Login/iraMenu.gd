@@ -25,7 +25,6 @@ func _on_inicio_pressed():
 	
 	#Validación para mandar contenido del correo
 	if email.text.length() ==0:
-		Popups.PopAbrirE("ERROR: Ingrese su correo electronico, antes de continuar por favor")
 		errorUsuario.text="Ingrese su correo"
 		errorUsuario.visible=true
 		
@@ -34,7 +33,6 @@ func _on_inicio_pressed():
 		
 	#Validación para mandar contenido del password
 	if password.text.length() ==0:
-		Popups.PopAbrirE("ERROR: Ingrese su contraseña, antes de continuar por favor")
 		errorCont.text="Ingrese su contraseña"
 		errorCont.visible=true
 	else:
