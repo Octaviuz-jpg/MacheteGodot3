@@ -13,13 +13,14 @@ margin_left = 253.0
 margin_top = 485.0
 margin_right = 503.0
 margin_bottom = 595.0
+window_title = "¡Alerta!"
 
 [node name="NombreLineEdit" type="LineEdit" parent="GuardarDialog"]
 unique_name_in_owner = true
 margin_left = 8.0
-margin_top = 5.0
+margin_top = 8.0
 margin_right = 242.0
-margin_bottom = 71.0
+margin_bottom = 74.0
 placeholder_text = "Nombre del proyecto"
 
 [connection signal="confirmed" from="GuardarDialog" to="." method="_on_GuardarDialog_confirmed"]
