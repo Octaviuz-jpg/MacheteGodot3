@@ -10,6 +10,7 @@ onready var root_spatial_node: Spatial = $"../../../../.." # ¡Asegúrate de que
 
 func _ready():
 	# Asegurarse de que la ruta de la carpeta termina con una barra
+	print("----------Cargando modelos de la carpeta Assets3D en el catalogo-------------")
 	if not scenes_folder_path.ends_with("/"):
 		scenes_folder_path += "/"
 
@@ -118,16 +119,19 @@ func _create_scene_button(scene_path: String):
 #--------------FUNCION BOTON A ASIGNAR------------
 
 func _on_scene_button_clicked(scene_path: String):
+	print("El botón para la escena/recurso '", scene_path.get_file().get_basename(), "' ha sido clickeado, proseguimos a seguir la ruta = " , scene_path)
+	#ObjectSelector.objeto_seleccionado = "res://objetos/sofa blanco tipo1/"+scene_path
+	
 	# Se combinaron ambas lógicas, priorizando la verificación del singleton de HEAD
-	if Engine.has_singleton("ObjectSelector"):
-		ObjectSelector.objeto_seleccionado = scene_path
+	#if Engine.has_singleton("ObjectSelector"):
+	ObjectSelector.objeto_seleccionado = scene_path
 		# Si ObjectSelector.vista_previa es algo que debe limpiarse o actualizarse, hazlo aquí.
-		ObjectSelector.vista_previa = null
-	else:
-		print("Advertencia: Singleton 'ObjectSelector' no encontrado. No se pudo asignar objeto.")
+		#ObjectSelector.vista_previa = null
+	#else:
+		#print("Advertencia: Singleton 'ObjectSelector' no encontrado. No se pudo asignar objeto.")
 
-	var scene_name = scene_path.get_file().get_basename()
-	print("El botón para la escena/recurso '", scene_name, "' ha sido clickeado.")
+	#var scene_name = scene_path.get_file().get_basename()
+	#print("El botón para la escena/recurso '", scene_name, "' ha sido clickeado.")
 	# Aquí podrías añadir la lógica para instanciar la escena 3D, por ejemplo:
 	#_instance_scene_in_world(scene_path)
 

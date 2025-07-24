@@ -9,11 +9,14 @@ onready var errorTexto:Label=$"../VBoxContainer/VBoxContainer/ErrorTexto"
 onready var errorCorreo:Label=$"../VBoxContainer/VBoxContainer2/ErrorCorreo"
 onready var errorCont:Label=$"../VBoxContainer/VBoxContainer3/ErrorCont"
 onready var errorConfCont:Label=$"../VBoxContainer/VBoxContainer4/ErrorConfCont"
+onready var label_exito: RichTextLabel = $"../Label3"
 
 var env=parse("res://.env")
 var key= get("SUPABASE_KEY")
 
 func _ready():
+	
+	
 	if req:
 		req.connect("request_completed", self, "on_completed_request")
 
@@ -61,6 +64,7 @@ func _on_Registrarse_pressed():
 	if email.text.length()>0 and password.text.length()>5:
 		send_signup_request(email.text,password.text)
 		print("te has registrado felicidades, vuelve a la pestaña login")
+		label_exito.text = "Te has registrado correctamente, por favor verifica tu correo "+ email.text + " para completar la operacion"
 	else:
 		print("Campo vacio, enviar información de registro solicitada")
 	

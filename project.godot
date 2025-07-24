@@ -125,6 +125,8 @@ Utilidad="*res://utilidad.gd"
 <<<<<<<HEADUtilidad="*res://utilidad.gd"
 AuthManager="*res://Scripts/AuthManager.gd"
 SupabaseManager="*res://Scripts/SupabaseManager.gd"
+Popups1="*res://Scenes/popups/Popups1.gd"
+Popups="*res://Scenes/popups/Popups.tscn"
 
 [display]
 
