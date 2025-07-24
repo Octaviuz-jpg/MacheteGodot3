@@ -130,8 +130,8 @@ func on_completed_request(result, response_code, headers, body):
 			save_user(payload)
 						
 	else:
-		errorTexto.text = "Ha ocurrido un error: "+response_code
-		errorTexto.visible = true
+		errorConfCont.text = "Ha ocurrido un error: " + str(response_code)
+		errorConfCont.visible = true
 		#all fallar el inicio de sesión
 		print("error: ", response_code)
 
