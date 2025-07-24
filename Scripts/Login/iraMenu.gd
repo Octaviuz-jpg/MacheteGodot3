@@ -2,6 +2,8 @@ extends Button
 
 onready var email: LineEdit=$"../VBoxContainer/VBoxContainer/Linename"
 onready var password: LineEdit=$"../VBoxContainer/VBoxContainer2/Linename"
+onready var errorUsuario: Label=$"../VBoxContainer/VBoxContainer/ErrorUsuario"
+onready var errorCont: Label=$"../VBoxContainer/VBoxContainer2/ErrorCont"
 var sign_in_status= false
 
 
@@ -19,12 +21,33 @@ func _ready():
 
 func _on_inicio_pressed():
 	print("Login button pressed!")
-
-	var entered_email = email.text
-	var entered_password = password.text
-
-	print("Attempting sign-in with email: " + entered_email)
-	Supabase.auth.sign_in(entered_email, entered_password)
+	var entered_email
+	var entered_password 
+	
+	#Validación para mandar contenido del correo
+	if email.text.length() ==0:
+		errorUsuario.text="Ingrese su usuario"
+		errorUsuario.visible=true
+	else:
+		errorUsuario.visible=false
+		
+	#Validación para mandar contenido del password
+	if password.text.length() ==0:
+		errorCont.text="Ingrese su contraseña"
+		errorCont.visible=true
+	else:
+		errorCont.visible=false
+	
+	#Si se ingresan datos en los campos de email y passworod  se mandará a Supabase 
+	# para realizar la autenticacion de usuario
+	
+	if email.text.length()>0 and password.text.length()>0:
+		entered_email = email.text
+		entered_password = password.text
+		print("Attempting sign-in with email: " + entered_email)
+		Supabase.auth.sign_in(entered_email, entered_password)
+	else:
+		print("Campo vacio, enviar información de usuario solicitada")
 
 
 # Al lograrse el inicio de sesión
