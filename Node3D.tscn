@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
 [ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
 [ext_resource path="res://CameraConstruction.gd" type="Script" id=14]
-
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
@@ -74,6 +73,12 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Container" type="Spatial" parent="DynamicRoom"]
+
+[node name="GridMapTairon" type="GridMap" parent="DynamicRoom"]
+mesh_library = ExtResource( 12 )
+__meta__ = {
+"_editor_clip_": 0
+}
 
 [node name="UIConstruction" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -248,6 +253,17 @@ margin_right = 266.0
 margin_bottom = 87.0
 text = "Vista aerea"
 
+[node name="ImportarTaironButton" type="Button" parent="UIConstruction"]
+anchor_left = 0.535
+anchor_top = 0.055
+anchor_right = 0.535
+anchor_bottom = 0.055
+margin_left = -6.20001
+margin_top = -10.4
+margin_right = 104.8
+margin_bottom = 10.6
+text = "Importar Tairon"
+
 [node name="GridMap" type="GridMap" parent="."]
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
@@ -264,3 +280,4 @@ __meta__ = {
 [connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
 [connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
 [connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
+[connection signal="pressed" from="UIConstruction/ImportarTaironButton" to="DynamicRoom" method="_on_ImportarTaironButton_pressed"]
