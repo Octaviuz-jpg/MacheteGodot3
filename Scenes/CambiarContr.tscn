@@ -1,0 +1,339 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Img/VolverMenu.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Button.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=22]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=23]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=24]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.0941176, 0.388235, 0.411765, 0.568627 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[node name="CambiarContr" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_right = -3.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Escena1#Elementografico" type="Sprite" parent="Panel"]
+position = Vector2( 414.724, 515.649 )
+rotation = -3.14159
+scale = Vector2( 0.790081, 0.60965 )
+texture = ExtResource( 2 )
+
+[node name="Volver" type="Button" parent="Panel"]
+margin_left = 25.0
+margin_top = 8.0
+margin_right = 110.0
+margin_bottom = 97.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+icon = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Decrip" type="Label" parent="Panel"]
+margin_left = 26.0
+margin_top = 131.0
+margin_right = 480.0
+margin_bottom = 220.0
+custom_colors/font_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "La contraseña debe
+tener mas de 5 carácteres "
+
+[node name="ActCont" type="Label" parent="Panel"]
+margin_left = 29.0
+margin_top = 272.0
+margin_right = 694.0
+margin_bottom = 315.0
+custom_colors/font_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Contraseña actual "
+
+[node name="IntroducirActCont" type="LineEdit" parent="Panel"]
+margin_left = 29.0
+margin_top = 330.0
+margin_right = 501.0
+margin_bottom = 386.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/normal = SubResource( 9 )
+placeholder_alpha = 0.44
+
+[node name="ErrorNoActual" type="Label" parent="Panel"]
+visible = false
+margin_left = 34.0
+margin_top = 403.0
+margin_right = 497.0
+margin_bottom = 452.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "No es igual a la contraseña actual"
+
+[node name="NueCont" type="Label" parent="Panel"]
+margin_left = 29.0
+margin_top = 480.0
+margin_right = 373.0
+margin_bottom = 523.0
+custom_colors/font_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "Nueva contraseña"
+
+[node name="IntroducirNueCont" type="LineEdit" parent="Panel"]
+margin_left = 29.0
+margin_top = 530.0
+margin_right = 511.0
+margin_bottom = 587.0
+custom_colors/selection_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.152941, 0.372549, 0.458824, 1 )
+custom_fonts/font = SubResource( 16 )
+custom_styles/normal = SubResource( 13 )
+
+[node name="ErrorContr" type="Label" parent="Panel"]
+visible = false
+margin_left = 29.0
+margin_top = 610.0
+margin_right = 694.0
+margin_bottom = 437.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 14 )
+text = "La contraseña debe tener más de 5 carácteres"
+
+[node name="ConfCont" type="Label" parent="Panel"]
+margin_left = 29.0
+margin_top = 690.0
+margin_right = 526.0
+margin_bottom = 733.0
+custom_colors/font_color = Color( 0.0313726, 0.360784, 0.45098, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "Confirmar contraseña"
+
+[node name="IntroducirConfCont" type="LineEdit" parent="Panel"]
+margin_left = 29.0
+margin_top = 740.0
+margin_right = 513.0
+margin_bottom = 799.0
+custom_fonts/font = SubResource( 17 )
+custom_styles/normal = SubResource( 18 )
+
+[node name="ErrorConfCont" type="Label" parent="Panel"]
+visible = false
+margin_left = 29.0
+margin_top = 820.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 19 )
+text = "La contraseña no es igual a la nueva"
+
+[node name="Button2" type="Button" parent="Panel"]
+margin_left = 243.0
+margin_top = 974.0
+margin_right = 444.0
+margin_bottom = 1027.0
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 20 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/focus = SubResource( 23 )
+custom_styles/disabled = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Guardar"
+
+[connection signal="pressed" from="Panel/Volver" to="Panel/Volver" method="_on_Volver_pressed"]

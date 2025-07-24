@@ -5,6 +5,10 @@ onready var password: LineEdit= $"../VBoxContainer/VBoxContainer3/Linename"
 onready var confirm_password: LineEdit= $"../VBoxContainer/VBoxContainer4/Linename"
 onready var req=$"../../HTTPRequestRegister"
 onready var req2=$"../../HTTPRequestDB"
+onready var errorTexto:Label=$"../VBoxContainer/VBoxContainer/ErrorTexto"
+onready var errorCorreo:Label=$"../VBoxContainer/VBoxContainer2/ErrorCorreo"
+onready var errorCont:Label=$"../VBoxContainer/VBoxContainer3/ErrorCont"
+onready var errorConfCont:Label=$"../VBoxContainer/VBoxContainer4/ErrorConfCont"
 
 var env=parse("res://.env")
 var key= get("SUPABASE_KEY")
@@ -20,10 +24,45 @@ func _on_Registrarse_pressed():
 	print(get_tree().current_scene.filename)
 	print(email.text,password.text)
 	var payload={"username":username.text,"account_id":"f1c4736a-1f04-4a4b-89a0-771821f40be0"}
+	#Validaciones para nombre de usuario
+	if username.text.length() ==0 :
+		errorTexto.text = "Debe ingresar un nombre de usuario"
+		errorTexto.visible = true
+	else:
+		errorTexto.visible=false
+	#Validaciones para correo	
+	if email.text.length() ==0 :
+		errorCorreo.text = "Por favor coloque un correo válido"
+		errorCorreo.visible = true
+	else:
+		errorCorreo.visible=false
+	#Validaciones para contraseña
+	if password.text.length() ==0 :
+		errorCont.text = "Debe ingresar una clave"
+		errorCont.visible = true
+	else:
+		if password.text.length() <= 5:
+			errorCont.text = "La contraseña debe contener más 5 caracteres"
+			errorCont.visible = true
+		else:
+			errorCont.visible=false
+	#Validaciones para confirmar contraseña
+	if confirm_password.text.length() ==0 :
+		errorConfCont.text = "Debe confirmar su clave"
+		errorConfCont.visible = true
+	else:
+		if  password.text != confirm_password.text:
+			errorConfCont.text = "No son iguales las contraseñas"
+			errorConfCont.visible = true
+		else:
+			errorConfCont.visible=false
 
 	# save_user(payload)
-	send_signup_request(email.text,password.text)
-	print("te has registrado felicidades, vuelve a la pestaña login")
+	if email.text.length()>0 and password.text.length()>5:
+		send_signup_request(email.text,password.text)
+		print("te has registrado felicidades, vuelve a la pestaña login")
+	else:
+		print("Campo vacio, enviar información de registro solicitada")
 	
 func on_email_sent(_email:String):
 	print("Account confirmation email sent to ",_email)
@@ -83,6 +122,7 @@ func on_completed_request(result, response_code, headers, body):
 		# print(response_body_string)
 		var json_parse_result = JSON.parse(response_body_string)
 
+
 		if json_parse_result.error == OK:
 			print("parsed")
 			var user= json_parse_result.result
@@ -140,3 +180,4 @@ func parse(filename):
 		if(o.size() == 2): # only check valid lines
 			_env[o[0]] = o[1].lstrip("\"").rstrip("\"");
 	return _env;
+
