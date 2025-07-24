@@ -82,7 +82,8 @@ func _on_login_succeeded():
 	else:
 		print("No se pudo obtener token JWT")
 	# Habilitar el botón por si el usuario vuelve a esta escena
-	disabled = false
+	errorCont.visible= false
+	errorUsuario.visible= false
 	
 	# Cambiar a la escena del menú
 	get_tree().change_scene("res://Scenes/Menu.tscn")
@@ -91,7 +92,8 @@ func _on_login_succeeded():
 func _on_login_failed(error_message):
 	print("Error de login: ", error_message)
 	# Habilitar el botón para que el usuario pueda intentarlo de nuevo
-	disabled = false
+	errorCont.text="Credenciales incorrectas"
+	errorCont.visible=true
 
 # Es una buena práctica desconectar las señales cuando el nodo se libera
 func _exit_tree():
