@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
 [ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
 [ext_resource path="res://CameraConstruction.gd" type="Script" id=14]
-
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
@@ -75,47 +74,57 @@ script = ExtResource( 2 )
 
 [node name="Container" type="Spatial" parent="DynamicRoom"]
 
-[node name="UIConstruction" type="CanvasLayer" parent="."]
+[node name="GridMap" type="GridMap" parent="."]
 unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
+visible = false
+mesh_library = ExtResource( 12 )
+__meta__ = {
+"_editor_clip_": 0
+}
 
-[node name="BotoneraRotacion" type="HBoxContainer" parent="UIConstruction"]
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BotoneraRotacion" type="HBoxContainer" parent="Control"]
 unique_name_in_owner = true
 margin_left = 263.0
 margin_top = 137.0
 margin_right = 405.0
 margin_bottom = 207.0
 
-[node name="RotarIzquierda" type="Button" parent="UIConstruction/BotoneraRotacion"]
+[node name="RotarIzquierda" type="Button" parent="Control/BotoneraRotacion"]
 margin_right = 71.0
 margin_bottom = 70.0
 text = "izquierda"
 
-[node name="RotarDerecha" type="Button" parent="UIConstruction/BotoneraRotacion"]
+[node name="RotarDerecha" type="Button" parent="Control/BotoneraRotacion"]
 margin_left = 75.0
 margin_right = 142.0
 margin_bottom = 70.0
 text = "derecha "
 
-[node name="camita" type="Button" parent="UIConstruction"]
+[node name="camita" type="Button" parent="Control"]
 margin_left = 120.0
 margin_top = 35.0
 margin_right = 132.0
 margin_bottom = 55.0
 
-[node name="cocinatipo2" type="Button" parent="UIConstruction"]
+[node name="cocinatipo2" type="Button" parent="Control"]
 margin_left = 140.0
 margin_top = 35.0
 margin_right = 169.0
 margin_bottom = 55.0
 
-[node name="trancarCamara" type="Button" parent="UIConstruction"]
+[node name="trancarCamara" type="Button" parent="Control"]
 margin_left = 180.0
 margin_top = 35.0
 margin_right = 288.0
 margin_bottom = 55.0
 text = "Trancar camara"
 
-[node name="BotonCatalogo" type="Button" parent="UIConstruction"]
+[node name="BotonCatalogo" type="Button" parent="Control"]
 margin_right = 96.0
 margin_bottom = 97.0
 custom_styles/hover = SubResource( 1 )
@@ -126,22 +135,23 @@ icon_align = 1
 script = ExtResource( 6 )
 panel_path = NodePath("../Catalogo")
 
-[node name="user" type="Button" parent="UIConstruction"]
+[node name="user" type="Button" parent="Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -101.0
+margin_left = 579.0
+margin_right = 680.0
 margin_bottom = 108.0
 icon = ExtResource( 10 )
 flat = true
 icon_align = 1
 
-[node name="Catalogo" type="Panel" parent="UIConstruction"]
+[node name="Catalogo" type="Panel" parent="Control"]
 margin_top = 120.0
 margin_right = 250.0
 margin_bottom = 1120.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="BotonProyectos" type="Button" parent="UIConstruction/Catalogo"]
+[node name="BotonProyectos" type="Button" parent="Control/Catalogo"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -250.0
@@ -152,7 +162,7 @@ icon = ExtResource( 13 )
 flat = true
 icon_align = 1
 
-[node name="Label" type="Label" parent="UIConstruction/Catalogo"]
+[node name="Label" type="Label" parent="Control/Catalogo"]
 margin_left = 59.0
 margin_top = 14.0
 margin_right = 219.0
@@ -161,47 +171,48 @@ custom_fonts/font = SubResource( 5 )
 text = "CATALOGO"
 align = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Catalogo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Catalogo"]
 visible = false
 margin_left = 100.0
 margin_top = 50.0
 margin_right = 249.0
 margin_bottom = 80.0
 
-[node name="cocinatipo2" type="Button" parent="UIConstruction/Catalogo/VBoxContainer"]
+[node name="cocinatipo2" type="Button" parent="Control/Catalogo/VBoxContainer"]
 margin_right = 170.0
 margin_bottom = 20.0
 text = "Cocina Tipo 2 de Octavio"
 
-[node name="camita" type="Button" parent="UIConstruction/Catalogo/VBoxContainer"]
+[node name="camita" type="Button" parent="Control/Catalogo/VBoxContainer"]
 margin_top = 24.0
 margin_right = 170.0
 margin_bottom = 44.0
 text = "Camita de Octavio"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UIConstruction/Catalogo"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Catalogo"]
 margin_left = 13.0
 margin_top = 66.0
 margin_right = 238.0
 margin_bottom = 613.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Catalogo/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Catalogo/ScrollContainer"]
 
-[node name="GridContainer" type="GridContainer" parent="UIConstruction/Catalogo/ScrollContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Control/Catalogo/ScrollContainer/VBoxContainer"]
 script = ExtResource( 7 )
 
-[node name="Proyectos" type="Panel" parent="UIConstruction"]
+[node name="Proyectos" type="Panel" parent="Control"]
 visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -500.0
-margin_bottom = 500.0
+margin_left = 430.0
+margin_top = 120.0
+margin_right = 680.0
+margin_bottom = 1120.0
 custom_styles/panel = SubResource( 6 )
 
-[node name="Label" type="Label" parent="UIConstruction/Proyectos"]
+[node name="Label" type="Label" parent="Control/Proyectos"]
 margin_left = 48.0
 margin_top = 17.0
 margin_right = 219.0
@@ -210,23 +221,23 @@ custom_fonts/font = SubResource( 5 )
 text = "PROYECTOS"
 align = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UIConstruction/Proyectos"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Proyectos"]
 margin_left = 35.0
 margin_top = 62.0
 margin_right = 240.0
 margin_bottom = 613.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIConstruction/Proyectos/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Proyectos/ScrollContainer"]
 
-[node name="GridContainer" type="GridContainer" parent="UIConstruction/Proyectos/ScrollContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Control/Proyectos/ScrollContainer/VBoxContainer"]
 script = ExtResource( 9 )
 
-[node name="BotonProyectos2" type="Button" parent="UIConstruction"]
+[node name="BotonProyectos2" type="Button" parent="Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -155.0
+margin_left = 525.0
 margin_top = 23.0
-margin_right = -86.0
+margin_right = 594.0
 margin_bottom = 86.0
 icon = ExtResource( 4 )
 flat = true
@@ -234,33 +245,40 @@ icon_align = 1
 script = ExtResource( 8 )
 panel_path = NodePath("../Proyectos")
 
-[node name="ButtonModoCons" type="Button" parent="UIConstruction"]
+[node name="ButtonModoCons" type="Button" parent="Control"]
 margin_left = 185.0
 margin_top = 96.0
-margin_right = 197.0
+margin_right = 320.0
 margin_bottom = 116.0
 text = "modo construccion"
 
-[node name="vistaAerea" type="Button" parent="UIConstruction"]
+[node name="vistaAerea" type="Button" parent="Control"]
 margin_left = 184.0
 margin_top = 67.0
 margin_right = 266.0
 margin_bottom = 87.0
 text = "Vista aerea"
 
-[node name="GridMap" type="GridMap" parent="."]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
-visible = false
-mesh_library = ExtResource( 12 )
-__meta__ = {
-"_editor_clip_": 0
-}
+[node name="Colocar" type="Button" parent="Control"]
+margin_left = 52.0
+margin_top = 1149.0
+margin_right = 187.0
+margin_bottom = 1200.0
+text = "Colocar"
 
-[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarIzquierda" to="CamaraOrbit" method="_on_RotarIzquierda_pressed"]
-[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarDerecha" to="CamaraOrbit" method="_on_RotarDerecha_pressed"]
-[connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
-[connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
-[connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
-[connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
-[connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
+[node name="Button" type="Button" parent="Control"]
+margin_left = 214.0
+margin_top = 1156.0
+margin_right = 333.0
+margin_bottom = 1195.0
+text = "Eliminar"
+
+[connection signal="pressed" from="Control/BotoneraRotacion/RotarIzquierda" to="CamaraOrbit" method="_on_RotarIzquierda_pressed"]
+[connection signal="pressed" from="Control/BotoneraRotacion/RotarDerecha" to="CamaraOrbit" method="_on_RotarDerecha_pressed"]
+[connection signal="pressed" from="Control/camita" to="CamaraOrbit" method="_on_camita_pressed"]
+[connection signal="pressed" from="Control/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="Control/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="Control/user" to="Control/user" method="_on_user_pressed"]
+[connection signal="pressed" from="Control/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
+[connection signal="pressed" from="Control/Colocar" to="DynamicRoom" method="_on_Colocar_pressed"]
+[connection signal="pressed" from="Control/Button" to="DynamicRoom" method="_on_Button_pressed"]
