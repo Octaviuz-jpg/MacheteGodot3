@@ -80,14 +80,17 @@ func _input(event):
 			var desde = camera.project_ray_origin(mouse_pos)
 			var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
 			
-			var exclude_array = [ObjectSelector.vista_previa] + _get_all_block_bodies()
+			var exclude_array = [ObjectSelector.vista_previa]
 			var result = get_world().direct_space_state.intersect_ray(desde, hacia, exclude_array, 1)
 
 			var placement_position = null
-			if result and result.collider.is_in_group("suelo"):
-				placement_position = result.position
+			if result:
+				if result.collider.is_in_group("suelo"):
+					placement_position = result.position
+				elif result.collider.is_in_group("blocks"):
+					# Si golpea un bloque, no se coloca el objeto
+					return
 			else:
-				# Fallback to plane intersection, same as in _process
 				var plane = Plane(Vector3.UP, floor_node.translation.y)
 				var intersection = plane.intersects_ray(desde, hacia)
 				if intersection:
@@ -108,11 +111,17 @@ func _process(delta):
 		var mouse_pos = get_viewport().get_mouse_position()
 		var desde = camera.project_ray_origin(mouse_pos)
 		var hacia = desde + camera.project_ray_normal(mouse_pos) * 1000
-		var exclude_array = [ObjectSelector.vista_previa] + _get_all_block_bodies()
+		var exclude_array = [ObjectSelector.vista_previa]
 		var result = get_world().direct_space_state.intersect_ray(desde, hacia, exclude_array, 1)
 
-		if result and result.collider.is_in_group("suelo"):
-			target_position = result.position
+		if result:
+			if result.collider.is_in_group("suelo") or result.collider.is_in_group("blocks"):
+				target_position = result.position
+			else:
+				var plane = Plane(Vector3.UP, floor_node.translation.y)
+				var intersection = plane.intersects_ray(desde, hacia)
+				if intersection:
+					target_position = intersection
 		else:
 			var plane = Plane(Vector3.UP, floor_node.translation.y)
 			var intersection = plane.intersects_ray(desde, hacia)
