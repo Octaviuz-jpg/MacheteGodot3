@@ -6,7 +6,7 @@ var estado_peticion = ""
 
 
 func _on_Cambiar_contrasea_pressed():
-	print("🔘 Botón presionado. Nodo HTTPRequestUpdate existe: ", has_node("HTTPRequestUpdate"))
+	print("🔘 Botón presionado. Nodo HTTPRequestUpdate existe: ", has_node("HTTPRequestUpdate")) 
 	var nueva_contrasena := "1234567"  # Cambia por la contraseña que desees
 	cambiar_contrasena(nueva_contrasena)
 

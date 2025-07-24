@@ -122,6 +122,9 @@ MedidasSingleton="*res://MedidasSingleton.gd"
 ObjectSelector="*res://ObjectSelector.gd"
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
 Utilidad="*res://utilidad.gd"
+<<<<<<<HEADUtilidad="*res://utilidad.gd"
+AuthManager="*res://Scripts/AuthManager.gd"
+SupabaseManager="*res://Scripts/SupabaseManager.gd"
 
 [display]
 
