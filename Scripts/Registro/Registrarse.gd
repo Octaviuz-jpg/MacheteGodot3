@@ -128,9 +128,10 @@ func on_completed_request(result, response_code, headers, body):
 			var user= json_parse_result.result
 			var payload={"username":username.text,"account_id":user.id}
 			save_user(payload)
-			
-			
+						
 	else:
+		errorTexto.text = "Ha ocurrido un error: "+response_code
+		errorTexto.visible = true
 		#all fallar el inicio de sesión
 		print("error: ", response_code)
 
@@ -150,8 +151,17 @@ func save_user(data_payload):
 
 func on_save_request_completed(result, response_code, headers, body):
 	print("save server response: ",response_code)
-	if response_code==201:
+	if response_code==201 or response_code==200:
+		errorTexto.visible=false
+		errorCorreo.visible=false
+		errorCont.visible=false
+		errorConfCont.visible=false
+
+
 		get_tree().change_scene("res://Scenes/Login.tscn")
+	else:
+		errorTexto.text = "Ha ocurrido un error en el servidor"
+		errorTexto.visible = true
 
 
 func get(name):
