@@ -9,11 +9,14 @@ onready var errorTexto:Label=$"../VBoxContainer/VBoxContainer/ErrorTexto"
 onready var errorCorreo:Label=$"../VBoxContainer/VBoxContainer2/ErrorCorreo"
 onready var errorCont:Label=$"../VBoxContainer/VBoxContainer3/ErrorCont"
 onready var errorConfCont:Label=$"../VBoxContainer/VBoxContainer4/ErrorConfCont"
+onready var label_exito: RichTextLabel = $"../Label3"
 
 var env=parse("res://.env")
 var key= get("SUPABASE_KEY")
 
 func _ready():
+	
+	
 	if req:
 		req.connect("request_completed", self, "on_completed_request")
 
@@ -61,6 +64,7 @@ func _on_Registrarse_pressed():
 	if email.text.length()>0 and password.text.length()>5:
 		send_signup_request(email.text,password.text)
 		print("te has registrado felicidades, vuelve a la pestaña login")
+		label_exito.text = "Te has registrado correctamente, por favor verifica tu correo "+ email.text + " para completar la operacion"
 	else:
 		print("Campo vacio, enviar información de registro solicitada")
 	
@@ -128,9 +132,10 @@ func on_completed_request(result, response_code, headers, body):
 			var user= json_parse_result.result
 			var payload={"username":username.text,"account_id":user.id}
 			save_user(payload)
-			
-			
+						
 	else:
+		errorConfCont.text = "Ha ocurrido un error: " + str(response_code)
+		errorConfCont.visible = true
 		#all fallar el inicio de sesión
 		print("error: ", response_code)
 
@@ -150,8 +155,17 @@ func save_user(data_payload):
 
 func on_save_request_completed(result, response_code, headers, body):
 	print("save server response: ",response_code)
-	if response_code==201:
+	if response_code==201 or response_code==200:
+		errorTexto.visible=false
+		errorCorreo.visible=false
+		errorCont.visible=false
+		errorConfCont.visible=false
+
+
 		get_tree().change_scene("res://Scenes/Login.tscn")
+	else:
+		errorTexto.text = "Ha ocurrido un error en el servidor"
+		errorTexto.visible = true
 
 
 func get(name):

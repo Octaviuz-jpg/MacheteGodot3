@@ -4,15 +4,17 @@ onready var altura = $"%alturaText"
 onready var profundidad = $"%profundidadText"
 onready var anchura = $"%anchuraText"
 onready var error_label = $"%ErrorLabel"
+
 onready var viewport_container = $"%ViewportContainer"
 onready var viewport_3d = $"%Viewport"
-onready var input_ui_container = $"%CenterContainer"
+#onready var input_ui_container = $"%Panel"
 onready var ui_bars_canvas_layer = $"%CanvasLayer_UI_Bars"
 onready var Accept = $"%CanvasLayer_UI_Bars/AcceptDialog"
 onready var nombre_input = $"CanvasLayer_UI_Bars/AcceptDialog/LineEdit"
 
 var room_3d_scene_res = preload("res://Node3D.tscn")
 var _camera_orbit_instance: Spatial = null
+onready var mi_panel = get_node("Panel")
 
 func _ready():
 	viewport_container.visible = false
@@ -68,7 +70,8 @@ func _on_Button_pressed():
 		return
 	
 	# Cambiar visibilidad de elementos UI
-	input_ui_container.visible = false
+	#input_ui_container.visible = false
+	mi_panel.visible = false
 	viewport_container.visible = true
 	ui_bars_canvas_layer.visible = true  # Mostrar barras de herramientas
 	
