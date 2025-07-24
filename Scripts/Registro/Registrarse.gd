@@ -122,6 +122,7 @@ func on_completed_request(result, response_code, headers, body):
 		# print(response_body_string)
 		var json_parse_result = JSON.parse(response_body_string)
 
+
 		if json_parse_result.error == OK:
 			print("parsed")
 			var user= json_parse_result.result
@@ -179,3 +180,4 @@ func parse(filename):
 		if(o.size() == 2): # only check valid lines
 			_env[o[0]] = o[1].lstrip("\"").rstrip("\"");
 	return _env;
+

@@ -56,7 +56,11 @@ func _on_auth_success(user: SupabaseUser):
 	var new_scene_path = "res://Scenes/Menu.tscn"
 	var new_scene_packed = load(new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
-
+	var jwt = obtener_token_jwt()
+	if jwt != "":
+		guardar_token(jwt)
+	else:
+		print("No se pudo obtener token JWT")
 	# 2. Obtener la escena actual (la que queremos liberar)
 	var current_scene_node = get_tree().current_scene
 
@@ -75,3 +79,24 @@ func _on_auth_success(user: SupabaseUser):
 # Al fallar el inicio de sesión
 func _on_auth_error(error : SupabaseAuthError):
 	print("Supabase Auth Error: ", error.type)
+
+
+func guardar_token(token: String) -> void:
+	var file = File.new()
+	if file.open("user://token.jwt", File.WRITE) == OK:
+		file.store_line(token)
+		file.close()
+		print("📂 Ruta real: ", ProjectSettings.globalize_path("user://token.jwt"))
+
+		print("💾 Token guardado en user://token.jwt")
+	else:
+		print("❌ No se pudo guardar el token.")
+
+func obtener_token_jwt() -> String:
+	var bearer_header = Supabase.auth.get("_bearer")
+	if bearer_header and bearer_header.size() > 0:
+		# bearer_header es un array con el string "Authorization: Bearer <token>"
+		var bearer_string = bearer_header[0]
+		# Extraer solo el token (quitar "Authorization: Bearer ")
+		return bearer_string.replace("Authorization: Bearer ", "")
+	return ""
