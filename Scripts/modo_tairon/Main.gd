@@ -181,6 +181,8 @@ func select_block(block):
 	scale_slider.visible = true
 	scale_slider.value = selected_block.scale.x # Sincronizar con escala actual
 	rotate_button.visible = true # Mostrar botón de rotación
+	
+	
 
 
 func deselect_block():

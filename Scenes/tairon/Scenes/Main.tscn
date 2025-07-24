@@ -12,7 +12,7 @@
 [ext_resource path="res://materials/CreateButton.tres" type="StyleBox" id=10]
 [ext_resource path="res://materials/RotateButton.tres" type="StyleBox" id=11]
 [ext_resource path="res://materials/DeleteButton.tres" type="StyleBox" id=12]
-[ext_resource path="res://Scripts/SupabaseManager.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/tairon/assets/menu_10308940.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/SceneStateManager.gd" type="Script" id=14]
 
 [sub_resource type="PlaneMesh" id=2]
@@ -173,10 +173,72 @@ custom_styles/pressed = ExtResource( 11 )
 custom_styles/normal = ExtResource( 11 )
 icon = ExtResource( 9 )
 
+[node name="MenuAmvorguesa" type="TextureButton" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 13 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+margin_left = 68.0
+margin_top = 1.0
+margin_right = 227.0
+margin_bottom = 87.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+margin_top = 16.0
+margin_right = 159.0
+margin_bottom = 67.0
+
+[node name="CambiarColor" type="Button" parent="CanvasLayer/Panel/VBoxContainer"]
+margin_right = 159.0
+margin_bottom = 20.0
+text = "Cambiar Color"
+
+[node name="CambiarTextura" type="Button" parent="CanvasLayer/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 159.0
+margin_bottom = 44.0
+text = "Cambiar Textura"
+
+[node name="Panel2" type="Panel" parent="CanvasLayer"]
+margin_left = 70.0
+margin_top = 2.0
+margin_right = 297.0
+margin_bottom = 141.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel2"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/Panel2"]
+margin_left = 29.0
+margin_top = 9.0
+margin_right = 191.0
+margin_bottom = 80.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/Panel2"]
+margin_left = 28.0
+margin_top = 50.0
+margin_right = 197.0
+margin_bottom = 71.0
+
+[node name="Aplicar" type="Button" parent="CanvasLayer/Panel2"]
+margin_left = 129.0
+margin_top = 90.0
+margin_right = 193.0
+margin_bottom = 111.0
+text = "Aplicar"
+
+[node name="QuitarTextura" type="Button" parent="CanvasLayer/Panel2"]
+margin_left = 33.0
+margin_top = 90.0
+margin_right = 93.0
+margin_bottom = 110.0
+text = "Limpiar"
+
 [node name="BlocksContainer" type="Spatial" parent="."]
 
 [node name="SupabaseManager" type="Node" parent="."]
-script = ExtResource( 13 )
 
 [node name="SceneStateManager" type="Node" parent="."]
 script = ExtResource( 14 )
@@ -189,3 +251,7 @@ script = ExtResource( 14 )
 [connection signal="button_up" from="CanvasLayer/left" to="." method="_on_left_button_up"]
 [connection signal="button_down" from="CanvasLayer/down" to="." method="_on_down_button_down"]
 [connection signal="button_up" from="CanvasLayer/down" to="." method="_on_down_button_up"]
+[connection signal="pressed" from="CanvasLayer/MenuAmvorguesa" to="CanvasLayer" method="_on_MenuAmvorguesa_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/CambiarColor" to="CanvasLayer" method="_on_CambiarColor_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/CambiarTextura" to="CanvasLayer" method="_on_CambiarTextura_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel2/Aplicar" to="CanvasLayer" method="_on_Aplicar_pressed"]

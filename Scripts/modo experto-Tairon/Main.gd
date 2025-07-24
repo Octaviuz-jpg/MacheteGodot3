@@ -34,11 +34,17 @@ func _ready():
 		print("✅ RayCast listo.")    
 			
 	# Cargar el material original    
-	var original_material = preload("res://Scenes/tairon/Materials/selectedBlock.tres")    
+	var original_material = preload("res://Scenes/tairon/Materials/Block.tres")    
+	# Crear una copia para selección con brillo    
 	selected_material = original_material.duplicate()    
 	selected_material.emission_enabled = true    
-	selected_material.emission = Color(0.1, 0.1, 0.1)     
-	
+	selected_material.emission = Color(0.5, 0.5, 0.5)    
+	# Ajustar intensidad según la plataforma    
+	if OS.get_name() == "Android":    
+		selected_material.emission_energy = 0.5  # Menos intenso en Android    
+	else:    
+		selected_material.emission_energy = 0.5  # Intensidad normal en PC  
+		
 	# Conectar controles de UI    
 	delete_button.connect("pressed", self, "_on_delete_button_pressed")    
 	scale_slider.connect("value_changed", self, "_on_scale_slider_changed")    
@@ -142,16 +148,15 @@ func select_block(block):
 	selected_block = block        
 	var mesh_instance = block.get_node("StaticBody/MeshInstance")        
 	mesh_instance.material_override = selected_material        
-	
+		
 	# Mostrar controles de UI    
 	delete_button.visible = true    
 	scale_slider.visible = true      
 	scale_slider.value = selected_block.scale.x  # Sincronizar con escala actual    
 	rotate_button.visible = true  # Mostrar botón de rotación  
-	$CanvasLayer/MenuAmvorguesa.visible = true #Muestra el menu de texturas
 	
-	$CanvasLayer.set_bloque(block) # Esto actualiza crosshair.gd
-	
+	$CanvasLayer.set_bloque(block) #actualiza el Crosshair
+		
 func deselect_block():        
 	if selected_block != null:        
 		var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")          
@@ -161,8 +166,7 @@ func deselect_block():
 		# Ocultar controles de UI    
 		delete_button.visible = false    
 		scale_slider.visible = false    
-		rotate_button.visible = false  # Ocultar botón de rotación
-		$CanvasLayer/MenuAmvorguesa.visible = false #Oculta el menu de texturas 
+		rotate_button.visible = false  # Ocultar botón de rotación  
 	
 func _on_scale_slider_changed(value):      
 	if selected_block != null:      
@@ -243,46 +247,6 @@ func delete_block(block):
 	click_count = 0      
 	last_clicked_block = null    
 	
-	
-func cambiar_color_bloque_seleccionado(color: Color):
-	if selected_block == null:
-		return
-
-	var nuevo_material = SpatialMaterial.new()
-	nuevo_material.albedo_color = color
-	nuevo_material.emission_enabled = true
-	nuevo_material.emission = color * 0.5
-
-	# Evita mostrar cualquier textura previa
-	nuevo_material.albedo_texture = null
-	nuevo_material.uv1_triplanar = false
-
-	var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")
-	mesh_instance.material_override = nuevo_material
-
-	
-func cambiar_textura_bloque_seleccionado(textura: Texture):
-	if selected_block == null:
-		return
-
-	var mesh_instance = selected_block.get_node("StaticBody/MeshInstance")
-
-	var nuevo_material = SpatialMaterial.new()
-	nuevo_material.albedo_texture = textura
-	nuevo_material.uv1_triplanar = true
-	nuevo_material.uv1_scale = Vector3(5, 5, 0.25)
-	nuevo_material.flags_unshaded = false
-	nuevo_material.emission_enabled = false
-
-	mesh_instance.material_override = nuevo_material
-
-
-func actualizar_material_bloque(block, new_material):
-	if selected_block == block:
-		# Actualizar materiales de selección (sin afectar otros bloques)
-		var mesh_instance = block.get_node("StaticBody/MeshInstance")
-		mesh_instance.set_surface_material(0, new_material)
-	
 # FUNCIONES DE ARRASTRE    
 func start_drag(collision_point):        
 	is_dragging = true          
@@ -294,9 +258,11 @@ func start_drag(collision_point):
 	drag_offset = selected_block.translation - snapped_point        
 	drag_offset.y = 0  # Eliminar cualquier componente Y del offset        
 			
-	# Cambiar material para indicar arrastre   
-	var drag_material = preload("res://Scenes/tairon/Materials/selectedBlock.tres")            
-	drag_material.albedo_color = Color.bisque             
+	# Cambiar material para indicar arrastre        
+	var drag_material = SpatialMaterial.new()        
+	drag_material.albedo_color = Color.cyan       
+	drag_material.emission_enabled = true        
+	drag_material.emission = Color.cyan * 0.5        
 	drag_material.flags_transparent = true        
 	drag_material.albedo_color.a = 0.7        
 			
