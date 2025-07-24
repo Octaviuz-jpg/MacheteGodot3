@@ -162,7 +162,7 @@ placeholder_alpha = 0.44
 [node name="ErrorTexto" type="Label" parent="Panel/VBoxContainer/VBoxContainer"]
 visible = false
 margin_top = 100.0
-margin_right = 512.0
+margin_right = 559.0
 margin_bottom = 132.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 28 )
@@ -194,7 +194,7 @@ placeholder_alpha = 0.44
 [node name="ErrorCorreo" type="Label" parent="Panel/VBoxContainer/VBoxContainer2"]
 visible = false
 margin_top = 100.0
-margin_right = 512.0
+margin_right = 559.0
 margin_bottom = 132.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 29 )
@@ -258,7 +258,7 @@ placeholder_alpha = 0.44
 [node name="ErrorConfCont" type="Label" parent="Panel/VBoxContainer/VBoxContainer4"]
 visible = false
 margin_top = 100.0
-margin_right = 559.0
+margin_right = 512.0
 margin_bottom = 132.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 30 )

@@ -22,3 +22,7 @@ func _load_user_data_example(name: String, email: String):
 		nombre_usuario.text = name
 	if correo_usuario: 
 		correo_usuario.text = email
+
+
+func _on_Cambiar_contrasea_pressed():
+	pass # Replace with function body.
