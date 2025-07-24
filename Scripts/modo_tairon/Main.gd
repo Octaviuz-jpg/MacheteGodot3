@@ -51,17 +51,6 @@ func _ready():
 	else:
 		print("✅ RayCast listo.")
 
-	# Cargar el material original
-	var original_material = preload("res://materials/Block.tres")
-	# Crear una copia para selección con brillo
-	selected_material = original_material.duplicate()
-	selected_material.emission_enabled = true
-	selected_material.emission = Color(0.5, 0.5, 0.5)
-	# Ajustar intensidad según la plataforma
-	if OS.get_name() == "Android":
-		selected_material.emission_energy = 0.5 # Menos intenso en Android
-	else:
-		selected_material.emission_energy = 0.5 # Intensidad normal en PC
 
 	# Conectar controles de UI
 	delete_button.connect("pressed", self, "_on_delete_button_pressed")
@@ -186,7 +175,7 @@ func select_block(block):
 	selected_block = block
 	var mesh_instance = block.get_node("StaticBody/MeshInstance")
 	mesh_instance.material_override = selected_material
-
+	
 	# Mostrar controles de UI
 	delete_button.visible = true
 	scale_slider.visible = true
@@ -301,10 +290,8 @@ func start_drag(collision_point):
 	drag_offset.y = 0 # Eliminar cualquier componente Y del offset
 
 	# Cambiar material para indicar arrastre
-	var drag_material = SpatialMaterial.new()
-	drag_material.albedo_color = Color.cyan
-	drag_material.emission_enabled = true
-	drag_material.emission = Color.cyan * 0.5
+	var drag_material = preload("res://materials/selectedBlock.tres")
+	drag_material.albedo_color = Color.bisque
 	drag_material.flags_transparent = true
 	drag_material.albedo_color.a = 0.7
 
