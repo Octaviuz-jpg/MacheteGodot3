@@ -119,11 +119,12 @@ config/icon="res://Assets/Img/icono.png"
 [autoload]
 
 MedidasSingleton="*res://MedidasSingleton.gd"
+Utilidad="*res://utilidad.gd"
 ObjectSelector="*res://ObjectSelector.gd"
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
-Utilidad="*res://utilidad.gd"
 <<<<<<<HEADUtilidad="*res://utilidad.gd"
 AuthManager="*res://Scripts/AuthManager.gd"
+GestorSeleccion="*res://GestorSeleccion.gd"
 SupabaseManager="*res://Scripts/SupabaseManager.gd"
 Popups1="*res://Scenes/popups/Popups1.gd"
 Popups="*res://Scenes/popups/Popups.tscn"

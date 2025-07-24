@@ -1,0 +1,283 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Control.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Img/volver.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/sub-menu/volver_a_menu.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
+[ext_resource path="res://Assets/IconTools/zoom-in.png" type="Texture" id=7]
+[ext_resource path="res://Assets/IconTools/ruler.png" type="Texture" id=8]
+[ext_resource path="res://Assets/IconTools/undo.png" type="Texture" id=9]
+[ext_resource path="res://Assets/IconTools/zoom-out.png" type="Texture" id=10]
+[ext_resource path="res://Assets/IconTools/redo.png" type="Texture" id=11]
+[ext_resource path="res://Assets/IconTools/save.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Assets/Img/baseOctavio.png" type="Texture" id=14]
+
+[sub_resource type="Gradient" id=11]
+interpolation_mode = 1
+offsets = PoolRealArray( 0.374302 )
+colors = PoolColorArray( 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+extra_spacing_bottom = 10
+font_data = ExtResource( 13 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.160784, 0.333333, 0.372549, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = 8.0
+
+[node name="PanelPresentación" type="Panel" parent="CenterContainer"]
+margin_left = 360.0
+margin_top = 640.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelPresentación"]
+margin_left = 351.0
+margin_top = -639.0
+margin_right = 1630.0
+margin_bottom = 85.0001
+rect_rotation = 89.7605
+texture = SubResource( 12 )
+expand = true
+
+[node name="Escena1#Elementografico" type="Sprite" parent="CenterContainer/PanelPresentación"]
+position = Vector2( -91, 108 )
+scale = Vector2( 0.62934, 0.551591 )
+texture = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelPresentación"]
+unique_name_in_owner = true
+margin_left = -117.0
+margin_top = -197.0
+margin_right = 272.0
+margin_bottom = 413.0
+custom_constants/separation = 100
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+margin_right = 389.0
+margin_bottom = 42.0
+
+[node name="anchura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
+margin_right = 327.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Anchura:"
+
+[node name="anchuraText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 331.0
+margin_right = 389.0
+margin_bottom = 42.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+margin_top = 142.0
+margin_right = 389.0
+margin_bottom = 184.0
+
+[node name="profundidad" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
+margin_right = 327.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Profundidad"
+
+[node name="profundidadText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 331.0
+margin_right = 389.0
+margin_bottom = 42.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+margin_top = 284.0
+margin_right = 389.0
+margin_bottom = 326.0
+
+[node name="altura" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
+margin_right = 327.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.301961, 0.529412, 0.615686, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Altura: "
+valign = 1
+
+[node name="alturaText" type="LineEdit" parent="CenterContainer/PanelPresentación/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 331.0
+margin_right = 389.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+margin_top = 426.0
+margin_right = 389.0
+margin_bottom = 468.0
+custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "generar"
+
+[node name="ErrorLabel" type="Label" parent="CenterContainer/PanelPresentación/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 568.0
+margin_right = 389.0
+margin_bottom = 610.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 7 )
+
+[node name="volver" type="Button" parent="CenterContainer/PanelPresentación"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -338.0
+margin_top = -620.0
+margin_right = 174.0
+margin_bottom = -108.0
+rect_scale = Vector2( 0.12, 0.12 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 10 )
+icon = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="BaseOctavio" type="Sprite" parent="CenterContainer/PanelPresentación"]
+position = Vector2( -112, -413 )
+scale = Vector2( 0.767578, 0.773438 )
+texture = ExtResource( 14 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+unique_name_in_owner = true
+size = Vector2( 720, 1280 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CanvasLayer_UI_Bars" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="BackgroundBottomBar" type="Panel" parent="CanvasLayer_UI_Bars"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -67.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 13 )
+
+[node name="BottomBar" type="HBoxContainer" parent="CanvasLayer_UI_Bars/BackgroundBottomBar"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -67.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="ZoomIn" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
+margin_left = 89.0
+margin_right = 137.0
+margin_bottom = 67.0
+icon = ExtResource( 7 )
+flat = true
+
+[node name="ZoomOut" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
+margin_left = 187.0
+margin_right = 236.0
+margin_bottom = 67.0
+icon = ExtResource( 10 )
+flat = true
+
+[node name="Undo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+margin_left = 286.0
+margin_right = 335.0
+margin_bottom = 67.0
+icon = ExtResource( 9 )
+flat = true
+
+[node name="Redo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+margin_left = 385.0
+margin_right = 434.0
+margin_bottom = 67.0
+icon = ExtResource( 11 )
+flat = true
+
+[node name="Meassures" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+margin_left = 484.0
+margin_right = 533.0
+margin_bottom = 67.0
+icon = ExtResource( 8 )
+flat = true
+
+[node name="Save" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+unique_name_in_owner = true
+margin_left = 583.0
+margin_right = 631.0
+margin_bottom = 67.0
+icon = ExtResource( 12 )
+flat = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer_UI_Bars"]
+unique_name_in_owner = true
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Alerta!"
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer_UI_Bars/AcceptDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 82.0
+margin_bottom = 32.0
+
+[connection signal="pressed" from="CenterContainer/PanelPresentación/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelPresentación/volver" to="CenterContainer/PanelPresentación/volver" method="_on_volver_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_ZoomIn_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_ZoomOut_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/Save" to="." method="_on_Save_pressed"]
+[connection signal="confirmed" from="CanvasLayer_UI_Bars/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
