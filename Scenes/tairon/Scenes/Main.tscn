@@ -1,17 +1,19 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scenes/tairon/Scripts/Camera.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/tairon/Scripts/Main.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/tairon/Scripts/Crosshair.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/modo_tairon/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/modo_tairon/Main.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/modo_tairon/Crosshair.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/tairon/assets/basura.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/tairon/Materials/Button.tres" type="Theme" id=5]
+[ext_resource path="res://materials/Button.tres" type="Theme" id=5]
 [ext_resource path="res://Scenes/tairon/assets/piso fino.jpg" type="Texture" id=6]
 [ext_resource path="res://Scenes/tairon/assets/anadir.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/tairon/assets/kindpng_4853972.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/tairon/assets/gira-a-la-derecha.png" type="Texture" id=9]
-[ext_resource path="res://Scenes/tairon/Materials/CreateButton.tres" type="StyleBox" id=10]
-[ext_resource path="res://Scenes/tairon/Materials/RotateButton.tres" type="StyleBox" id=11]
-[ext_resource path="res://Scenes/tairon/Materials/DeleteButton.tres" type="StyleBox" id=12]
+[ext_resource path="res://materials/CreateButton.tres" type="StyleBox" id=10]
+[ext_resource path="res://materials/RotateButton.tres" type="StyleBox" id=11]
+[ext_resource path="res://materials/DeleteButton.tres" type="StyleBox" id=12]
+[ext_resource path="res://Scripts/SupabaseManager.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/SceneStateManager.gd" type="Script" id=14]
 
 [sub_resource type="PlaneMesh" id=2]
 
@@ -172,6 +174,12 @@ custom_styles/normal = ExtResource( 11 )
 icon = ExtResource( 9 )
 
 [node name="BlocksContainer" type="Spatial" parent="."]
+
+[node name="SupabaseManager" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="SceneStateManager" type="Node" parent="."]
+script = ExtResource( 14 )
 
 [connection signal="button_down" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_button_down"]
 [connection signal="button_up" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_button_up"]
