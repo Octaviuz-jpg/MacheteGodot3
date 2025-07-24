@@ -26,7 +26,7 @@ func _on_inicio_pressed():
 	
 	#Validación para mandar contenido del correo
 	if email.text.length() ==0:
-		errorUsuario.text="Ingrese su usuario"
+		errorUsuario.text="Ingrese su correo"
 		errorUsuario.visible=true
 	else:
 		errorUsuario.visible=false
