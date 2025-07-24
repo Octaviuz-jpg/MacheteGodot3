@@ -1,9 +1,10 @@
 extends Button
 
-func _on_Volver_pressed():
-	
+
+
+func _on_OkMenuUduario_pressed():
 	var new_scene_path = "res://Scenes/perfil_Usuario.tscn"
-	var new_scene_packed = load(new_scene_path)
+	var new_scene_packed = load (new_scene_path)
 	var new_scene_instance = new_scene_packed.instance()
 
 	# 2. Obtener la escena actual (la que queremos liberar)
@@ -19,3 +20,4 @@ func _on_Volver_pressed():
 
 	# 5. Establecer la nueva escena como la escena principal del árbol
 	get_tree().current_scene = new_scene_instance
+
