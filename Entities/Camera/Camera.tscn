@@ -4,3 +4,8 @@
 
 [node name="Camera" type="Camera"]
 script = ExtResource( 1 )
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+exclude_parent = false
+collision_mask = 3
