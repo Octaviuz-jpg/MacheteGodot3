@@ -329,6 +329,7 @@ custom_fonts/font = SubResource( 10 )
 custom_styles/read_only = SubResource( 11 )
 custom_styles/focus = SubResource( 11 )
 custom_styles/normal = SubResource( 11 )
+secret = true
 placeholder_alpha = 0.44
 
 [node name="ErrorCont" type="Label" parent="Panel/VBoxContainer/VBoxContainer2"]

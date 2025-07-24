@@ -14,27 +14,32 @@ func _ready():
 	AuthManager.connect("login_failed", self, "_on_login_failed")
 
 
+
+
 func _on_inicio_pressed():
 	print("Login button pressed!")
 	var entered_email
 	var entered_password 
 	
+	
+	
 	#Validación para mandar contenido del correo
 	if email.text.length() ==0:
+		Popups.PopAbrirE("ERROR: Ingrese su correo electronico, antes de continuar por favor")
 		errorUsuario.text="Ingrese su correo"
 		errorUsuario.visible=true
+		
 	else:
 		errorUsuario.visible=false
 		
 	#Validación para mandar contenido del password
 	if password.text.length() ==0:
+		Popups.PopAbrirE("ERROR: Ingrese su contraseña, antes de continuar por favor")
 		errorCont.text="Ingrese su contraseña"
 		errorCont.visible=true
 	else:
 		errorCont.visible=false
 	
-	#Si se ingresan datos en los campos de email y passworod  se mandará a Supabase 
-	# para realizar la autenticacion de usuario
 	
 	if email.text.length()>0 and password.text.length()>0:
 		entered_email = email.text
@@ -45,8 +50,6 @@ func _on_inicio_pressed():
 		AuthManager.login(email.text, password.text)
 	else:
 		print("Campo vacio, enviar información de usuario solicitada")
-
-
 
 # Al fallar el inicio de sesión
 func _on_auth_error(error : SupabaseAuthError):
