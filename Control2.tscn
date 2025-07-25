@@ -4,10 +4,10 @@
 [ext_resource path="res://Assets/Img/volver.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/sub-menu/volver_a_menu.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
-[ext_resource path="res://Assets/IconTools/zoom-in.png" type="Texture" id=7]
+[ext_resource path="res://Assets/IconTools/lock.png" type="Texture" id=5]
+[ext_resource path="res://Assets/IconTools/view.png" type="Texture" id=6]
 [ext_resource path="res://Assets/IconTools/ruler.png" type="Texture" id=8]
 [ext_resource path="res://Assets/IconTools/undo.png" type="Texture" id=9]
-[ext_resource path="res://Assets/IconTools/zoom-out.png" type="Texture" id=10]
 [ext_resource path="res://Assets/IconTools/redo.png" type="Texture" id=11]
 [ext_resource path="res://Assets/IconTools/save.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=13]
@@ -109,7 +109,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="BottomBar" type="HBoxContainer" parent="CanvasLayer_UI_Bars/BackgroundBottomBar"]
+[node name="BottomBar" type="HBoxContainer" parent="CanvasLayer_UI_Bars/BackgroundBottomBar" groups=["ui"]]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -119,30 +119,30 @@ size_flags_stretch_ratio = 0.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="ZoomIn" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="trancarCamara" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 unique_name_in_owner = true
 margin_left = 89.0
 margin_right = 137.0
 margin_bottom = 67.0
-icon = ExtResource( 7 )
+icon = ExtResource( 5 )
 flat = true
 
-[node name="ZoomOut" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="vistaAerea" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 unique_name_in_owner = true
 margin_left = 187.0
 margin_right = 236.0
 margin_bottom = 67.0
-icon = ExtResource( 10 )
+icon = ExtResource( 6 )
 flat = true
 
-[node name="Undo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="RotarIzquierda" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 286.0
 margin_right = 335.0
 margin_bottom = 67.0
 icon = ExtResource( 9 )
 flat = true
 
-[node name="Redo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="RotarDerecha" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 385.0
 margin_right = 434.0
 margin_bottom = 67.0
@@ -338,8 +338,10 @@ position = Vector2( 317, 229 )
 scale = Vector2( 0.767578, 0.773438 )
 texture = ExtResource( 14 )
 
-[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_ZoomIn_pressed"]
-[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_ZoomOut_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/trancarCamara" to="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/trancarCamara" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/vistaAerea" to="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/vistaAerea" method="_on_vistaAerea_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/RotarIzquierda" to="." method="_on_RotarIzquierda_pressed"]
+[connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/RotarDerecha" to="." method="_on_RotarDerecha_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/Save" to="." method="_on_Save_pressed"]
 [connection signal="confirmed" from="CanvasLayer_UI_Bars/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]

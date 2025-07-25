@@ -64,3 +64,7 @@ func generar_grid_map_centrado(total_width: int, total_height: int, total_depth:
 
 func _on_vistaAerea_pressed():
 	pass # Replace with function body.
+
+
+func _on_trancarCamara_pressed():
+	pass # Replace with function body.

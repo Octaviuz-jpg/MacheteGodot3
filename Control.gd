@@ -73,7 +73,7 @@ func _on_Button_pressed():
 	#input_ui_container.visible = false
 	mi_panel.visible = false
 	viewport_container.visible = true
-	ui_bars_canvas_layer.visible = true  # Mostrar barras de herramientas
+	#ui_bars_canvas_layer.visible = true  # Mostrar barras de herramientas
 	
 	# Debug importante
 	print("Elementos visibles:")
@@ -118,3 +118,12 @@ func _on_AcceptDialog_confirmed():
 	
 	if SistemaGuardado.guardar_proyecto(nombre, viewport_3d.get_child(0)):
 		print("Proyecto guardado: ", nombre)
+
+func _on_RotarIzquierda_pressed():
+	if ObjectSelector.vista_previa:
+		ObjectSelector.vista_previa.rotate_y(deg2rad(-15))
+
+
+func _on_RotarDerecha_pressed():
+	if ObjectSelector.vista_previa:
+		ObjectSelector.vista_previa.rotate_y(deg2rad(15))
