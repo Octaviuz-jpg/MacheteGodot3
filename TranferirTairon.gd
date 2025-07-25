@@ -5,11 +5,14 @@ onready var blocks_container: Spatial = $BlocksContainer
 onready var objects_container: Spatial = $ObjectsContainer
 onready var back_button: Button = $CanvasLayer/BackButton
 onready var add_object_button: Button = $CanvasLayer/AddObjectButton
+onready var delete_object_button: Button = $CanvasLayer/DeleteObjectButton
 onready var camera: Camera = $Camera
 onready var floor_node: StaticBody = $Floor
 
 # --- LÓGICA DE OBJETOS ---
 const BlockScene = preload("res://Scenes/tairon/Scenes/Block.tscn")
+var selected_object = null
+var original_materials = {} # Para restaurar el color original al deseleccionar
 
 func _ready():
 	# --- VALIDACIÓN DE NODOS ---
@@ -17,15 +20,19 @@ func _ready():
 	if not objects_container: push_error("ERROR: No se encontró 'ObjectsContainer'")
 	if not back_button: push_error("ERROR: No se encontró 'BackButton'")
 	if not add_object_button: push_error("ERROR: No se encontró 'AddObjectButton'")
+	if not delete_object_button: push_error("ERROR: No se encontró 'DeleteObjectButton'")
 	
 	# --- CONEXIONES DE SEÑALES ---
 	back_button.connect("pressed", self, "_on_back_button_pressed")
 	add_object_button.connect("pressed", self, "_on_add_object_button_pressed")
+	delete_object_button.connect("pressed", self, "_on_delete_object_button_pressed")
 
 	# --- INICIALIZACIÓN ---
 	load_tairon_structure()
 	ObjectSelector.objeto_seleccionado = ""
 	ObjectSelector.vista_previa = null
+	delete_object_button.visible = false
+
 
 func load_tairon_structure():
 	print("Iniciando carga de estructura Tairon...")
@@ -58,16 +65,25 @@ func _on_back_button_pressed():
 		ObjectSelector.vista_previa.queue_free()
 		ObjectSelector.vista_previa = null
 		
+	deselect_object()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene("res://Node3D.tscn")
 
 func _on_add_object_button_pressed():
+	deselect_object()
 	ObjectSelector.objeto_seleccionado = "res://Objeto2/nevera_ejecutiva.tscn"
 	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func _on_delete_object_button_pressed():
+	if selected_object:
+		selected_object.queue_free()
+		selected_object = null
+		original_materials.clear()
+		delete_object_button.visible = false
 
-# --- LÓGICA DE COLOCACIÓN DE OBJETOS ---
+
+# --- LÓGICA DE COLOCACIÓN Y SELECCIÓN DE OBJETOS ---
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
@@ -101,6 +117,38 @@ func _input(event):
 				ObjectSelector.vista_previa.queue_free()
 				ObjectSelector.vista_previa = null
 				ObjectSelector.objeto_seleccionado = ""
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		if not ObjectSelector.vista_previa:
+			# Handle object selection for deletion
+			var mouse_pos = get_viewport().get_mouse_position()
+			var from = camera.project_ray_origin(mouse_pos)
+			var to = from + camera.project_ray_normal(mouse_pos) * 1000
+			var space_state = get_world().direct_space_state
+			var result = space_state.intersect_ray(from, to, [self])
+
+			if result:
+				var node = result.collider
+				var object_root = null
+				
+				var current = node
+				while current != null:
+					if current.get_parent() == objects_container:
+						object_root = current
+						break
+					current = current.get_parent()
+
+				if object_root:
+					if selected_object == object_root:
+						deselect_object()
+					else:
+						select_object(object_root)
+				else:
+					deselect_object()
+			else:
+				deselect_object()
+
 
 func _process(delta):
 	if ObjectSelector.objeto_seleccionado != "" and not ObjectSelector.vista_previa:
@@ -177,7 +225,54 @@ func crear_vista_previa(ruta: String) -> Node:
 	add_child(obj)
 	return obj
 
-# --- FUNCIONES AUXILIARES ---
+# --- FUNCIONES AUXILIARES Y DE SELECCIÓN ---
+
+func select_object(object):
+	if selected_object:
+		deselect_object()
+
+	selected_object = object
+	delete_object_button.visible = true
+	_set_object_color(selected_object, Color(1, 0.5, 0.5)) # Highlight in light red
+
+func deselect_object():
+	if not selected_object:
+		return
+		
+	_restore_object_color(selected_object)
+	
+	selected_object = null
+	original_materials.clear()
+	delete_object_button.visible = false
+
+func _set_object_color(node, color):
+	if node is MeshInstance:
+		if not original_materials.has(node):
+			original_materials[node] = []
+			for i in range(node.get_surface_material_count()):
+				original_materials[node].append(node.get_surface_material(i))
+
+		for i in range(node.get_surface_material_count()):
+			var mat = node.get_surface_material(i)
+			if mat and mat is SpatialMaterial:
+				var new_mat = mat.duplicate()
+				new_mat.albedo_color = color
+				node.set_surface_material(i, new_mat)
+
+	for child in node.get_children():
+		_set_object_color(child, color)
+
+func _restore_object_color(node):
+	if node is MeshInstance:
+		if original_materials.has(node):
+			var materials = original_materials[node]
+			for i in range(node.get_surface_material_count()):
+				if i < materials.size():
+					node.set_surface_material(i, materials[i])
+			original_materials.erase(node)
+
+	for child in node.get_children():
+		_restore_object_color(child)
 
 func hay_colision_con_pared(objeto: Node) -> bool:
 	var space_state = get_world().direct_space_state
