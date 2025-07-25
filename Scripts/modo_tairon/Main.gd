@@ -3,7 +3,12 @@ extends Spatial
 
 var block_scene = preload("res://Scenes/tairon/Scenes/Block.tscn")
 
-onready var raycast = $Camera/RayCast
+export (NodePath) var raycast_path : NodePath
+onready var raycast = get_node(raycast_path) as RayCast
+
+export (NodePath) var camera_path : NodePath
+onready var camera = get_node(camera_path) as Camera
+
 onready var blocks_container = $BlocksContainer
 
 # Variables para selección
@@ -121,14 +126,10 @@ func is_click_on_ui(click_position: Vector2) -> bool:
 
 
 func handle_left_click(touch_position = null):
-	var camera = $Camera
-	var raycast = $Camera/RayCast
-
-	# Si se proporciona posición de touch, usar raycast desde esa posición
 	if touch_position != null:
 		var from = camera.project_ray_origin(touch_position)
 		var to = from + camera.project_ray_normal(touch_position) * 100
-
+		print("Raycast desde posición táctil: ", from, " a ", to)
 		var space_state = get_world().direct_space_state
 		var result = space_state.intersect_ray(from, to)
 
@@ -207,11 +208,12 @@ func _on_delete_button_pressed():
 
 
 func _on_create_button_pressed():
-	var raycast = $Camera/RayCast
+	print("Raycast activo: ", raycast.is_enabled())
 	var crosshair = $CanvasLayer/Label # El crosshair "+"
 	# Verificar si el raycast está detectando algo
 	if not raycast.is_colliding():
 		# Cambiar color del crosshair a rojo por 1 segundo
+		print("❌ No hay colisión detectada")
 		crosshair.modulate = Color.red
 		yield(get_tree().create_timer(1.0), "timeout")
 		crosshair.modulate = Color.white
@@ -224,6 +226,11 @@ func _on_create_button_pressed():
 	var is_floor = false
 
 	# Método 1: Por nombre del padre
+	# DEBUG ALL IF
+	print("Collider padre: ", collider.get_parent().name)
+	print("Collider en posición Y: ", collision_point.y <= 1.0)
+	print("Collider en grupo 'floor': ", collider.get_parent().is_in_group("floor"))
+
 	if collider.get_parent().name == "Floor":
 		is_floor = true
 		crosshair.modulate = Color.green
@@ -236,6 +243,7 @@ func _on_create_button_pressed():
 	elif collider.get_parent().is_in_group("floor"):
 		is_floor = true
 
+	print("Colisión detectada con: ", collider.name)
 	if is_floor:
 		place_new_block(collision_point)
 
@@ -303,7 +311,6 @@ func update_drag_position(touch_position = null):
 	var new_position
 
 	if touch_position != null:
-		var camera = $Camera
 		var from = camera.project_ray_origin(touch_position)
 		var to = from + camera.project_ray_normal(touch_position) * 100
 
@@ -315,7 +322,6 @@ func update_drag_position(touch_position = null):
 		else:
 			return # No hacer nada si no hay colisión
 	else:
-		var raycast = $Camera/RayCast
 		if raycast.is_colliding():
 			new_position = raycast.get_collision_point().snapped(Vector3.ONE) + drag_offset
 		else:
