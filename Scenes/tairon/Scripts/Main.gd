@@ -34,7 +34,7 @@ func _ready():
 		print("✅ RayCast listo.")    
 			
 	# Cargar el material original    
-	var original_material = preload("res://Materials/selectedBlock.tres")    
+	var original_material = preload("res://materials/selectedBlock.tres")    
 	selected_material = original_material.duplicate()    
 	selected_material.emission_enabled = true    
 	selected_material.emission = Color(0.1, 0.1, 0.1)     
@@ -295,7 +295,7 @@ func start_drag(collision_point):
 	drag_offset.y = 0  # Eliminar cualquier componente Y del offset        
 			
 	# Cambiar material para indicar arrastre   
-	var drag_material = preload("res://Scenes/tairon/Materials/selectedBlock.tres")            
+	var drag_material = preload("res://materials/selectedBlock.tres")            
 	drag_material.albedo_color = Color.bisque             
 	drag_material.flags_transparent = true        
 	drag_material.albedo_color.a = 0.7        

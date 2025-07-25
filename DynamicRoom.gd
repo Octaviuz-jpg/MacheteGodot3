@@ -10,8 +10,10 @@ var bloquear_preview_por_ui := false
 var ultima_posicion_valida := Vector3()
 var objeto_seleccionado_para_eliminar: Node = null
 var objeto_anterior_seleccionado: Node = null
-
-
+onready var boton_colocar = $"%Colocar"  # Adjust path as needed
+onready var boton_eliminar = $"%Eliminar"  # Adjust path as needed
+onready var PanelEliminar = $"%PanelEliminar"
+onready var PanelColocar = $"%PanelColocar"
 
 
 
@@ -23,6 +25,12 @@ func _ready():
 	_setup_camera()
 #	var gestor_seleccion :Node = GestorSeleccion.new()
 #	add_child(gestor_seleccion)
+	if boton_colocar:
+		boton_colocar.visible = false
+		PanelColocar.visible = false
+	if boton_eliminar:
+		boton_eliminar.visible = false
+		PanelEliminar.visible = false
 
 	
 	# Cargar proyecto si hay uno seleccionado
@@ -137,6 +145,7 @@ func _input(event):
 					quitar_marcador_seleccion(nodo_raiz)
 					objeto_seleccionado_para_eliminar = null
 					objeto_anterior_seleccionado = null
+					actualizar_visibilidad_botones() 
 					print("🔄 Deseleccionado: mismo objeto tocado dos veces")
 					return
 
@@ -146,6 +155,7 @@ func _input(event):
 				objeto_seleccionado_para_eliminar = nodo_raiz
 				objeto_anterior_seleccionado = nodo_raiz
 				agregar_marcador_seleccion(nodo_raiz)
+				actualizar_visibilidad_botones()  # Add this
 
 				print("🔎 Nuevo objeto seleccionado:", nodo_raiz.name)
 			else:
@@ -326,6 +336,7 @@ func _process(delta):
 
 			var objetivo := Vector3(limite_x, y_final, limite_z)
 			obj.translation = obj.translation.linear_interpolate(objetivo, 0.10)
+	actualizar_visibilidad_botones()  # Add this
 
 # 🔍 Recolectar todos los RIDs del objeto y sus hijos
 func recolectar_rids(nodo: Node) -> Array:
@@ -410,6 +421,7 @@ func _on_Colocar_pressed():
 		ObjectSelector.vista_previa.queue_free()
 		ObjectSelector.vista_previa = null
 		ObjectSelector.objeto_seleccionado = ""
+		actualizar_visibilidad_botones()
 		print("✅ Nevera colocada desde botón en", ultima_posicion_valida)
 	else:
 		print("⚠️ No hay preview o posición válida")
@@ -422,6 +434,7 @@ func eliminar_objeto_seleccionado():
 		objeto_seleccionado_para_eliminar.queue_free()
 		objeto_seleccionado_para_eliminar = null
 		objeto_anterior_seleccionado = null
+		actualizar_visibilidad_botones() 
 	else:
 		print("⚠️ No hay objeto seleccionado")
 
@@ -473,3 +486,12 @@ func quitar_marcador_seleccion(nodo):
 
 func _on_Button_pressed():
 	eliminar_objeto_seleccionado()
+
+
+func actualizar_visibilidad_botones():
+	if boton_colocar:
+		boton_colocar.visible = ObjectSelector.vista_previa != null
+		PanelColocar.visible = ObjectSelector.vista_previa != null
+	if boton_eliminar:
+		boton_eliminar.visible = objeto_seleccionado_para_eliminar != null
+		PanelEliminar.visible = objeto_seleccionado_para_eliminar != null

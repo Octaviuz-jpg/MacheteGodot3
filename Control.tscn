@@ -250,14 +250,14 @@ margin_bottom = 67.0
 icon = ExtResource( 10 )
 flat = true
 
-[node name="Undo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="RotarIzquierda" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 286.0
 margin_right = 335.0
 margin_bottom = 67.0
 icon = ExtResource( 9 )
 flat = true
 
-[node name="Redo" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
+[node name="RotarDerecha" type="Button" parent="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar"]
 margin_left = 385.0
 margin_right = 434.0
 margin_bottom = 67.0
