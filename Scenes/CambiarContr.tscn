@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Fonts/champagne_limousines/Champagne & Limousines Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Img/VolverMenu.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Button.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/GuardarCont.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -322,7 +323,7 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 19 )
 text = "La contraseña no es igual a la nueva"
 
-[node name="Button2" type="Button" parent="Panel"]
+[node name="GuardarCont" type="Button" parent="Panel"]
 margin_left = 243.0
 margin_top = 974.0
 margin_right = 444.0
@@ -335,5 +336,7 @@ custom_styles/focus = SubResource( 23 )
 custom_styles/disabled = SubResource( 24 )
 custom_styles/normal = SubResource( 25 )
 text = "Guardar"
+script = ExtResource( 5 )
 
 [connection signal="pressed" from="Panel/Volver" to="Panel/Volver" method="_on_Volver_pressed"]
+[connection signal="pressed" from="Panel/GuardarCont" to="Panel/GuardarCont" method="_on_GuardarCont_pressed"]
