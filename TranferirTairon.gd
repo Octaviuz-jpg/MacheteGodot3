@@ -5,6 +5,17 @@ onready var blocks_container: Spatial = $BlocksContainer
 onready var objects_container: Spatial = $ObjectsContainer
 onready var back_button: Button = $CanvasLayer/BackButton
 onready var add_object_button: Button = $CanvasLayer/AddObjectButton
+onready var add_object_button_1: Button = $CanvasLayer/AddObjectButton1
+onready var add_object_button_2: Button = $CanvasLayer/AddObjectButton2
+onready var add_object_button_3: Button = $CanvasLayer/AddObjectButton3
+onready var add_object_button_4: Button = $CanvasLayer/AddObjectButton4
+onready var add_object_button_5: Button = $CanvasLayer/AddObjectButton5
+onready var add_object_button_6: Button = $CanvasLayer/AddObjectButton6
+onready var add_object_button_7: Button = $CanvasLayer/AddObjectButton7
+onready var add_object_button_8: Button = $CanvasLayer/AddObjectButton8
+onready var add_object_button_9: Button = $CanvasLayer/AddObjectButton9
+onready var add_object_button_10: Button = $CanvasLayer/AddObjectButton10
+onready var add_object_button_sofa_blanco: Button = $CanvasLayer/AddObjectButtonSofaBlanco
 onready var delete_object_button: Button = $CanvasLayer/DeleteObjectButton
 onready var camera: Camera = $Camera
 onready var floor_node: StaticBody = $Floor
@@ -25,13 +36,19 @@ func _ready():
 	# --- CONEXIONES DE SEÑALES ---
 	back_button.connect("pressed", self, "_on_back_button_pressed")
 	add_object_button.connect("pressed", self, "_on_add_object_button_pressed")
-	delete_object_button.connect("pressed", self, "_on_delete_object_button_pressed")
+	add_object_button_1.connect("pressed", self, "_on_add_object_button_1_pressed")
+	add_object_button_2.connect("pressed", self, "_on_add_object_button_2_pressed")
+	add_object_button_3.connect("pressed", self, "_on_add_object_button_3_pressed")
+	add_object_button_4.connect("pressed", self, "_on_add_object_button_4_pressed")
+	add_object_button_5.connect("pressed", self, "_on_add_object_button_5_pressed")
+	add_object_button_6.connect("pressed", self, "_on_add_object_button_6_pressed")
+	add_object_button_7.connect("pressed", self, "_on_add_object_button_7_pressed")
+	add_object_button_8.connect("pressed", self, "_on_add_object_button_8_pressed")
+	add_object_button_9.connect("pressed", self, "_on_add_object_button_9_pressed")
+	add_object_button_10.connect("pressed", self, "_on_add_object_button_10_pressed")
 
-	# --- INICIALIZACIÓN ---
-	load_tairon_structure()
-	ObjectSelector.objeto_seleccionado = ""
-	ObjectSelector.vista_previa = null
-	delete_object_button.visible = false
+	add_object_button_sofa_blanco.connect("pressed", self, "_on_add_object_button_sofa_blanco_pressed")
+
 
 
 func load_tairon_structure():
@@ -69,9 +86,70 @@ func _on_back_button_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene("res://Node3D.tscn")
 
+
 func _on_add_object_button_pressed():
 	deselect_object()
 	ObjectSelector.objeto_seleccionado = "res://Objeto2/nevera_ejecutiva.tscn"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_1_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/alacena_tipo1.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_2_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/asset cama ajustado.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_3_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/cama gris 1.80 x 0.69.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_4_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/closet1.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_5_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/closet2.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_6_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/cocina_gas.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_7_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/cocina_moderna_tipo2.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_8_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/Cocina_moderna.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_9_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/cocinatipo3.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_add_object_button_10_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://assets3D/assets3D/conjunto cocina sin suelo.glb"
 	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -82,6 +160,11 @@ func _on_delete_object_button_pressed():
 		original_materials.clear()
 		delete_object_button.visible = false
 
+func _on_add_object_button_sofa_blanco_pressed():
+	deselect_object()
+	ObjectSelector.objeto_seleccionado = "res://objetos/sofa blanco.glb"
+	print("Objeto seleccionado: ", ObjectSelector.objeto_seleccionado)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # --- LÓGICA DE COLOCACIÓN Y SELECCIÓN DE OBJETOS ---
 

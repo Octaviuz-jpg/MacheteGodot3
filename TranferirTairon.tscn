@@ -55,15 +55,124 @@ margin_left = -140.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = 60.0
+rect_scale = Vector2( 1, 0.84 )
 text = "Añadir Nevera"
+
+[node name="AddObjectButton1" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -138.0
+margin_top = 59.0
+margin_right = -18.0
+margin_bottom = 99.0
+rect_scale = Vector2( 1, 0.92 )
+text = "Añadir Alacena"
+
+[node name="AddObjectButton2" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -139.0
+margin_top = 105.0
+margin_right = -19.0
+margin_bottom = 145.0
+rect_scale = Vector2( 1, 0.88 )
+text = "Cama tipo 1"
+
+[node name="AddObjectButton3" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -138.0
+margin_top = 150.0
+margin_right = -18.0
+margin_bottom = 190.0
+rect_scale = Vector2( 1, 0.84 )
+text = "cama tipo 2"
+
+[node name="AddObjectButton4" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -135.0
+margin_top = 190.0
+margin_right = -15.0
+margin_bottom = 230.0
+rect_scale = Vector2( 1, 0.92 )
+text = "closet tipo 1"
+
+[node name="AddObjectButton5" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -134.0
+margin_top = 234.0
+margin_right = -14.0
+margin_bottom = 274.0
+rect_scale = Vector2( 1, 0.879999 )
+text = "closet tipo 2"
+
+[node name="AddObjectButton6" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -133.0
+margin_top = 275.0
+margin_right = -13.0
+margin_bottom = 315.0
+rect_scale = Vector2( 1, 0.920001 )
+text = "cocina gris"
+
+[node name="AddObjectButton7" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -156.0
+margin_top = 318.0
+margin_right = -1.0
+margin_bottom = 358.0
+rect_scale = Vector2( 1, 0.92 )
+text = "cocina moderna tipo 1"
+
+[node name="AddObjectButton8" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -157.0
+margin_top = 360.0
+margin_right = -2.0
+margin_bottom = 400.0
+rect_scale = Vector2( 1, 0.92 )
+text = "cocina moderna tipo 2"
+
+[node name="AddObjectButton9" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -154.0
+margin_top = 400.0
+margin_right = 2.0
+margin_bottom = 440.0
+rect_scale = Vector2( 0.949802, 1 )
+text = "Cocina moderna tipo 3"
+
+[node name="AddObjectButton10" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -170.0
+margin_top = 447.0
+margin_right = 5.0
+margin_bottom = 487.0
+text = "conjunto cocina sin suelo"
+
+[node name="AddObjectButtonSofaBlanco" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -170.0
+margin_top = 497.0
+margin_right = 5.0
+margin_bottom = 537.0
+text = "sofa Blanco bonito"
 
 [node name="DeleteObjectButton" type="Button" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -140.0
-margin_top = 80.0
-margin_right = -20.0
-margin_bottom = 120.0
+margin_left = -587.0
+margin_top = 20.0
+margin_right = -467.0
+margin_bottom = 60.0
 text = "Eliminar Objeto"
 
 [node name="HelpLabel" type="Label" parent="CanvasLayer"]
