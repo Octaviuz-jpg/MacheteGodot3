@@ -125,6 +125,7 @@ Utilidad="*res://utilidad.gd"
 <<<<<<<HEADUtilidad="*res://utilidad.gd"
 AuthManager="*res://Scripts/AuthManager.gd"
 SupabaseManager="*res://Scripts/SupabaseManager.gd"
+EstructurasSingleton="*res://Scripts/EstructurasSingleton.gd"
 GameModeContext="*res://Contexts/GameModeContext.gd"
 
 [display]
