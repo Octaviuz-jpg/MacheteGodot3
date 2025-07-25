@@ -104,12 +104,18 @@ func _on_aerial_view_changed(is_aerial):
 		tween.interpolate_property(self, "translation", translation, target_translation, aerial_view_transition_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		tween.interpolate_property(self, "rotation_degrees", rotation_degrees, target_rotation, aerial_view_transition_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 
+		tween.connect("tween_all_completed", self, "_sync_mouse_rotation_vars", [], CONNECT_ONESHOT)
 		tween.start()
 	else:
 		tween.interpolate_property(self, "translation", translation, last_translation, aerial_view_transition_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		tween.interpolate_property(self, "rotation_degrees", rotation_degrees, last_rotation, aerial_view_transition_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 
+		tween.connect("tween_all_completed", self, "_sync_mouse_rotation_vars", [], CONNECT_ONESHOT)
 		tween.start()
+
+func _sync_mouse_rotation_vars():
+	camera_view_x = rotation_degrees.x
+	camera_view_y = rotation_degrees.y
 
 func set_is_aerial_view(value):
 	is_aerial_view = value

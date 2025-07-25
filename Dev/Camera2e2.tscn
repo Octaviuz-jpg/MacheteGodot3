@@ -20,6 +20,7 @@ layers = 3
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.856412, 0 )
 camera_speed = 8.0
+camera_height_for_build_mode = 20.0
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
