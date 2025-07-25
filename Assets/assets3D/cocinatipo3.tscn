@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/assets3D/cocinatipo3.glb" type="PackedScene" id=1]
+[ext_resource path="res://Assets/assets3D/Color_1_001.material" type="Material" id=2]
+[ext_resource path="res://Assets/assets3D/Color_0_001.material" type="Material" id=3]
+[ext_resource path="res://Assets/assets3D/Color_6_001.material" type="Material" id=4]
+[ext_resource path="res://Assets/assets3D/Color_3_001.material" type="Material" id=5]
+[ext_resource path="res://Assets/assets3D/Color_2_001.material" type="Material" id=6]
+
+[sub_resource type="ORMSpatialMaterial" id=6]
+
+[sub_resource type="ORMSpatialMaterial" id=2]
+albedo_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+
+[sub_resource type="ORMSpatialMaterial" id=4]
+albedo_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+
+[sub_resource type="ORMSpatialMaterial" id=5]
+albedo_color = Color( 0.360784, 0.317647, 0.317647, 1 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.92261, 1.02349, 1.73112 )
+
+[node name="cocinatipo3" instance=ExtResource( 1 )]
+
+[node name="chair_O005" parent="Default/kuhinja moderna/chair_O/chair_O003" index="1"]
+material/0 = ExtResource( 6 )
+
+[node name="chair_O018" parent="Default/kuhinja moderna/chair_O013/chair_O016" index="1"]
+material/0 = SubResource( 6 )
+
+[node name="chair_O030" parent="Default/kuhinja moderna/chair_O026/chair_O029" index="0"]
+material/0 = SubResource( 2 )
+
+[node name="chair_O031" parent="Default/kuhinja moderna/chair_O026/chair_O029" index="1"]
+material_override = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="kuhinja moderna005" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna004" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna008" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna007" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna011" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna010" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna016" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna015" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna019" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna018" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna022" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna021" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna025" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna024" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna028" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna027" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna031" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna030" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna034" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna033" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna038" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna036" index="1"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna042" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna041" index="0"]
+material/0 = SubResource( 5 )
+
+[node name="kuhinja moderna055" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna054" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna058" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna057" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="kuhinja moderna061" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna060" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="kuhinja moderna064" parent="Default/kuhinja moderna/kuhinja moderna001/kuhinja moderna063" index="0"]
+material/0 = ExtResource( 5 )
+
+[node name="sporet ploca i vrata rerne Moderna002" parent="Default/kuhinja moderna/sporet ploca i vrata rerne Moderna/sporet ploca i vrata rerne Moderna001" index="0"]
+material/0 = ExtResource( 4 )
+
+[node name="sporet ploca i vrata rerne Moderna003" parent="Default/kuhinja moderna/sporet ploca i vrata rerne Moderna/sporet ploca i vrata rerne Moderna001" index="1"]
+material/0 = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421437, 1.07602, 0.0237274 )
+shape = SubResource( 1 )

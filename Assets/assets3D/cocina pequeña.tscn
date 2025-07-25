@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.04757, 1.12021, 0.4 )
+
+[node name="cocina"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45111, 2.34725, 6.541 )
+
+[node name="Light" parent="." index="1"]
+transform = Transform( -0.290865, 0.566393, 0.771101, -0.0551891, 0.794672, -0.604525, -0.955171, -0.218391, -0.199883, 2.07852, -0.293818, -3.02832 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60006, -1.10094, -5.92853 )
+shape = SubResource( 1 )
