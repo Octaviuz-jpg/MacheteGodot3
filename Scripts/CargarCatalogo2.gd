@@ -7,6 +7,7 @@ export var scenes_folder_path: String = "res://Assets/assets3D/" # ¡Ajusta esta
 export var button_min_size: Vector2 = Vector2(200, 64) # Ancho, Alto - Se mantuvo el valor de HEAD (200) por ser más grande
 
 onready var root_spatial_node: Spatial = $"../../../../.." # ¡Asegúrate de que esta ruta sea correcta para tu jerarquía!
+export var font_size: int = 24  # Tamaño de fuente que deseas (ajusta este valor)
 
 func _ready():
 	# Asegurarse de que la ruta de la carpeta termina con una barra
@@ -48,6 +49,7 @@ func _create_scene_button(scene_path: String):
 	# Obtiene solo el nombre del archivo (ej. "mi_silla.tscn" -> "mi_silla")
 	scene_button.text = scene_path.get_file().get_basename()
 	scene_button.rect_min_size = button_min_size # Establece el tamaño mínimo del botón
+	
 	scene_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scene_button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
@@ -63,19 +65,20 @@ func _create_scene_button(scene_path: String):
 		# scene_button.icon_scale = Vector2(0.5, 0.5) # Ejemplo: reducir a la mitad
 		scene_button.align = Button.ALIGN_LEFT # Alinear texto a la derecha del icono (opcional)
 		scene_button.clip_text = true # Recortar texto que se desborda (opcional)
+		
 	else:
 		print("Advertencia: No se pudo cargar el icono para el botón:", icon_path)
 #--------------ESTILOS DEL BOTON----------------------
 	# Estilo Normal
 	var style_normal = StyleBoxFlat.new()
-	style_normal.set_border_width_all(1)
+	style_normal.set_border_width_all(5)
 	style_normal.set_border_color(Color(1, 1, 1, 1))
-	style_normal.bg_color = Color(50, 112, 114) # Color de fondo más claro (se mantuvo el de HEAD)
+	style_normal.bg_color = Color(50, 112, 114, 0.9) # Color de fondo más claro (se mantuvo el de HEAD)
 	# style_normal.set_corner_radius_all(int(button_min_size.y / 2)) # Esta línea estaba comentada en HEAD y presente en el otro branch
 
-	style_normal.set_shadow_color(Color(0, 0, 0, 0.3)) # Sombra oscura
-	style_normal.set_shadow_offset(Vector2(2, 2)) # Desplazamiento de la sombra
-	style_normal.set_shadow_size(4) # Suavidad de la sombra
+	style_normal.set_shadow_color(Color(0, 0, 0, 0.4)) # Sombra oscura
+	style_normal.set_shadow_offset(Vector2(3, 3)) # Desplazamiento de la sombra
+	style_normal.set_shadow_size(6) # Suavidad de la sombra
 
 
 	# Estilo Hover (cuando el mouse está encima)
