@@ -1,0 +1,54 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.catalog (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  category text,
+  description text,
+  CONSTRAINT catalog_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.object (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  added_at timestamp with time zone NOT NULL DEFAULT now(),
+  catalog_id bigint,
+  route text,
+  height double precision,
+  width double precision,
+  description text,
+  CONSTRAINT object_pkey PRIMARY KEY (id),
+  CONSTRAINT object_catalog_id_fkey FOREIGN KEY (catalog_id) REFERENCES public.catalog(id)
+);
+CREATE TABLE public.space (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  name text,
+  route text,
+  user_id uuid,
+  CONSTRAINT space_pkey PRIMARY KEY (id),
+  CONSTRAINT space_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.space_object (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  object_id bigint NOT NULL,
+  space_id bigint NOT NULL,
+  CONSTRAINT space_object_pkey PRIMARY KEY (id),
+  CONSTRAINT space_object_object_id_fkey FOREIGN KEY (object_id) REFERENCES public.object(id),
+  CONSTRAINT space_object_space_id_fkey FOREIGN KEY (space_id) REFERENCES public.space(id)
+);
+CREATE TABLE public.user_info (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  account_id uuid DEFAULT gen_random_uuid(),
+  username text,
+  CONSTRAINT user_info_pkey PRIMARY KEY (id),
+  CONSTRAINT user_info_account_id_fkey FOREIGN KEY (account_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.user_space (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  space_id bigint NOT NULL,
+  user_id uuid,
+  CONSTRAINT user_space_pkey PRIMARY KEY (id),
+  CONSTRAINT user_space_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id),
+  CONSTRAINT user_space_space_id_fkey FOREIGN KEY (space_id) REFERENCES public.space(id)
+);

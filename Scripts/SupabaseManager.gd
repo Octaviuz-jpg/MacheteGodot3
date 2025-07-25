@@ -14,13 +14,14 @@ var download_request: HTTPRequest
 var signup_request: HTTPRequest
 var signin_request: HTTPRequest
 var signout_request: HTTPRequest
-
 var link_request: HTTPRequest
+var tairon_load_request: HTTPRequest # <-- NUEVO
 
 # Señales para comunicarse con Main
 signal scene_loaded(scene_data)
 signal scene_saved(success)
 signal error_occurred(message)
+signal tairon_structure_loaded(data) # <-- NUEVO
 
 # Señales de autenticación
 signal login_succeeded(user_data)
@@ -42,6 +43,8 @@ func _ready():
 	signup_request = HTTPRequest.new()
 	signin_request = HTTPRequest.new()
 	signout_request = HTTPRequest.new()
+	link_request = HTTPRequest.new()
+	tairon_load_request = HTTPRequest.new() # <-- NUEVO
 	
 	add_child(load_request)
 	add_child(upload_request)
@@ -50,9 +53,8 @@ func _ready():
 	add_child(signup_request)
 	add_child(signin_request)
 	add_child(signout_request)
-	
-	link_request = HTTPRequest.new()
 	add_child(link_request)
+	add_child(tairon_load_request) # <-- NUEVO
 	
 	# Conectar señales
 	load_request.connect("request_completed", self, "_on_load_request_completed")
@@ -63,8 +65,48 @@ func _ready():
 	signin_request.connect("request_completed", self, "_on_signin_completed")
 	signout_request.connect("request_completed", self, "_on_signout_completed")
 	link_request.connect("request_completed", self, "_on_link_request_completed")
+	tairon_load_request.connect("request_completed", self, "_on_tairon_load_completed") # <-- NUEVO
 	
 	print("✅ SupabaseManager inicializado")
+
+# --- LÓGICA PARA CARGAR ESTRUCTURA TAIRON ---
+
+func load_tairon_structure():
+	var user_id = get_user_id()
+	if not user_id:
+		print("Error: No se puede cargar la estructura Tairon sin un usuario logueado.")
+		emit_signal("tairon_structure_loaded", null)
+		return
+
+	print("🧱 Cargando estructura Tairon para el usuario: ", user_id)
+	# Asumo que la tabla se llama 'estructuras_tairon'. ¡Cámbialo si es necesario!
+	var url = SUPABASE_URL + "/rest/v1/estructuras_tairon?select=pos_x,pos_y,pos_z&user_id=eq." + user_id
+	var headers = [
+		"Authorization: Bearer " + access_token,
+		"apikey: " + SUPABASE_ANON_KEY
+	]
+	
+	tairon_load_request.request(url, headers, true, HTTPClient.METHOD_GET)
+
+func _on_tairon_load_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
+	print("🧱 Respuesta de carga Tairon - Código: ", response_code)
+	
+	if response_code == 200:
+		var json = JSON.parse(body.get_string_from_utf8())
+		if json.error == OK:
+			print("✅ Estructura Tairon recibida.")
+			emit_signal("tairon_structure_loaded", json.result)
+		else:
+			print("❌ Error al parsear JSON de estructura Tairon: ", json.error_string)
+			emit_signal("tairon_structure_loaded", null)
+	else:
+		var error_message = "Error al cargar estructura Tairon: " + str(response_code)
+		if body.size() > 0:
+			error_message += " - " + body.get_string_from_utf8()
+		print("❌ ", error_message)
+		emit_signal("tairon_structure_loaded", null)
+
+# --- FIN DE LÓGICA TAIRON ---
 
 # --- NUEVO FLUJO DE GUARDADO ---
 
@@ -391,6 +433,15 @@ func get_current_user_id():
 	if current_user != null and current_user.has("id"):
 		return current_user.id
 	return null
+
+# --- FUNCIÓN AÑADIDA ---
+# Devuelve el ID del usuario actual si está logueado.
+func get_user_id():
+	if current_user and current_user.has("id"):
+		return current_user.id
+	return null
+# --- FIN DE FUNCIÓN AÑADIDA ---
+
 
 # --- FUNCIONES DE GESTIÓN DE ESPACIOS (A IMPLEMENTAR) ---
 

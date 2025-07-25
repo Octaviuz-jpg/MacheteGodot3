@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://CamaraOrbit.gd" type="Script" id=1]
 [ext_resource path="res://DynamicRoom.gd" type="Script" id=2]
@@ -14,14 +14,6 @@
 [ext_resource path="res://Assets/meshlib.meshlib" type="MeshLibrary" id=12]
 [ext_resource path="res://Assets/IconTools/tienda.png" type="Texture" id=13]
 [ext_resource path="res://CameraConstruction.gd" type="Script" id=14]
-[ext_resource path="res://Assets/IconTools/lock.png" type="Texture" id=15]
-[ext_resource path="res://Assets/IconTools/save.png" type="Texture" id=16]
-[ext_resource path="res://Assets/IconTools/undo.png" type="Texture" id=17]
-[ext_resource path="res://Assets/IconTools/redo.png" type="Texture" id=18]
-[ext_resource path="res://Assets/IconTools/view.png" type="Texture" id=19]
-[ext_resource path="res://Assets/IconTools/ruler.png" type="Texture" id=20]
-[ext_resource path="res://Assets/basura.png" type="Texture" id=21]
-[ext_resource path="res://Assets/IconTools/check-circle-2.png" type="Texture" id=22]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.27451, 0.388235, 0.403922, 1 )
@@ -105,7 +97,13 @@ script = ExtResource( 2 )
 
 [node name="Container" type="Spatial" parent="DynamicRoom"]
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="GridMapTairon" type="GridMap" parent="DynamicRoom"]
+mesh_library = ExtResource( 12 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="UIConstruction" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
 visible = false
@@ -260,7 +258,25 @@ margin_right = 320.0
 margin_bottom = 116.0
 text = "modo construccion"
 
-[node name="PanelColocar" type="Panel" parent="Control"]
+[node name="vistaAerea" type="Button" parent="UIConstruction"]
+margin_left = 184.0
+margin_top = 67.0
+margin_right = 266.0
+margin_bottom = 87.0
+text = "Vista aerea"
+
+[node name="ImportarTaironButton" type="Button" parent="UIConstruction"]
+anchor_left = 0.535
+anchor_top = 0.055
+anchor_right = 0.535
+anchor_bottom = 0.055
+margin_left = -6.20001
+margin_top = -10.4
+margin_right = 104.8
+margin_bottom = 10.6
+text = "Importar Tairon"
+
+[node name="GridMap" type="GridMap" parent="."]
 unique_name_in_owner = true
 margin_left = 293.0
 margin_top = 1057.0
@@ -268,115 +284,11 @@ margin_right = 413.0
 margin_bottom = 1177.0
 custom_styles/panel = SubResource( 9 )
 
-[node name="Colocar" type="Button" parent="Control/PanelColocar"]
-unique_name_in_owner = true
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -115.0
-margin_top = -60.0
-margin_right = 5.0
-margin_bottom = 60.0
-icon = ExtResource( 22 )
-flat = true
-
-[node name="PanelEliminar" type="Panel" parent="Control"]
-unique_name_in_owner = true
-anchor_right = 9.512
-anchor_bottom = 11.78
-margin_left = 289.0
-margin_top = 1053.0
-margin_right = 34.52
-margin_bottom = 704.8
-custom_styles/panel = SubResource( 10 )
-
-[node name="Eliminar" type="Button" parent="Control/PanelEliminar"]
-unique_name_in_owner = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 9.0
-margin_top = 7.0
-margin_right = 493.0
-margin_bottom = 485.0
-rect_scale = Vector2( 0.2, 0.2 )
-size_flags_horizontal = 5
-size_flags_vertical = 5
-theme = SubResource( 11 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-icon = ExtResource( 21 )
-flat = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
-
-[node name="Panel" type="Panel" parent="Control/CanvasLayer"]
-material = SubResource( 7 )
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -76.0
-custom_styles/panel = SubResource( 8 )
-
-[node name="BottomBar" type="HBoxContainer" parent="Control/CanvasLayer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
-custom_constants/separation = 50
-alignment = 1
-
-[node name="trancarCamara" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-unique_name_in_owner = true
-margin_left = 138.0
-margin_right = 186.0
-margin_bottom = 76.0
-icon = ExtResource( 15 )
-flat = true
-
-[node name="vistaAerea" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-unique_name_in_owner = true
-margin_left = 236.0
-margin_right = 285.0
-margin_bottom = 76.0
-icon = ExtResource( 19 )
-flat = true
-
-[node name="RotarIzquierda" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-margin_left = 335.0
-margin_right = 384.0
-margin_bottom = 76.0
-icon = ExtResource( 17 )
-flat = true
-
-[node name="RotarDerecha" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-margin_left = 434.0
-margin_right = 483.0
-margin_bottom = 76.0
-icon = ExtResource( 18 )
-flat = true
-
-[node name="Meassures" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-visible = false
-margin_left = 484.0
-margin_right = 533.0
-margin_bottom = 76.0
-icon = ExtResource( 20 )
-flat = true
-
-[node name="Save" type="Button" parent="Control/CanvasLayer/Panel/BottomBar"]
-unique_name_in_owner = true
-margin_left = 533.0
-margin_right = 581.0
-margin_bottom = 76.0
-icon = ExtResource( 16 )
-flat = true
-
-[connection signal="pressed" from="Control/camita" to="CamaraOrbit" method="_on_camita_pressed"]
-[connection signal="pressed" from="Control/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
-[connection signal="pressed" from="Control/user" to="Control/user" method="_on_user_pressed"]
-[connection signal="pressed" from="Control/PanelColocar/Colocar" to="DynamicRoom" method="_on_Colocar_pressed"]
-[connection signal="pressed" from="Control/PanelEliminar/Eliminar" to="DynamicRoom" method="_on_Button_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Panel/BottomBar/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Panel/BottomBar/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Panel/BottomBar/RotarIzquierda" to="CamaraOrbit" method="_on_RotarIzquierda_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Panel/BottomBar/RotarDerecha" to="CamaraOrbit" method="_on_RotarDerecha_pressed"]
+[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarIzquierda" to="CamaraOrbit" method="_on_RotarIzquierda_pressed"]
+[connection signal="pressed" from="UIConstruction/BotoneraRotacion/RotarDerecha" to="CamaraOrbit" method="_on_RotarDerecha_pressed"]
+[connection signal="pressed" from="UIConstruction/camita" to="CamaraOrbit" method="_on_camita_pressed"]
+[connection signal="pressed" from="UIConstruction/cocinatipo2" to="CamaraOrbit" method="_on_cocinatipo2_pressed"]
+[connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
+[connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
+[connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
+[connection signal="pressed" from="UIConstruction/ImportarTaironButton" to="DynamicRoom" method="_on_ImportarTaironButton_pressed"]

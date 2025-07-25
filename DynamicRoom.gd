@@ -2,25 +2,32 @@ extends Spatial
 
 onready var _wall_texture = preload("res://materials/pared_blanca.jpg")
 onready var _floor_texture = preload("res://materials/suelo_granito.jpg")
-onready var botonera = $"UIConstruction/BotoneraRotacion"
+onready var botonera = get_node_or_null("../UIConstruction/BotoneraRotacion")
+onready var camera_orbit: Node = $"../CamaraOrbit"
 
-onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
-var tocar_gui := false  # variable global auxiliar
-var bloquear_preview_por_ui := false
-var ultima_posicion_valida := Vector3()
-var objeto_seleccionado_para_eliminar: Node = null
-var objeto_anterior_seleccionado: Node = null
-onready var boton_colocar = $"%Colocar"  # Adjust path as needed
-onready var boton_eliminar = $"%Eliminar"  # Adjust path as needed
-onready var PanelEliminar = $"%PanelEliminar"
-onready var PanelColocar = $"%PanelColocar"
-
-
+# --- VARIABLES MÁS SEGURAS ---
+# Usamos get_node_or_null para evitar que el juego crashee si no encuentra los nodos.
+onready var gridmap_tairon: GridMap = get_node_or_null("GridMapTairon")
+onready var importar_button: Button = get_node_or_null("../UIConstruction/ImportarTaironButton")
+# --- FIN DE VARIABLES ---
 
 
 func _ready():
 	self.translation = Vector3.ZERO
-	registrar_ui()
+	
+	# --- VALIDACIÓN DE NODOS ---
+	# Comprobamos si los nodos fueron encontrados. Si no, mostramos un error claro.
+	if not gridmap_tairon:
+		push_error("ERROR: No se encontró el nodo 'GridMapTairon'. Asegúrate de que sea un HIJO DIRECTO de 'DynamicRoom' y que el nombre sea idéntico.")
+	
+	if not importar_button:
+		push_error("ERROR: No se encontró el botón 'ImportarTaironButton'. Asegúrate de que esté dentro de 'UIConstruction' y que el nombre sea idéntico.")
+	else:
+		# Nos aseguramos de que la señal esté conectada, sin duplicarla.
+		if not importar_button.is_connected("pressed", self, "_on_ImportarTaironButton_pressed"):
+			importar_button.connect("pressed", self, "_on_ImportarTaironButton_pressed")
+	# --- FIN DE VALIDACIÓN ---
+
 	build_room()
 	_setup_camera()
 #	var gestor_seleccion :Node = GestorSeleccion.new()
@@ -33,15 +40,19 @@ func _ready():
 		PanelEliminar.visible = false
 
 	
-	# Cargar proyecto si hay uno seleccionado
 	if MedidasSingleton.proyecto_actual != "":
 		SistemaGuardado.cargar_proyecto(MedidasSingleton.proyecto_actual, self)
-		MedidasSingleton.proyecto_actual = ""  # Resetear después de cargar
+		MedidasSingleton.proyecto_actual = ""
 
 func _setup_camera():
 	if camera_orbit:
 		var room_size = max(MedidasSingleton.anchura, MedidasSingleton.profundidad)
 		camera_orbit.init_orbit(room_size)
+
+func _on_ImportarTaironButton_pressed():
+	print("Transfiriendo a la escena de visualización de Tairon...")
+	get_tree().change_scene("res://TranferirTairon.tscn")
+# --- FIN DE LA NUEVA FUNCIÓN ---
 
 func build_room():
 	var wall_material = SpatialMaterial.new()
@@ -51,7 +62,7 @@ func build_room():
 	floor_material.albedo_texture = _floor_texture
 
 	for child in get_children():
-		if child.name != "Container":
+		if child.name != "Container" and not child is GridMap:
 			child.queue_free()
 
 	var container = get_node_or_null("Container")
@@ -108,11 +119,6 @@ func _create_wall(pos: Vector3, size: Vector3, rot_y: float, material: SpatialMa
 	static_body.add_to_group("paredes")
 
 	add_child(wall)
-
-# En el script de tu Room/SceneRoot:
-
-
-
 
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
@@ -177,7 +183,6 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 	var mesh_node = encontrar_nodo_con_malla(obj)
 	if mesh_node:
 		var escala = calcular_escala_normalizada(mesh_node, 0.4)
-		# ⬅ Aquí colocas la impresión para depurar el asset
 		print("🔍 Asset:", obj.name)
 		print("📦 AABB Position:", mesh_node.get_aabb().position)
 		print("📏 AABB Size:", mesh_node.get_aabb().size)
@@ -191,7 +196,6 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 		if ObjectSelector.vista_previa:
 		 obj.rotation = ObjectSelector.vista_previa.rotation
 
-		# 🚫 Validación volumétrica real
 		if hay_colision_volumetrica(obj):
 			print("⛔ No se puede colocar, colisión volumétrica detectada")
 			obj.queue_free()
@@ -277,11 +281,9 @@ func detectar_objeto_colocado_en(punto: Vector3) -> bool:
 # warning-ignore:unused_argument
 # warning-ignore:unused_argument
 func _process(delta):
-	# 🧩 Mostrar u ocultar botones táctiles de rotación
 	if botonera:
 		botonera.visible = ObjectSelector.vista_previa != null
 
-	# 🧪 Generar vista previa si hay objeto seleccionado
 	if ObjectSelector.objeto_seleccionado != "" and not ObjectSelector.vista_previa:
 		ObjectSelector.vista_previa = crear_vista_previa(ObjectSelector.objeto_seleccionado)
 
@@ -289,13 +291,11 @@ func _process(delta):
 	if ObjectSelector.vista_previa and not bloquear_preview_por_ui:
 		var obj = ObjectSelector.vista_previa
 
-		# 🎮 Rotación por teclado
 		if Input.is_action_just_pressed("rotar izquierda"):
 			obj.rotate_y(deg2rad(-15))
 		elif Input.is_action_just_pressed("rotar derecha"):
 			obj.rotate_y(deg2rad(15))
 
-		# 🖱️ Movimiento con el mouse/táctil
 		var mouse_pos = get_viewport().get_mouse_position()
 		var camera = get_viewport().get_camera()
 		var desde = camera.project_ray_origin(mouse_pos)
@@ -338,7 +338,6 @@ func _process(delta):
 			obj.translation = obj.translation.linear_interpolate(objetivo, 0.10)
 	actualizar_visibilidad_botones()  # Add this
 
-# 🔍 Recolectar todos los RIDs del objeto y sus hijos
 func recolectar_rids(nodo: Node) -> Array:
 		var rids = []
 		if nodo.has_method("get_rid"):
@@ -349,8 +348,6 @@ func recolectar_rids(nodo: Node) -> Array:
 		
 func hay_colision_volumetrica(objeto: Node) -> bool:
 	var space = get_world().direct_space_state
-
-	
 
 	var excludes = recolectar_rids(objeto)
 
@@ -395,103 +392,13 @@ func hay_colision_volumetrica(objeto: Node) -> bool:
 	return false
 	
 
+	var controles := [
+	get_node_or_null("../UIConstruction/BotoneraRotacion"),
+	get_node_or_null("../UIConstruction/trancarCamara"),
+	get_node_or_null("../UIConstruction/BotonCatalogo"),
+	get_node_or_null("../UIConstruction/vistaAerea"),
+	get_node_or_null("../UIConstruction/ImportarTaironButton")
+	]
 
 
-func detectar_tap_en_ui(pos: Vector2) -> bool:
-	for nodo in get_tree().get_nodes_in_group("ui"):
-		if nodo is Control and nodo.visible and nodo.mouse_filter != Control.MOUSE_FILTER_IGNORE:
-			var rect := Rect2(nodo.get_global_transform().origin, nodo.rect_size)
-			if rect.has_point(pos):
-				print("🛑 Tap sobre:", nodo.name)
-				return true
-	return false
-
-	
-func registrar_ui():
-	var ui_root := get_parent().get_node("Control")
-	for child in ui_root.get_children():
-		if child is Control:
-			child.add_to_group("ui")
-
-
-
-func _on_Colocar_pressed():
-	if ObjectSelector.vista_previa and ultima_posicion_valida != Vector3():
-		colocar_objeto_en_suelo(ObjectSelector.objeto_seleccionado, ultima_posicion_valida)
-		ObjectSelector.vista_previa.queue_free()
-		ObjectSelector.vista_previa = null
-		ObjectSelector.objeto_seleccionado = ""
-		actualizar_visibilidad_botones()
-		print("✅ Nevera colocada desde botón en", ultima_posicion_valida)
-	else:
-		print("⚠️ No hay preview o posición válida")
-		
-
-
-func eliminar_objeto_seleccionado():
-	if objeto_seleccionado_para_eliminar:
-		print("💣 Eliminando objeto:", objeto_seleccionado_para_eliminar.name)
-		objeto_seleccionado_para_eliminar.queue_free()
-		objeto_seleccionado_para_eliminar = null
-		objeto_anterior_seleccionado = null
-		actualizar_visibilidad_botones() 
-	else:
-		print("⚠️ No hay objeto seleccionado")
-
-	
-
-func marcar_objeto_con_transparencia(nodo, nivel_transparencia := 0.6):
-	for child in nodo.get_children():
-		if child is MeshInstance:
-			var mod :Color= child.modulate
-			mod.a = nivel_transparencia
-			child.modulate = mod
-		if child.get_child_count() > 0:
-			marcar_objeto_con_transparencia(child, nivel_transparencia)
-			
-
-func restaurar_opacidad_original(nodo):
-	for child in nodo.get_children():
-		if child is MeshInstance:
-			var mod :Color= child.modulate
-			mod.a = 1.0
-			child.modulate = mod
-		if child.get_child_count() > 0:
-			restaurar_opacidad_original(child)
-
-
-func agregar_marcador_seleccion(nodo):
-	var marcador := Sprite3D.new()
-	marcador.name = "MarcadorSeleccion"
-	marcador.texture = preload("res://Assets/Img/Basic_red_dot.png")
-	marcador.billboard = true
-	marcador.scale = Vector3(0.05, 0.05, 0.05)
-
-	# Estimación de altura desde primer MeshInstance
-	var altura := 03.0
-	for child in nodo.get_children():
-		if child is MeshInstance and child.mesh:
-			altura = child.mesh.get_aabb().size.y
-			break
-
-	marcador.translation = Vector3(0, altura + 0.2, 0)
-	nodo.add_child(marcador)
-
-func quitar_marcador_seleccion(nodo):
-	var marcador :Sprite3D = nodo.get_node_or_null("MarcadorSeleccion")
-	if marcador:
-		marcador.queue_free()
-
-
-
-func _on_Button_pressed():
-	eliminar_objeto_seleccionado()
-
-
-func actualizar_visibilidad_botones():
-	if boton_colocar:
-		boton_colocar.visible = ObjectSelector.vista_previa != null
-		PanelColocar.visible = ObjectSelector.vista_previa != null
-	if boton_eliminar:
-		boton_eliminar.visible = objeto_seleccionado_para_eliminar != null
-		PanelEliminar.visible = objeto_seleccionado_para_eliminar != null
+	return true
