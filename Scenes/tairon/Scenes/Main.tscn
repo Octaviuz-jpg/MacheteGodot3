@@ -1,19 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/modo_tairon/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/modo_tairon/Main.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/modo_tairon/Crosshair.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/tairon/assets/basura.png" type="Texture" id=4]
+[ext_resource path="res://Assets/IconTools/Ellipse 7.png" type="Texture" id=4]
 [ext_resource path="res://materials/Button.tres" type="Theme" id=5]
 [ext_resource path="res://Scenes/tairon/assets/piso fino.jpg" type="Texture" id=6]
-[ext_resource path="res://Scenes/tairon/assets/anadir.png" type="Texture" id=7]
+[ext_resource path="res://Assets/IconTools/button arrowleft.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/tairon/assets/kindpng_4853972.png" type="Texture" id=8]
-[ext_resource path="res://Scenes/tairon/assets/gira-a-la-derecha.png" type="Texture" id=9]
-[ext_resource path="res://materials/CreateButton.tres" type="StyleBox" id=10]
-[ext_resource path="res://materials/RotateButton.tres" type="StyleBox" id=11]
-[ext_resource path="res://materials/DeleteButton.tres" type="StyleBox" id=12]
-[ext_resource path="res://Scenes/tairon/assets/menu_10308940.png" type="Texture" id=13]
+[ext_resource path="res://Assets/IconTools/button arrowright.png" type="Texture" id=9]
+[ext_resource path="res://Assets/IconTools/button opt.png" type="Texture" id=10]
+[ext_resource path="res://Assets/IconTools/button delete.png" type="Texture" id=11]
+[ext_resource path="res://Assets/IconTools/button arrowup.png" type="Texture" id=12]
+[ext_resource path="res://Assets/IconTools/button undo_.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/SceneStateManager.gd" type="Script" id=14]
+[ext_resource path="res://Assets/IconTools/button +.png" type="Texture" id=15]
 
 [sub_resource type="PlaneMesh" id=2]
 
@@ -73,31 +74,28 @@ text = "+"
 align = 1
 
 [node name="DeleteButton" type="Button" parent="CanvasLayer"]
-modulate = Color( 0.976471, 0.0196078, 0.0196078, 1 )
-self_modulate = Color( 1, 0, 0, 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 37.0
-margin_top = -170.0
-margin_right = 649.0
-margin_bottom = 442.0
-rect_scale = Vector2( 0.215063, 0.21195 )
+margin_left = 14.0
+margin_top = -189.0
+margin_right = 99.0
+margin_bottom = -104.0
+rect_scale = Vector2( 1.5, 1.5 )
 theme = ExtResource( 5 )
-custom_styles/hover = ExtResource( 12 )
-custom_styles/pressed = ExtResource( 12 )
-custom_styles/normal = ExtResource( 12 )
-icon = ExtResource( 4 )
+icon = ExtResource( 11 )
+flat = true
 icon_align = 1
 
 [node name="ScaleSlider" type="HSlider" parent="CanvasLayer"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 49.0
-margin_top = 300.0
-margin_right = 349.0
-margin_bottom = 320.0
+margin_left = 43.0
+margin_top = 181.0
+margin_right = 345.0
+margin_bottom = 201.0
 rect_rotation = -89.9698
-rect_scale = Vector2( 2.51994, 5.26139 )
+rect_scale = Vector2( 1.5, 3.132 )
+custom_icons/grabber = ExtResource( 4 )
 min_value = 0.5
 max_value = 30.0
 step = 0.001
@@ -105,52 +103,46 @@ value = 3.0
 rounded = true
 
 [node name="CreateButton" type="Button" parent="CanvasLayer"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -197.0
-margin_top = -32.0001
-margin_right = 355.0
-margin_bottom = 520.0
-rect_scale = Vector2( 0.222456, -0.240001 )
+anchor_top = 0.708
+anchor_bottom = 0.708
+margin_left = 17.0
+margin_top = -63.24
+margin_right = 94.0
+margin_bottom = 21.76
+rect_scale = Vector2( 1.5, 1.5 )
 theme = SubResource( 5 )
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/normal = ExtResource( 10 )
-icon = ExtResource( 7 )
+icon = ExtResource( 15 )
+flat = true
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -185.0
-margin_top = 532.0
-margin_right = 795.0
-margin_bottom = 1512.0
-rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 8 )
+margin_left = -222.0
+margin_top = 952.0
+margin_right = -159.0
+margin_bottom = 1015.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 12 )
 
 [node name="right" type="TextureButton" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -17.0
-margin_top = 601.0
-margin_right = 963.0
-margin_bottom = 1581.0
-rect_rotation = 89.8018
-rect_scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 8 )
+margin_left = -126.0
+margin_top = 1082.0
+margin_right = -64.0
+margin_bottom = 1144.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 9 )
 
 [node name="left" type="TextureButton" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -256.0
-margin_top = 696.0
-margin_right = 724.0
-margin_bottom = 1676.0
-rect_rotation = -88.5008
-rect_scale = Vector2( 0.0979077, 0.1 )
-texture_normal = ExtResource( 8 )
+margin_left = -319.0
+margin_top = 1081.0
+margin_right = -254.0
+margin_bottom = 1143.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 7 )
 
 [node name="down" type="TextureButton" parent="CanvasLayer"]
 anchor_right = 0.086
@@ -163,20 +155,21 @@ rect_scale = Vector2( 0.1, 0.1 )
 texture_normal = ExtResource( 8 )
 
 [node name="RotateButton" type="Button" parent="CanvasLayer"]
-margin_left = 233.0
-margin_top = 920.0
-margin_right = 785.0
-margin_bottom = 1472.0
-rect_scale = Vector2( 0.228322, 0.208534 )
-custom_styles/hover = ExtResource( 11 )
-custom_styles/pressed = ExtResource( 11 )
-custom_styles/normal = ExtResource( 11 )
-icon = ExtResource( 9 )
+margin_left = 20.0
+margin_top = 976.0
+margin_right = 97.0
+margin_bottom = 1049.0
+rect_scale = Vector2( 1.5, 1.5 )
+icon = ExtResource( 13 )
+flat = true
 
 [node name="MenuAmvorguesa" type="TextureButton" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture_normal = ExtResource( 13 )
+margin_left = 18.0
+margin_top = 11.0
+margin_right = 85.0
+margin_bottom = 77.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture_normal = ExtResource( 10 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 margin_left = 68.0
