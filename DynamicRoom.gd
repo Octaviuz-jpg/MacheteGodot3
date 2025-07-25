@@ -6,6 +6,7 @@ onready var botonera = $"UIConstruction/BotoneraRotacion"
 
 onready var camera_orbit: Node = $"../CamaraOrbit" # Asegúrate de que esta ruta sea correcta
 
+var objects = []
 
 func _ready():
 	self.translation = Vector3.ZERO
@@ -106,6 +107,7 @@ func _input(event):
 				ObjectSelector.vista_previa = null
 
 func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
+	var m_obj = MacheteObject.new()
 	if ruta == "" or not ResourceLoader.exists(ruta):
 		push_error("❌ Ruta inválida: " + ruta)
 		return
@@ -139,6 +141,10 @@ func colocar_objeto_en_suelo(ruta: String, punto: Vector3):
 			return
 	else:
 		obj.translation = punto
+	m_obj.res_path=ruta
+	m_obj.position=punto
+	ObjectSelector._save.objects.append(m_obj)
+	print(ObjectSelector._save.objects)
 
 func crear_vista_previa(ruta: String) -> Node:
 	if not ResourceLoader.exists(ruta):

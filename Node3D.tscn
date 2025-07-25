@@ -247,6 +247,27 @@ margin_right = 266.0
 margin_bottom = 87.0
 text = "Vista aerea"
 
+[node name="Load" type="Button" parent="UIConstruction"]
+margin_left = 568.0
+margin_top = 226.0
+margin_right = 691.0
+margin_bottom = 270.0
+text = "Load"
+
+[node name="Save" type="Button" parent="UIConstruction"]
+margin_left = 567.0
+margin_top = 282.0
+margin_right = 692.0
+margin_bottom = 323.0
+text = "Save"
+
+[node name="Reload" type="Button" parent="UIConstruction"]
+margin_left = 567.0
+margin_top = 335.0
+margin_right = 697.0
+margin_bottom = 377.0
+text = "Reload"
+
 [node name="GridMap" type="GridMap" parent="."]
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00992048, 0 )
@@ -263,3 +284,6 @@ __meta__ = {
 [connection signal="pressed" from="UIConstruction/trancarCamara" to="CamaraOrbit" method="_on_trancarCamara_pressed"]
 [connection signal="pressed" from="UIConstruction/user" to="UIConstruction/user" method="_on_user_pressed"]
 [connection signal="pressed" from="UIConstruction/vistaAerea" to="CamaraOrbit" method="_on_vistaAerea_pressed"]
+[connection signal="pressed" from="UIConstruction/Load" to="CamaraOrbit" method="_on_Load_pressed"]
+[connection signal="pressed" from="UIConstruction/Save" to="CamaraOrbit" method="_on_Save_pressed"]
+[connection signal="pressed" from="UIConstruction/Reload" to="CamaraOrbit" method="_on_Reload_pressed"]

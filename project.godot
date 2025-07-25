@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/supabase/Database/database_task.gd"
 }, {
+"base": "Resource",
+"class": "MacheteObject",
+"language": "GDScript",
+"path": "res://room.gd"
+}, {
 "base": "Reference",
 "class": "RealtimeChannel",
 "language": "GDScript",
@@ -28,6 +33,11 @@ _global_script_classes=[ {
 "class": "RealtimeClient",
 "language": "GDScript",
 "path": "res://addons/supabase/Realtime/realtime_client.gd"
+}, {
+"base": "Resource",
+"class": "SaveObj",
+"language": "GDScript",
+"path": "res://SavedObjects.gd"
 }, {
 "base": "Node",
 "class": "SistemaGuardado",
@@ -92,8 +102,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AuthTask": "",
 "DatabaseTask": "",
+"MacheteObject": "",
 "RealtimeChannel": "",
 "RealtimeClient": "",
+"SaveObj": "",
 "SistemaGuardado": "",
 "StorageBucket": "",
 "StorageTask": "",
@@ -125,8 +137,6 @@ Utilidad="*res://utilidad.gd"
 <<<<<<<HEADUtilidad="*res://utilidad.gd"
 AuthManager="*res://Scripts/AuthManager.gd"
 SupabaseManager="*res://Scripts/SupabaseManager.gd"
-Popups1="*res://Scenes/popups/Popups1.gd"
-Popups="*res://Scenes/popups/Popups.tscn"
 
 [display]
 

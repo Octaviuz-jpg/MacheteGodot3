@@ -17,3 +17,4 @@ default_env.tres
 .mono/
 data_*/
 *.apk*
+proyectos_guardados/*

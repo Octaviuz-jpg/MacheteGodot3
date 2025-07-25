@@ -105,3 +105,38 @@ func _on_RotarIzquierda_pressed():
 func _on_RotarDerecha_pressed():
 	if ObjectSelector.vista_previa:
 		ObjectSelector.vista_previa.rotate_y(deg2rad(15))
+
+
+func _on_Reload_pressed() -> void:
+	get_tree().reload_current_scene()
+	ObjectSelector.objeto_seleccionado = "res://Objeto2/nevera_ejecutiva.tscn"
+	ObjectSelector.vista_previa=null
+	ObjectSelector._save.objects.clear()
+	print("reload")
+
+func find_container():
+	var root = get_parent()
+	return root.get_node("DynamicRoom/Container")
+
+
+func _on_Load_pressed() -> void:
+	print("load")
+	var test=ObjectSelector._save.load_save()
+	var container = find_container()
+	print(test.height)
+	print(test.width)
+	print(test.depth)
+	for i in test.objects:
+		# print(i.res_path)
+		var obj = load(i.res_path).instance()
+		container.add_child(obj)
+		obj.translation=i.position
+
+
+func _on_Save_pressed() -> void:
+	ObjectSelector._save.height=MedidasSingleton.altura
+	ObjectSelector._save.depth=MedidasSingleton.profundidad
+	ObjectSelector._save.width=MedidasSingleton.anchura
+	ObjectSelector._save.write_save()
+	ObjectSelector._save.objects.clear()
+	pass # Replace with function body.

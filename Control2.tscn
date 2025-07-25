@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Img/volver.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/sub-menu/volver_a_menu.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Img/Escena1#_elementografico.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/testing_load.gd" type="Script" id=5]
 [ext_resource path="res://Assets/IconTools/zoom-in.png" type="Texture" id=7]
 [ext_resource path="res://Assets/IconTools/ruler.png" type="Texture" id=8]
 [ext_resource path="res://Assets/IconTools/undo.png" type="Texture" id=9]
@@ -338,9 +339,18 @@ position = Vector2( 317, 229 )
 scale = Vector2( 0.767578, 0.773438 )
 texture = ExtResource( 14 )
 
+[node name="Cargar" type="Button" parent="Panel"]
+margin_left = 376.0
+margin_top = 1076.0
+margin_right = 633.0
+margin_bottom = 1138.0
+text = "Cargar"
+script = ExtResource( 5 )
+
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomIn" to="." method="_on_ZoomIn_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/ZoomOut" to="." method="_on_ZoomOut_pressed"]
 [connection signal="pressed" from="CanvasLayer_UI_Bars/BackgroundBottomBar/BottomBar/Save" to="." method="_on_Save_pressed"]
 [connection signal="confirmed" from="CanvasLayer_UI_Bars/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Panel/volver" to="Panel/volver" method="_on_volver_pressed"]
+[connection signal="pressed" from="Panel/Cargar" to="." method="_on_Cargar_pressed"]

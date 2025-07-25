@@ -118,3 +118,53 @@ func _on_AcceptDialog_confirmed():
 	
 	if SistemaGuardado.guardar_proyecto(nombre, viewport_3d.get_child(0)):
 		print("Proyecto guardado: ", nombre)
+
+
+func _on_Cargar_pressed() -> void:
+	ObjectSelector.autoload=true
+	var savedThings=ObjectSelector._save.load_save()
+	MedidasSingleton.altura = savedThings.height
+	MedidasSingleton.anchura = savedThings.width
+	MedidasSingleton.profundidad = savedThings.depth
+
+	# Limpiar instancia previa
+	for child in viewport_3d.get_children():
+		child.queue_free()
+
+	# Forzar fondo blanco
+	viewport_3d.set_clear_mode(Viewport.CLEAR_MODE_ALWAYS)
+	viewport_3d.set_transparent_background(false)
+
+	# Instanciar nueva habitación
+	var room_instance = room_3d_scene_res.instance()
+	viewport_3d.add_child(room_instance)
+	
+	# Configurar cámara orbital
+	_camera_orbit_instance = room_instance.get_node("CamaraOrbit")
+	if _camera_orbit_instance:
+		print("Cámara orbital configurada")
+		_camera_orbit_instance.init_orbit(max(MedidasSingleton.anchura, MedidasSingleton.profundidad))
+		
+		# Asegurar que la cámara está activa
+		var cam = _camera_orbit_instance.get_node("camara3D")
+		if cam:
+			cam.current = true
+			print("Cámara activada")
+	else:
+		push_error("No se encontró CamaraOrbit en la escena 3D")
+		return
+	
+	# Cambiar visibilidad de elementos UI
+	#input_ui_container.visible = false
+	mi_panel.visible = false
+	viewport_container.visible = true
+	ui_bars_canvas_layer.visible = true  # Mostrar barras de herramientas
+	
+	# Debug importante
+	print("Elementos visibles:")
+	print("ViewportContainer visible:", viewport_container.visible)
+	print("UI Bars visible:", ui_bars_canvas_layer.visible)
+	print("Número de hijos en viewport_3d:", viewport_3d.get_child_count())
+
+	pass # Replace with function body.
+
