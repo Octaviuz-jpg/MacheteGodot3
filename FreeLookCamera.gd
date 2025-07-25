@@ -35,8 +35,7 @@ func _unhandled_input(event):
 
 func _process(delta):
 	# No mover la cámara si el cursor no está capturado
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-		return
+	
 
 	var direction = Vector3.ZERO
 	var current_speed = speed

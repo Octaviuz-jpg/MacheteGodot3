@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TranferirTairon.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/tairon/assets/kindpng_4853972.png" type="Texture" id=2]
 [ext_resource path="res://FreeLookCamera.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/tairon/assets/piso fino.jpg" type="Texture" id=4]
 
@@ -67,3 +68,63 @@ WASD: Mover | Espacio/Ctrl: Subir/Bajar | Shift: Correr | Ratón: Mirar | Esc: L
 align = 1
 valign = 1
 autowrap = true
+
+[node name="delante" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 0.833
+anchor_top = 0.57
+anchor_right = 0.833
+anchor_bottom = 0.57
+margin_left = -48.76
+margin_top = -49.6
+margin_right = 931.24
+margin_bottom = 930.4
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 2 )
+
+[node name="derecha" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 0.909
+anchor_top = 0.653
+anchor_right = 0.909
+anchor_bottom = 0.687
+margin_left = 53.5199
+margin_top = -48.8401
+margin_right = 1033.52
+margin_bottom = 887.64
+rect_rotation = 90.4
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 2 )
+
+[node name="atras" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 0.825
+anchor_top = 0.723
+anchor_right = 0.825
+anchor_bottom = 0.723
+margin_left = 49.0001
+margin_top = 48.5598
+margin_right = 1029.0
+margin_bottom = 1028.56
+rect_rotation = 180.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 2 )
+
+[node name="izquierda" type="TextureButton" parent="CanvasLayer"]
+anchor_left = 0.697
+anchor_top = 0.634
+anchor_right = 0.697
+anchor_bottom = 0.634
+margin_left = -48.84
+margin_top = 48.48
+margin_right = 931.16
+margin_bottom = 1028.48
+rect_rotation = -90.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 2 )
+
+[connection signal="button_down" from="CanvasLayer/delante" to="." method="_on_delante_button_down"]
+[connection signal="button_up" from="CanvasLayer/delante" to="." method="_on_delante_button_up"]
+[connection signal="button_down" from="CanvasLayer/derecha" to="." method="_on_derecha_button_down"]
+[connection signal="button_up" from="CanvasLayer/derecha" to="." method="_on_derecha_button_up"]
+[connection signal="button_down" from="CanvasLayer/atras" to="." method="_on_atras_button_down"]
+[connection signal="button_up" from="CanvasLayer/atras" to="." method="_on_atras_button_up"]
+[connection signal="button_down" from="CanvasLayer/izquierda" to="." method="_on_izquierda_button_down"]
+[connection signal="button_up" from="CanvasLayer/izquierda" to="." method="_on_izquierda_button_up"]

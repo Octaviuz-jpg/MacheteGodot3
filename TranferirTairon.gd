@@ -245,3 +245,29 @@ func _get_all_block_bodies() -> Array:
 		if block.has_node("StaticBody"):
 			bodies.append(block.get_node("StaticBody"))
 	return bodies
+
+
+
+func _on_derecha_button_up():
+	Input.action_release("ui_right")
+	
+func _on_derecha_button_down():
+	Input.action_press("ui_right")
+
+func _on_izquierda_button_up():
+	Input.action_release("ui_left")
+	
+func _on_izquierda_button_down():
+	Input.action_press("ui_left")
+
+func _on_delante_button_up():
+	Input.action_release("ui_up")
+	
+func _on_delante_button_down():
+	Input.action_press("ui_up")
+
+func _on_atras_button_up():
+	Input.action_release("ui_down")
+	
+func _on_atras_button_down():
+	Input.action_press("ui_down")
